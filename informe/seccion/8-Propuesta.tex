@@ -1,5 +1,6 @@
 \chapter{Propuesta de Solución}
-Este capítulo presenta la propuesta preliminar de solución desarrollada a partir de los hallazgos de la revisión sistemática de la literatura. Dado que este informe corresponde al hito de avance del Seminario de Título, las decisiones aquí expuestas constituyen la base de diseño conceptual y formal del artefacto, cuya codificación, calibración y validación experimental exhaustiva se desarrollarán en las etapas siguientes conforme al plan de trabajo establecido.
+\label{cap:propuesta}
+Este capítulo presenta la propuesta de solución desarrollada a partir de los hallazgos de la revisión sistemática de la literatura. Las decisiones aquí expuestas constituyen la base de diseño conceptual y formal del artefacto, cuya codificación, calibración y validación experimental se desarrollarán en el Proyecto de Título conforme al plan de trabajo establecido.
 
 \section{De las brechas identificadas a las decisiones de diseño}
 Las decisiones arquitectónicas adoptadas responden directamente a las cuatro brechas identificadas en el Estado del Arte, garantizando una trazabilidad metodológica entre la evidencia secundaria y el diseño del artefacto. La Tabla \ref{tab:trazabilidad_brechas} resume esta correspondencia.
@@ -10,23 +11,24 @@ Las decisiones arquitectónicas adoptadas responden directamente a las cuatro br
 \renewcommand{\arraystretch}{1.25}
 \begin{tabular}{|c|p{6.5cm}|p{7cm}|}
 \hline
-\textbf{RQ} & \textbf{Brecha identificada en la literatura} & \textbf{Decisión de diseño preliminar} \\ \hline
+\textbf{RQ} & \textbf{Brecha identificada en la literatura} & \textbf{Decisión de diseño} \\ \hline
 \textbf{RQ1} & Los modelos probabilísticos aplicados a APT operan mayoritariamente sobre alertas o grafos previamente correlacionados, generando dependencia de una infraestructura previa. & El modelo se diseña para operar directamente sobre registros de tráfico de red, suprimiendo la dependencia de subsistemas externos de correlación. \\ \hline
-\textbf{RQ2} & Los estudios con HMM definen variables observables a partir de alertas de terceros; su modelación sobre tráfico estructurado por etapas está poco explorada. & Las variables observables se derivarán de características estadísticas del flujo de red, asociando los estados ocultos a las fases de ataque de los datasets. \\ \hline
+\textbf{RQ2} & Los estudios con HMM definen variables observables a partir de alertas de terceros; su modelación sobre tráfico estructurado por etapas está poco explorada. & Las variables observables se derivan de características estadísticas del flujo de red, y los estados ocultos se anclan a las fases de ataque etiquetadas en los conjuntos de datos (Sección~\ref{sec:correspondencia}). \\ \hline
 \textbf{RQ3} & Ausencia de un benchmark consolidado y baja representatividad temporal en los conjuntos de datos comúnmente evaluados. & Se adopta una estrategia dual con DAPT2020 (comparabilidad histórica) y Unraveled (seis semanas de emulación organizacional realista). \\ \hline
-\textbf{RQ4} & El 70\% de los estudios evalúa mediante \textit{Accuracy} global, enmascarando el desempeño deficiente sobre la clase minoritaria en entornos desbalanceados. & Se adopta un modelo generativo intrínseco evaluado con métricas desagregadas por etapa ($F_1$-score, \textit{Recall}), contrastándolo con técnicas de remuestreo (SMOTE). \\ \hline
+\textbf{RQ4} & La mayoría de los estudios que reportan métricas utiliza \textit{Accuracy} global (35 de 77 estudios, frente a 14 que reportan $F_1$-score), lo que enmascara el desempeño sobre la clase minoritaria. & Evaluación con métricas desagregadas por etapa y métricas de detección temprana; tratamiento del desbalance que preserva la estructura temporal; comparación con modelos de referencia bajo las mismas condiciones. \\ \hline
 \end{tabular}
-\caption{Trazabilidad entre brechas de la revisión sistemática y decisiones de diseño preliminares.}
+\caption{Trazabilidad entre brechas de la revisión sistemática y decisiones de diseño.}
 \label{tab:trazabilidad_brechas}
 \end{table}
 
-\section{Componentes de la propuesta preliminar}
+\section{Componentes de la propuesta}
 
-\subsection{Entradas y preprocesamiento proyectado}
-El sistema recibirá flujos de red provenientes de DAPT2020 y Unraveled. El preprocesamiento preliminar contempla:
+\subsection{Entradas y preprocesamiento}
+El sistema recibirá flujos de red provenientes de DAPT2020 y Unraveled. El preprocesamiento contempla:
 \begin{enumerate}
-    \item \textbf{Agregación temporal:} Los registros de flujo se estructurarán en secuencias discretas temporales ordenadas cronológicamente por host o sesión mediante ventanas de tiempo $\Delta t$.
-    \item \textbf{Vector de observaciones:} Se seleccionará un conjunto acotado de atributos representativos (tasa de bytes, duración del flujo, distribución de puertos y flags TCP), los cuales serán discretizados mediante cuantización por intervalos para conformar el alfabeto de símbolos observables $V = \{v_1, \dots, v_M\}$.
+    \item \textbf{Agregación temporal:} Los registros de flujo se agruparán por host en ventanas de tiempo $\Delta t$, ordenadas según su instante de inicio. Cada secuencia corresponde a la actividad de un host a lo largo del periodo registrado.
+    \item \textbf{Vector de observaciones:} Se seleccionará un conjunto acotado de atributos representativos (tasa de bytes, duración del flujo, distribución de puertos y flags TCP), los cuales serán discretizados mediante cuantización por intervalos para conformar el alfabeto de símbolos observables $V = \{v_1, \dots, v_M\}$. Los límites de los intervalos se calcularán solo con la partición de entrenamiento.
+    \item \textbf{Etiquetado de ventanas:} Se construirá una tabla de correspondencia entre las etiquetas de etapa de cada conjunto de datos y los cinco estados del modelo. Una ventana se etiquetará como benigna si no contiene flujos maliciosos y, en caso contrario, con la etapa de mayor avance presente entre sus flujos. La sensibilidad de esta regla y del tamaño de $\Delta t$ se evaluará experimentalmente.
 \end{enumerate}
 
 \subsection{Definición formal del modelo generativo}
@@ -37,19 +39,98 @@ El núcleo de procesamiento se modela formalmente como una tupla $\lambda = (A, 
     \item \textbf{Matriz de Emisión ($B$):} Matriz $N \times M$ que define la probabilidad de registrar un determinado patrón de tráfico $v_k$ condicionada al estado activo $s_j$.
     \item \textbf{Distribución Inicial ($\pi$):} Vector de probabilidades de inicio del proceso.
 \end{itemize}
-El ajuste de parámetros se proyecta mediante el algoritmo de Baum-Welch (EM) sobre el conjunto de entrenamiento, mientras que la inferencia de la secuencia de etapas más probable se ejecutará mediante el algoritmo de Viterbi.
+Los parámetros se estimarán de forma supervisada a partir de las secuencias etiquetadas y se refinarán con Baum-Welch bajo restricciones, según se detalla en la Sección~\ref{sec:correspondencia}. La inferencia en línea se realizará mediante la probabilidad filtrada, y la reconstrucción retrospectiva de la secuencia completa de etapas mediante el algoritmo de Viterbi.
 
 \subsection{Salidas esperadas}
 Ante una secuencia de observaciones $O = (O_1, \dots, O_T)$, el modelo reportará:
 \begin{itemize}
-    \item La secuencia óptima de estados estimada $Q^* = (q_1^*, \dots, q_T^*)$, indicando la fase de ataque activa en el instante $T$.
-    \item Un nivel de confianza probabilístico asociado a la etapa inferida y la proyección de la probabilidad de transición hacia la siguiente fase de la campaña.
+    \item En cada instante $t$, la etapa más probable según la probabilidad filtrada $P(q_t \mid O_1, \dots, O_t, \lambda)$, junto con su nivel de confianza y la probabilidad de transición hacia la siguiente fase de la campaña, estimada a partir de $A$.
+    \item Una alerta cuando la probabilidad acumulada de los estados de ataque supere un umbral $\tau$ calibrado en la partición de validación.
+    \item De forma retrospectiva, la secuencia óptima de estados $Q^* = (q_1^*, \dots, q_T^*)$ obtenida con Viterbi, que reconstruye la progresión completa del ataque para su análisis forense.
 \end{itemize}
 
-\section{Estrategia de validación experimental preliminar}
-La validación se proyecta en tres etapas metodológicas:
+\section{Correspondencia entre estados ocultos y etapas de ataque}
+\label{sec:correspondencia}
+Como se expuso en el Marco Teórico, Baum-Welch sin supervisión no garantiza que los estados aprendidos correspondan a Reconocimiento, Foothold, Movimiento lateral y Exfiltración: el algoritmo converge a un máximo local y la verosimilitud es invariante ante permutaciones de los estados. Para asegurar esta correspondencia se adopta una estrategia en tres niveles, que aprovecha que DAPT2020 y Unraveled proveen etiquetas de etapa.
+
 \begin{enumerate}
-    \item \textbf{Evaluación sobre DAPT2020:} Permite la comparación directa con los clasificadores supervisados y semi-supervisados reportados en la literatura.
-    \item \textbf{Evaluación sobre Unraveled:} Valida la estabilidad del modelo sobre trazas longitudinales de seis semanas con desbalance severo de clases.
-    \item \textbf{Análisis de robustez frente al desbalance:} Contraste del desempeño del modelo HMM operando sobre los datos originales versus datos tratados con balanceo sintético (SMOTE), evaluando métricas desagregadas de precisión, exhaustividad y $F_1$-score por cada fase de la intrusión.
+    \item \textbf{Anclaje por supervisión.} Los parámetros $\hat{A}$, $\hat{B}$ y $\hat{\pi}$ se estiman mediante conteo de frecuencias sobre las secuencias etiquetadas de entrenamiento (estimación de máxima verosimilitud), con suavizado de Laplace. Cada estado queda así vinculado a su etapa por construcción, y la fila de $B$ asociada a, por ejemplo, el movimiento lateral se calcula exclusivamente con ventanas etiquetadas como tal.
+    \item \textbf{Refinamiento restringido.} El algoritmo de Baum-Welch se utiliza solo como refinamiento, inicializado con la estimación supervisada y no con valores aleatorios. Las transiciones que no se observan en el entrenamiento y que son inconsistentes con la cadena de ataque se fijan en cero, propiedad que la reestimación conserva. La estructura no se restringe a un orden estrictamente lineal, ya que un atacante puede volver a etapas previas, por ejemplo, reconocimiento interno tras el movimiento lateral. Para limitar la deriva semántica de los estados, el número de iteraciones se controla con la verosimilitud sobre la partición de validación.
+    \item \textbf{Verificación posterior.} Tras el entrenamiento, se verificará la correspondencia comparando la etapa inferida con la etiqueta real en la partición de validación mediante una matriz de confusión por estado. Si la exactitud de algún estado respecto de su etiqueta se degrada frente a la estimación supervisada, el refinamiento se descarta para ese conjunto de datos. Adicionalmente, se comparará cada fila de $B$ con el perfil empírico de tráfico de su etapa.
 \end{enumerate}
+
+Como experimento de control, se entrenará también un HMM con Baum-Welch desde una inicialización aleatoria y sin supervisión. Sus estados se asignarán a las etapas mediante el emparejamiento óptimo con las etiquetas (algoritmo húngaro sobre la matriz de coincidencias). Este control permitirá cuantificar cuánto de la correspondencia se pierde cuando los estados no se anclan a las etapas, y justificar empíricamente la estrategia adoptada.
+
+\section{Tratamiento del desbalance de clases}
+\label{sec:desbalance}
+Dado que SMOTE genera instancias sin posición temporal y no está definido sobre símbolos discretos, no se aplicará sobre las secuencias del HMM. El tratamiento del desbalance se diferencia según el tipo de modelo:
+
+\begin{itemize}
+    \item \textbf{Para el HMM}, se contrastarán tres condiciones que preservan la estructura temporal:
+    \begin{enumerate}
+        \item \textit{Datos originales con suavizado}: estimación supervisada sin remuestreo, con suavizado de Laplace sobre $A$, $B$ y $\pi$.
+        \item \textit{Calibración del umbral de decisión}: el umbral $\tau$ sobre la probabilidad filtrada de los estados de ataque se ajusta en validación para una tasa objetivo de falsas alarmas, en lugar de asignar la etapa de mayor probabilidad.
+        \item \textit{Remuestreo a nivel de secuencia}: en la partición de entrenamiento se replican secuencias completas que contienen actividad de ataque y se submuestrean tramos benignos alejados de dicha actividad, de modo que el orden interno de cada secuencia no se altera.
+    \end{enumerate}
+    \item \textbf{Para los modelos de referencia}, que tratan cada ventana como independiente, se contrastarán los datos originales, la ponderación de clases y SMOTE.
+\end{itemize}
+
+En todos los casos, el remuestreo se aplicará únicamente sobre la partición de entrenamiento, después de particionar los datos, y la evaluación se realizará siempre sobre la distribución original de clases.
+
+\section{Métricas de evaluación}
+
+\subsection{Desempeño por etapa}
+Para cada etapa de ataque se reportarán la precisión, la exhaustividad y el $F_1$-score, junto con su promedio macro y la matriz de confusión entre etapas. Se descarta la exactitud global como métrica principal, por las razones expuestas en el Estado del Arte.
+
+\subsection{Detección temprana}
+Dado que el objetivo general del proyecto es la identificación temprana de la progresión de una APT, no basta con medir si una ventana se clasifica correctamente: es necesario medir \textit{cuándo} se detecta el ataque. Estas métricas se calculan con la inferencia en línea, es decir, utilizando en cada instante solo la evidencia disponible hasta ese momento.
+
+Sea $\mathcal{C}$ el conjunto de secuencias atacadas, es decir, las secuencias de host que contienen al menos una ventana maliciosa. Para cada $c \in \mathcal{C}$, sea $t_0^c$ el inicio de la primera ventana maliciosa, $t_{\text{fin}}^c$ el final de la última y $t_{\text{exf}}^c$ el inicio de la etapa de exfiltración. El modelo emite una alerta en el instante $t$ cuando
+\begin{equation}
+P\big(q_t \in S_{\text{ataque}} \mid O_1, \dots, O_t, \lambda\big) \geq \tau, \qquad S_{\text{ataque}} = S \setminus \{s_{\text{benigno}}\}
+\end{equation}
+y se denota $t_d^c$ el primer instante de alerta con $t_d^c \geq t_0^c$. Las alertas anteriores a $t_0^c$ se contabilizan como falsas alarmas. A partir de estas definiciones se reportarán:
+
+\begin{itemize}
+    \item \textbf{Tiempo hasta la detección:} $\mathrm{TTD}_c = t_d^c - t_0^c$, resumido mediante su mediana y percentiles sobre $\mathcal{C}$.
+    \item \textbf{Precocidad normalizada:} $\mathrm{E}_c = (t_d^c - t_0^c) / (t_{\text{fin}}^c - t_0^c) \in [0, 1]$, que expresa la fracción de la campaña transcurrida al momento de la detección y permite comparar campañas de distinta duración. Las campañas no detectadas se reportan por separado.
+    \item \textbf{Etapa de primera detección:} la etapa real en el instante $t_d^c$, cuya distribución indica si los ataques se detectan durante el reconocimiento o solo cuando ya se encuentran avanzados.
+    \item \textbf{Tasa de detección previa a la exfiltración:} proporción de secuencias atacadas en que $t_d^c < t_{\text{exf}}^c$, es decir, detectadas antes de que se materialice el daño principal.
+    \item \textbf{Retardo por etapa:} para cada etapa $e$, el tiempo entre su inicio y la primera ventana en que el modelo la identifica correctamente.
+\end{itemize}
+
+Una detección temprana solo es útil si no se obtiene a costa de un exceso de alertas, ya que un detector que alerta en todas las ventanas alcanzaría un tiempo de detección nulo. Por ello, las métricas anteriores se reportarán junto con la tasa de falsas alarmas en los periodos benignos y se presentarán como una curva de compromiso entre el tiempo de detección y la tasa de falsos positivos al variar $\tau$, siguiendo la metodología de evaluación propuesta para el conjunto cAPTure, que relaciona ambas métricas como criterios prácticos de despliegue \parencite{puccetti_capture_2026}.
+
+\subsection{Comparación con modelos de referencia}
+\label{sec:baseline}
+La comparación con resultados publicados no es suficiente para validar la propuesta, ya que los estudios difieren en el preprocesamiento, la partición de los datos y las métricas reportadas. Por ejemplo, \textcite{rivas_analysis_2025} evalúan Random Forest, árboles de decisión y XGBoost sobre DAPT2020 y Unraveled reportando exactitud, precisión, exhaustividad y $F_1$-score, pero con un preprocesamiento y una partición propios, por lo que sus resultados servirán solo como referencia contextual. Por ello se implementarán dos modelos de referencia, Random Forest \parencite{breiman2001random} y XGBoost \parencite{chen2016xgboost}, bajo las mismas condiciones que el HMM:
+
+\begin{itemize}
+    \item \textbf{Mismos datos y misma partición.} Los datos se particionarán en entrenamiento, validación y prueba agrupando por secuencia, de modo que ninguna secuencia quede dividida entre particiones, y respetando el orden cronológico cuando la estructura del conjunto lo permita. Se evita la partición aleatoria por ventana, ya que ventanas contiguas son casi idénticas y su separación entre entrenamiento y prueba sobreestimaría el desempeño.
+    \item \textbf{Mismas ventanas, atributos y etiquetas.} Los modelos de referencia utilizarán las mismas ventanas $\Delta t$, los mismos atributos y la misma correspondencia de cinco etapas. Se evaluarán con los atributos continuos, su representación natural, y con los mismos símbolos discretos del HMM, para aislar el efecto de la discretización.
+    \item \textbf{Variante con contexto temporal.} Se incluirá una variante de cada modelo de referencia que incorpora los atributos de las $k$ ventanas previas. Así, una eventual ventaja del HMM podrá atribuirse al modelado de la progresión entre etapas y no solo a disponer de información del pasado.
+    \item \textbf{Mismas métricas.} Se reportarán las métricas por etapa y las de detección temprana. Para los modelos de referencia, la alerta se emite cuando la probabilidad estimada de una clase de ataque supera el umbral $\tau$, calibrado con el mismo criterio de falsas alarmas.
+    \item \textbf{Mismo procedimiento de ajuste.} Los hiperparámetros de todos los modelos se ajustarán únicamente con la partición de validación.
+\end{itemize}
+
+\section{Diseño experimental}
+La Tabla~\ref{tab:experimentos} resume las configuraciones que se evaluarán. Cada una se ejecutará sobre DAPT2020, para la comparación con la literatura, y sobre Unraveled, para evaluar la estabilidad del modelo en trazas longitudinales de seis semanas con desbalance severo.
+
+\begin{table}[h!]
+\centering
+\small
+\renewcommand{\arraystretch}{1.25}
+\begin{tabularx}{\textwidth}{|c|p{3.4cm}|X|X|}
+\hline
+\textbf{ID} & \textbf{Modelo} & \textbf{Estimación} & \textbf{Tratamiento del desbalance} \\ \hline
+H1 & HMM & Supervisada (conteo de frecuencias) & Original con suavizado; umbral calibrado; remuestreo por secuencia \\ \hline
+H2 & HMM & Supervisada + Baum-Welch restringido & Igual que H1 \\ \hline
+H0 & HMM (control) & Baum-Welch no supervisado, inicialización aleatoria & Original; se mide la correspondencia entre estados y etapas \\ \hline
+B1 & Random Forest & Supervisada, con y sin contexto temporal & Original; ponderación de clases; SMOTE en entrenamiento \\ \hline
+B2 & XGBoost & Supervisada, con y sin contexto temporal & Igual que B1 \\ \hline
+\end{tabularx}
+\caption{Configuraciones del diseño experimental.}
+\label{tab:experimentos}
+\end{table}
+
+El diseño permite contrastar dos hipótesis de trabajo. La primera es que, a igual tasa de falsas alarmas, el HMM detecta las campañas antes y con mayor frecuencia previo a la exfiltración que los modelos de referencia, por modelar la progresión entre etapas. La segunda es que los modelos de referencia pueden alcanzar un $F_1$-score por ventana comparable o superior. Si ambas se confirman, el aporte del HMM radicaría en la detección temprana y la interpretabilidad de la progresión, más que en la clasificación aislada de ventanas. Los resultados se analizarán por conjunto de datos, por etapa y por condición de desbalance.

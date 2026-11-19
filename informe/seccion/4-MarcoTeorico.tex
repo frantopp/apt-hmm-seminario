@@ -1,5 +1,5 @@
 \chapter{Marco Teórico}
-En este capítulo se presentan los fundamentos conceptuales y matemáticos que sustentan el desarrollo de la investigación. Se formalizan las características operacionales de las Amenazas Persistentes Avanzadas, los fundamentos teóricos de los Modelos Ocultos de Markov (HMM), los algoritmos clásicos de entrenamiento e inferencia, las propiedades de los conjuntos de datos evaluados y las técnicas para abordar el desbalance severo de clases.
+En este capítulo se presentan los fundamentos conceptuales y matemáticos que sustentan el desarrollo de la investigación. Se formalizan las características operacionales de las Amenazas Persistentes Avanzadas, los fundamentos teóricos de los Modelos Ocultos de Markov (HMM), los algoritmos de entrenamiento e inferencia y sus limitaciones, las técnicas para abordar el desbalance severo de clases y los modelos de referencia con que se contrastará la propuesta.
 
 \section{Amenazas Persistentes Avanzadas (APT)}
 Una Amenaza Persistente Avanzada (APT) es una campaña de intrusión dirigida, sigilosa y estructurada en múltiples fases sucesivas ejecutada por actores con capacidades técnicas avanzadas \parencite{hutchins2011killchain}. A diferencia del malware convencional, una APT no persigue la disrupción inmediata, sino la permanencia prolongada dentro de la infraestructura para exfiltrar activos estratégicos.
@@ -54,15 +54,45 @@ La estimación de los parámetros $\lambda = (A, B, \pi)$ a partir de secuencias
 \end{align}
 Las probabilidades marginales a posteriori $\gamma_t(i)$ y $\xi_t(i, j)$ permiten recalcular de forma analítica las matrices de transición y emisión en cada iteración del paso $M$.
 
-\section{Tratamiento del Desbalance Severo de Clases}
-En entornos reales de detección de intrusiones, la actividad de un atacante APT representa una fracción marginal ($< 0.1\%$) del volumen total de registros de red \parencite{myneni2020dapt2020}. Esta desproporción introduce sesgos críticos en clasificadores discriminativos tradicionales, los cuales tienden a ignorar la clase minoritaria. 
+Al tratarse de un procedimiento de máxima verosimilitud con datos incompletos, Baum-Welch presenta dos propiedades que condicionan su uso en este trabajo. En primer lugar, converge a un máximo local de la verosimilitud, por lo que el modelo obtenido depende de la estimación inicial de $\lambda$ \parencite{rabiner1989}. En segundo lugar, la verosimilitud $P(O \mid \lambda)$ es invariante ante cualquier permutación de los índices de los estados aplicada de forma consistente sobre $A$, $B$ y $\pi$. En consecuencia, un HMM entrenado sin supervisión aprende estados que explican estadísticamente las observaciones, pero nada asegura que un estado determinado corresponda a una etapa concreta del ataque, como el movimiento lateral: la interpretación de los estados debe imponerse en el entrenamiento o verificarse después de él. Una propiedad útil para lo primero es que todo parámetro inicializado en cero permanece en cero durante la reestimación \parencite{rabiner1989}, lo que permite fijar la estructura de transiciones admitidas.
 
-Frente a esta limitación, el presente trabajo evalúa dos aproximaciones complementarias:
+\subsection{Estimación supervisada de los parámetros}
+Cuando las secuencias de entrenamiento cuentan con la secuencia de estados verdadera, como ocurre en conjuntos de datos etiquetados por etapa de ataque, los parámetros de máxima verosimilitud se obtienen en forma cerrada por conteo de frecuencias:
+\begin{equation}
+\hat{a}_{ij} = \frac{n_{ij} + \alpha}{\sum_{l=1}^{N} n_{il} + N\alpha}, \qquad
+\hat{b}_j(k) = \frac{m_j(k) + \alpha}{\sum_{l=1}^{M} m_j(l) + M\alpha}, \qquad
+\hat{\pi}_i = \frac{c_i + \alpha}{\sum_{l=1}^{N} c_l + N\alpha}
+\end{equation}
+donde $n_{ij}$ es el número de transiciones observadas de $s_i$ a $s_j$, $m_j(k)$ el número de veces que se emite el símbolo $v_k$ estando en $s_j$, $c_i$ el número de secuencias que comienzan en $s_i$, y $\alpha > 0$ un término de suavizado de Laplace que evita asignar probabilidad nula a transiciones o símbolos no observados en el entrenamiento. A diferencia de Baum-Welch, esta estimación vincula cada estado con su etiqueta por construcción.
+
+\subsection{Inferencia en línea: probabilidad filtrada}
+El algoritmo de Viterbi decodifica la secuencia completa $O_1, \dots, O_T$, de modo que la etapa asignada al instante $t$ puede depender de observaciones posteriores a $t$. Para un detector que debe emitir alertas a medida que llega el tráfico, la cantidad pertinente es la probabilidad filtrada, que solo utiliza la evidencia disponible hasta $t$ y se obtiene de la variable \textit{forward}:
+\begin{equation}
+P(q_t = s_i \mid O_1, \dots, O_t, \lambda) = \frac{\alpha_t(i)}{\sum_{j=1}^{N} \alpha_t(j)}
+\end{equation}
+Esta distribución se actualiza de forma recursiva con cada nueva observación y permite reportar, en cada instante, la etapa más probable junto con su nivel de confianza.
+
+\section{Tratamiento del Desbalance Severo de Clases}
+En entornos reales de detección de intrusiones, la actividad de un atacante APT representa una fracción marginal ($< 0.1\%$) del volumen total de registros de red \parencite{myneni2020dapt2020}. Esta desproporción introduce sesgos críticos en clasificadores discriminativos tradicionales, los cuales tienden a ignorar la clase minoritaria.
+
+Un HMM modela la distribución conjunta $P(O, Q)$ en lugar de la frontera condicional $P(Q \mid O)$. Bajo estimación supervisada, cada fila de $B$ se estima únicamente con las observaciones de su propio estado y se normaliza por separado, de modo que el volumen de tráfico benigno no altera directamente el perfil de emisión de las etapas minoritarias. El desbalance se manifiesta, en cambio, en la escasez de transiciones observadas hacia y entre las etapas de ataque, que el suavizado de Laplace y la calibración del umbral de decisión sobre la probabilidad filtrada permiten compensar.
+
+La técnica de remuestreo más difundida es SMOTE (\textit{Synthetic Minority Over-sampling Technique}) \parencite{chawla2002smote}, que genera nuevas instancias de la clase minoritaria por interpolación lineal entre una muestra y uno de sus $k$ vecinos más cercanos de la misma clase:
+\begin{equation}
+x_{\text{nuevo}} = x_i + \delta \cdot (x_{zi} - x_i), \quad \delta \in [0, 1]
+\end{equation}
+SMOTE trata cada instancia como independiente de las demás. Este supuesto es adecuado para clasificadores que evalúan cada ventana por separado, pero entra en conflicto con un modelo secuencial por tres razones:
 \begin{enumerate}
-    \item \textbf{Modelamiento Generativo Intrínseco:} El HMM modela la densidad conjunta de probabilidad $P(O, Q)$ en lugar de la frontera condicional $P(Q \mid O)$. Al calibrar el perfil de transición de estados $A$ y emisiones $B$ sobre secuencias temporales, el modelo preserva la coherencia estructural de la fase minoritaria sin depender de la cardinalidad total de instancias.
-    \item \textbf{Técnicas de Remuestreo Sintético (SMOTE):} La técnica \textit{Synthetic Minority Over-sampling Technique} \parencite{chawla2002smote} se utiliza en el espacio de características del vector de observaciones para generar interpolaciones lineales sintéticas de eventos maliciosos:
-    \begin{equation}
-    x_{\text{nuevo}} = x_i + \lambda \cdot (x_{zi} - x_i), \quad \lambda \in [0, 1]
-    \end{equation}
-    donde $x_i$ es una muestra minoritaria y $x_{zi}$ representa uno de sus $k$ vecinos más cercanos del mismo estado.
+    \item \textbf{Las instancias sintéticas no tienen posición temporal.} Una ventana generada por interpolación carece de antecesora y sucesora reales, por lo que no aporta información válida a la matriz de transición $A$. Si se inserta en una secuencia, introduce transiciones que no ocurrieron y altera la duración aparente de las etapas.
+    \item \textbf{La interpolación no está definida sobre símbolos discretos.} El HMM opera sobre un alfabeto $V$ obtenido por discretización; interpolar entre dos símbolos produce valores intermedios sin significado o símbolos que no corresponden a ningún patrón de tráfico observado.
+    \item \textbf{Riesgo de filtración de información.} Si el sobremuestreo se aplica antes de particionar los datos, instancias sintéticas derivadas de muestras de evaluación pueden quedar en el entrenamiento, lo que sobreestima el desempeño.
 \end{enumerate}
+Por estas razones, en este trabajo SMOTE no se aplica sobre las secuencias que alimentan al HMM. El tratamiento del desbalance para el modelo secuencial y el uso de SMOTE en el modelo de referencia se detallan en el Capítulo~\ref{cap:propuesta}.
+
+\section{Modelos de referencia basados en ensambles de árboles}
+Para determinar si el modelado secuencial aporta una mejora real, el desempeño del HMM se contrasta con clasificadores discriminativos que evalúan cada ventana de tráfico de forma independiente. Se consideran dos ensambles de árboles de decisión de uso extendido en la detección de intrusiones:
+\begin{itemize}
+    \item \textbf{Random Forest} \parencite{breiman2001random}: combina un conjunto de árboles entrenados sobre muestras \textit{bootstrap} de los datos y sobre subconjuntos aleatorios de atributos en cada división, y asigna la clase por votación mayoritaria. La aleatorización reduce la varianza respecto de un árbol individual.
+    \item \textbf{XGBoost} \parencite{chen2016xgboost}: construye árboles de forma secuencial, de modo que cada uno corrige el error residual de los anteriores mediante \textit{gradient boosting} con regularización explícita de la complejidad del modelo.
+\end{itemize}
+Ambos admiten ponderación de clases y pueden combinarse con SMOTE, ya que tratan las ventanas como instancias independientes. Esa misma independencia les impide representar la progresión entre etapas, lo que los convierte en la línea base adecuada para aislar el aporte de la dimensión temporal del HMM.
