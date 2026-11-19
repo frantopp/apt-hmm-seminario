@@ -58,7 +58,7 @@ La Figura~\ref{fig:dsr} presenta el esquema integrado de la metodología, indica
 % --- Bloque 2: Desarrollo ---
 \node[fase] (f2) at (0,-3.6) {Fase 3\\Diseño y desarrollo\\\textit{(Desarrollo)}};
 \node[ent]  (e2) at (4.6,-3.6) {Marco formal y brechas\\Datasets DAPT2020 y Unraveled};
-\node[act]  (a2) at (10.2,-3.6) {Diseño de la arquitectura HMM\\Preprocesamiento en secuencias\\Entrenamiento (Baum-Welch)};
+\node[act]  (a2) at (10.2,-3.6) {Diseño de la arquitectura HMM\\Preprocesamiento en secuencias\\Estimación supervisada y Baum-Welch};
 \node[sal]  (s2) at (15.7,-3.6) {Prototipo funcional\\del modelo HMM};
 \draw[fl] (e2) -- (a2);
 \draw[fl] (a2) -- (s2);
@@ -69,8 +69,8 @@ La Figura~\ref{fig:dsr} presenta el esquema integrado de la metodología, indica
 % --- Bloque 3: Validación ---
 \node[fase] (f3) at (0,-6.6) {Fases 4--5\\Demostración y evaluación\\\textit{(Validación)}};
 \node[ent]  (e3) at (4.6,-6.6) {Prototipo del modelo\\Secuencias de prueba};
-\node[act]  (a3) at (10.2,-6.6) {Inferencia de etapas (Viterbi)\\Cálculo de métricas por etapa\\Análisis del desbalance de clases};
-\node[sal]  (s3) at (15.7,-6.6) {Métricas de desempeño\\Comparación con la literatura};
+\node[act]  (a3) at (10.2,-6.6) {Inferencia de etapas en línea\\Métricas por etapa y de detección temprana\\Análisis del desbalance de clases};
+\node[sal]  (s3) at (15.7,-6.6) {Métricas de desempeño\\Comparación con modelos de referencia};
 \draw[fl] (e3) -- (a3);
 \draw[fl] (a3) -- (s3);
 \begin{scope}[on background layer]
@@ -293,7 +293,11 @@ El proceso de selección se ejecutó siguiendo las cuatro etapas del modelo PRIS
 
 En esta etapa se excluyeron 311 registros. La causa predominante correspondió al criterio CE-8, aplicado a estudios que, pese a situarse en el dominio de la detección de amenazas, no aportaban evidencia relevante respecto de las preguntas formuladas. Un número significativo de exclusiones bajo el criterio CE-1 se originó en coincidencias léxicas espurias, derivadas de la coincidencia de la sigla APT con fragmentos de términos como \textit{adaptive} o \textit{adaptation}, así como con su acepción en otras disciplinas.
 
-De los 292 artículos que avanzaron a la evaluación de texto completo, 199 debieron ser excluidos por no disponerse de acceso al documento completo (CE-6) y 10 por corresponder a dominios ajenos al objeto de estudio (CE-1). El corpus final quedó constituido por 83 estudios primarios, de los cuales 16 emplean modelos de Markov, 18 abordan explícitamente el desbalance de clases y 6 utilizan los conjuntos de datos seleccionados para este trabajo.
+De los 292 artículos que avanzaron a la evaluación de texto completo, 199 debieron ser excluidos por no disponerse de acceso al documento completo (CE-6) y 10 por corresponder a dominios ajenos al objeto de estudio (CE-1), lo que dejó un corpus preliminar de 83 estudios.
+
+Sobre este corpus preliminar se realizó una verificación de consistencia, que consistió en revisar nuevamente el título, el resumen y la fuente de publicación de cada estudio contra el criterio CE-1. Esta verificación identificó seis estudios que no pertenecen al dominio de la ciberseguridad y que habían superado el cribado por coincidencias léxicas con las ecuaciones de búsqueda, del mismo tipo que las descritas para la etapa anterior: dos trabajos de predicción clínica (infecciones respiratorias pediátricas y diabetes tipo II), uno de detección de crisis epilépticas en señales EEG, uno de clasificación de mensajes de desarrolladores de software, uno que propone una técnica genérica de sobremuestreo sin aplicación a la seguridad y uno de valoración de pólizas de seguros de riesgo cibernético, cuyo objeto es actuarial y no la detección de amenazas. Los seis fueron excluidos bajo el criterio CE-1. Se conservaron, en cambio, los estudios que abordan las APT o los ataques multietapa desde la defensa o la evaluación de seguridad, por aportar evidencia a RQ1 y RQ2.
+
+El corpus final quedó constituido por 77 estudios primarios, cuya caracterización por modelos, conjuntos de datos, tratamiento del desbalance y métricas se presenta en el Capítulo~6.
 
 \begin{figure}[h!]
 \centering
@@ -318,7 +322,7 @@ De los 292 artículos que avanzaron a la evaluación de texto completo, 199 debi
  
 \node[caja] (c3) at (0.5,-7.0) {Artículos evaluados a texto completo ($n = 292$)};
  
-\node[caja] (c4) at (0.5,-10.2) {Estudios incluidos en la síntesis ($n = 83$)};
+\node[caja] (c4) at (0.5,-10.2) {Estudios incluidos en la síntesis ($n = 77$)};
  
 \node[exc] (e1) at (8.6,0) {Duplicados eliminados ($n = 473$)\\
 \footnotesize Criterio CE-3};
@@ -326,8 +330,8 @@ De los 292 artículos que avanzaron a la evaluación de texto completo, 199 debi
 \node[exc] (e2) at (8.6,-3.4) {Registros excluidos en el cribado por título y resumen ($n = 311$)\\[2pt]
 \footnotesize CE-8 ($n=249$), CE-1 ($n=29$), CE-7 ($n=16$), CE-5 ($n=12$), CE-6 ($n=3$), CE-2 ($n=1$), CE-3 ($n=1$)};
  
-\node[exc] (e3) at (8.6,-7.0) {Artículos excluidos tras la evaluación de texto completo ($n = 209$)\\[2pt]
-\footnotesize CE-6, sin disponibilidad de texto completo ($n=199$); CE-1, fuera del dominio de estudio ($n=10$)};
+\node[exc] (e3) at (8.6,-7.0) {Artículos excluidos tras la evaluación de texto completo ($n = 215$)\\[2pt]
+\footnotesize CE-6, sin disponibilidad de texto completo ($n=199$); CE-1, fuera del dominio de estudio ($n=16$, de ellos 6 en la verificación de consistencia del corpus)};
  
 \draw[fl] (c1) -- (c2);
 \draw[fl] (c2) -- (c3);
@@ -371,8 +375,8 @@ De manera análoga a los estudios secundarios en ciberseguridad empírica, no se
 
 En su lugar, la validez interna y reproducibilidad de la revisión se resguardó mediante tres mecanismos operativos:
 \begin{enumerate}
-    \item \textbf{Filtrado por pares e impacto:} Restricción a fuentes con revisión por pares indexadas en Scopus, Web of Science e IEEE Xplore, exigiendo un umbral mínimo de tres citas (CI-8) para publicaciones anteriores a 2025.
-    \item \textbf{Verificación de consistencia cruzada en extracción:} Cada estudio del corpus final ($n=83$) fue analizado mediante una matriz estructurada que desagrega explícitamente: 
+    \item \textbf{Filtrado por pares e impacto:} Restricción a fuentes con revisión por pares indexadas en Scopus, Web of Science e IEEE Xplore, exigiendo un umbral mínimo de tres citas para publicaciones anteriores a 2025.
+    \item \textbf{Verificación de consistencia cruzada en extracción:} Cada estudio del corpus final ($n=77$) fue analizado mediante una matriz estructurada que desagrega explícitamente: 
     \begin{itemize}
         \item Familia del modelo probabilístico.
         \item Definición formal de estados y observaciones.

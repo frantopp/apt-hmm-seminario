@@ -4,7 +4,7 @@ Con el propósito de caracterizar el estado actual de la investigación sobre mo
 
 \section{Panorama bibliométrico del corpus}
 
-El corpus final quedó constituido por 83 estudios primarios, de los cuales 74 corresponden a artículos de revista y 9 a comunicaciones en conferencias. La revista IEEE Access concentra la mayor proporción de publicaciones del corpus, con 18 estudios, seguida por Scientific Reports e IEEE Transactions on Dependable and Secure Computing.
+El corpus final quedó constituido por 77 estudios primarios, de los cuales 70 corresponden a artículos de revista y 7 a comunicaciones en conferencias. La revista IEEE Access concentra la mayor proporción de publicaciones del corpus, con 17 estudios, seguida por IEEE Transactions on Dependable and Secure Computing.
 
 La distribución temporal, presentada en la Figura~\ref{fig:temporal}, evidencia un crecimiento sostenido del interés investigativo en el área. Mientras que entre 2017 y 2022 la producción se mantuvo en un rango de tres a ocho estudios anuales, a partir de 2023 se observa una expansión marcada, que alcanza 22 estudios en 2026. Más de la mitad del corpus corresponde a publicaciones de los últimos tres años, lo que confirma que se trata de un área de investigación activa y en desarrollo, y no de un campo consolidado con soluciones establecidas.
 
@@ -23,14 +23,14 @@ La distribución temporal, presentada en la Figura~\ref{fig:temporal}, evidencia
     grid=major, grid style={dashed,gray!30},
     tick label style={font=\small}, label style={font=\small},
 ]
-\addplot[fill=cyan!60,draw=cyan!80!black] coordinates {(2017,3)(2019,8)(2020,3)(2021,8)(2022,5)(2023,11)(2024,10)(2025,13)(2026,22)};
+\addplot[fill=cyan!60,draw=cyan!80!black] coordinates {(2017,3)(2019,7)(2020,3)(2021,8)(2022,5)(2023,9)(2024,9)(2025,11)(2026,22)};
 \end{axis}
 \end{tikzpicture}
 \caption{Distribución temporal de los estudios del corpus (2017--2026). Fuente: Elaboración propia.}
 \label{fig:temporal}
 \end{figure}
 
-La Figura~\ref{fig:modelos} presenta la distribución de los estudios según la familia de modelos empleada. Los enfoques basados en aprendizaje profundo constituyen el grupo más numeroso, con 30 estudios, seguidos por los modelos de Markov con 24 y las técnicas clásicas de aprendizaje automático con 23. Los modelos basados en grafos de proveniencia, teoría de juegos y redes bayesianas presentan una participación menor pero significativa. Cabe señalar que un mismo estudio puede emplear más de una familia de modelos, por lo que las categorías no son mutuamente excluyentes.
+La Figura~\ref{fig:modelos} presenta la distribución de los estudios según la familia de modelos que mencionan en su texto completo, conforme a la Tabla~\ref{tab:hallazgos}. Los enfoques basados en aprendizaje profundo constituyen el grupo más numeroso, con 60 estudios, seguidos por las técnicas clásicas de aprendizaje automático con 48 y los modelos de Markov con 32, de los cuales 19 corresponden a Modelos Ocultos de Markov. Los modelos basados en grafos, redes bayesianas y teoría de juegos presentan una participación menor pero significativa. Cabe señalar que un mismo estudio puede emplear o discutir más de una familia de modelos, por lo que las categorías no son mutuamente excluyentes.
 
 \begin{figure}[h!]
 \centering
@@ -38,15 +38,15 @@ La Figura~\ref{fig:modelos} presenta la distribución de los estudios según la 
 \begin{axis}[
     width=11cm, height=6.5cm,
     xbar, bar width=13pt,
-    xmin=0, xmax=35,
-    symbolic y coords={LLM,Redes bayesianas,Teoría de juegos,Grafos de proveniencia,ML clásico,HMM / Markov,Deep learning},
+    xmin=0, xmax=70,
+    symbolic y coords={LLM,Teoría de juegos,Redes bayesianas,Grafos,HMM / Markov,ML clásico,Deep learning},
     ytick=data,
     xlabel={Número de estudios},
     nodes near coords, nodes near coords style={font=\footnotesize},
     grid=major, grid style={dashed,gray!30},
     tick label style={font=\small}, label style={font=\small},
 ]
-\addplot[fill=teal!55,draw=teal!80!black] coordinates {(4,LLM)(7,Redes bayesianas)(9,Teoría de juegos)(10,Grafos de proveniencia)(23,ML clásico)(24,HMM / Markov)(30,Deep learning)};
+\addplot[fill=teal!55,draw=teal!80!black] coordinates {(11,LLM)(20,Teoría de juegos)(28,Redes bayesianas)(29,Grafos)(32,HMM / Markov)(48,ML clásico)(60,Deep learning)};
 \end{axis}
 \end{tikzpicture}
 \caption{Familias de modelos empleadas en los estudios del corpus. Fuente: Elaboración propia.}
@@ -57,7 +57,7 @@ La Figura~\ref{fig:modelos} presenta la distribución de los estudios según la 
 
 Esta sección presenta el análisis organizado según las categorías definidas en la metodología. La Tabla~\ref{tab:hallazgos} identifica, para cada estudio del corpus, las familias de modelos empleadas, los conjuntos de datos utilizados y el tratamiento explícito del desbalance de clases.
 
-La revisión de los textos completos permite precisar la caracterización del corpus. Treinta y dos estudios mencionan modelos de Markov en alguna de sus variantes, de los cuales diecinueve refieren específicamente Modelos Ocultos de Markov. Nueve estudios trabajan con DAPT2020 y nueve con Unraveled, cifras superiores a las que sugería el análisis de resúmenes, lo que indica que una proporción relevante de los trabajos no declara el conjunto de datos en dicha sección. Cuarenta y un estudios abordan de manera explícita el desbalance de clases, aproximadamente la mitad del corpus. Cabe precisar que estas cifras corresponden a la presencia de los términos en el texto completo, por lo que incluyen tanto el uso efectivo como las referencias a trabajos previos.
+La revisión de los textos completos permite precisar la caracterización del corpus. Treinta y dos estudios mencionan modelos de Markov en alguna de sus variantes, de los cuales diecinueve refieren específicamente Modelos Ocultos de Markov. Nueve estudios trabajan con DAPT2020 y nueve con Unraveled, cifras superiores a las que sugería el análisis de resúmenes, lo que indica que una proporción relevante de los trabajos no declara el conjunto de datos en dicha sección. Treinta y seis estudios abordan de manera explícita el desbalance de clases, cerca de la mitad del corpus. Cabe precisar que estas cifras corresponden a la presencia de los términos en el texto completo, por lo que incluyen tanto el uso efectivo como las referencias a trabajos previos.
 
 \begin{footnotesize}
 \setlength{\tabcolsep}{4pt}
@@ -114,10 +114,8 @@ Chen y Yan \parencite{chen_research_2025} & 2025 & Deep L., ML clás. & -- & x \
 Chourasiya et al. \parencite{chourasiya_advanced_2025} & 2025 & Bayes, Deep L., ML clás., LLM & CICIDS, UNSW &  \\
 Ibrahim et al. \parencite{ibrahim_optimized_2025} & 2025 & Deep L., ML clás. & DAPT2020, Unraveled, CICIDS, NSL-KDD, UNSW &  \\
 L. Zhang \parencite{l_zhang_implementing_2025} & 2025 & Deep L., ML clás. & DARPA & x \\
-Madhalaimuthu y Radhakrishnan \parencite{madhalaimuthu_clinical_2025} & 2025 & Bayes, Deep L., ML clás. & -- & x \\
 Mittal et al. \parencite{mittal_proactive_2025} & 2025 & HMM, Markov, Grafos, Deep L., ML clás., Juegos & -- & x \\
 Nicho et al. \parencite{nicho_enhanced_2025} & 2025 & HMM, Bayes, Deep L., ML clás. & -- & x \\
-Praveenkumar y Gunasundari \parencite{praveenkumar_optimizing_2025} & 2025 & Deep L., ML clás. & -- & x \\
 Rivas et al. \parencite{rivas_analysis_2025} & 2025 & Bayes, Deep L., ML clás., Juegos & DAPT2020, Unraveled & x \\
 S. Lee et al. \parencite{s_lee_aptstop_2025} & 2025 & HMM, Bayes, Grafos, Deep L., ML clás., LLM, Juegos & DARPA &  \\
 Byrapuneni y Saidireddy \parencite{byrapuneni_efficient_2024} & 2024 & Bayes, Deep L., ML clás. & DARPA, NSL-KDD, KDD99 & x \\
@@ -128,15 +126,12 @@ Lo et al. \parencite{lo_digital_2024} & 2024 & Deep L. & -- &  \\
 Ma et al. \parencite{ma_anomaly_2024} & 2024 & HMM, Markov, Bayes, Deep L., ML clás. & DARPA, CICIDS &  \\
 Mamun et al. \parencite{mamun_limitations_2024} & 2024 & Bayes, Deep L., ML clás. & DAPT2020, Unraveled, DARPA, CICIDS, NSL-KDD, UNSW, KDD99 & x \\
 Soliman et al.\parencite{soliman_rank_2024}  & 2024 & Grafos, Deep L. & DARPA, KDD99 &  \\
-Wang et al. \parencite{wang_epileptic_2024} & 2024 & Deep L. & -- & x \\
 Zhang et al. \parencite{zhang_secaas-based_2024} & 2024 & Markov, Grafos, Deep L., Juegos & -- &  \\
-Akshar et al. \parencite{akshar_comparative_2023} & 2023 & Bayes, Deep L., ML clás., LLM & -- & x \\
 Chen et al. \parencite{chen_machine_2023} & 2023 & Deep L., ML clás. & CICIDS, NSL-KDD, UNSW, ToN-IoT, KDD99 & x \\
 Javed et al. \parencite{javed_apt_2023} & 2023 & HMM, Bayes, Deep L., ML clás., LLM, Juegos & DAPT2020, CICIDS, NSL-KDD & x \\
 Kazeminajafabadi y Imani \parencite{kazeminajafabadi_optimal_2023} & 2023 & HMM, Markov, Bayes, Grafos, Deep L. & -- &  \\
 Kim et al. \parencite{kim_ban_2023} & 2023 & HMM, Markov, Bayes, Grafos, Deep L., Juegos & DAPT2020, Unraveled, DARPA &  \\
 Kumari y Lee \parencite{kumari_prospective_2023} & 2023 & Markov, Deep L., ML clás. & DAPT2020, Unraveled & x \\
-Li y Mamon \parencite{li_price_2023} & 2023 & HMM, Markov, Bayes, Grafos, Deep L. & -- &  \\
 Smiliotopoulos et al. \parencite{smiliotopoulos_detection_2023} & 2023 & Bayes, Deep L., ML clás. & -- & x \\
 Wan et al. \parencite{wan_resisting_2023} & 2023 & ML clás., Juegos & -- &  \\
 Y. Javed et al. \parencite{y_javed_prism_2023} & 2023 & HMM, Markov, Grafos, Deep L. & -- &  \\
@@ -159,11 +154,10 @@ L. Wang et al. \parencite{l_wang_method_2020} & 2020 & Bayes, ML clás. & -- &  
 M. Khosravi y B. T. Ladani \parencite{m_khosravi_alerts_2020} & 2020 & HMM, Markov, Grafos & DARPA &  \\
 A. Chowdhary et al. \parencite{a_chowdhary_adaptive_2019} & 2019 & Markov, Grafos, Juegos & -- &  \\
 Brogi y Di Bernardino \parencite{brogi_hidden_2019} & 2019 & HMM, Markov, ML clás., Juegos & -- &  \\
-Du et al. \parencite{du_attack_2019} & 2019 & -- & -- &  \\
+Du et al. \parencite{du_attack_2019} & 2019 & HMM & -- &  \\
 G. Ioannou et al. \parencite{g_ioannou_markov_2019} & 2019 & HMM, Markov, Bayes, Grafos, Juegos & -- &  \\
 Ghafir et al. \parencite{ghafir2019hmm} & 2019 & HMM, Markov, Deep L., ML clás., Juegos & -- &  \\
 Wang et al. \parencite{wang_optimal_2019} & 2019 & Markov, Deep L., Juegos & -- &  \\
-Yang et al. \parencite{yang_manifold_2019} & 2019 & Deep L. & -- & x \\
 Zegeye et al. \parencite{zegeye_multi-layer_2019} & 2019 & HMM, Markov, Deep L., ML clás. & CICIDS, NSL-KDD &  \\
 D. Gonzales et al. \parencite{d_gonzales_cloud-trustsecurity_2017} & 2017 & Bayes, Grafos & -- &  \\
 Niu et al. \parencite{niu_modeling_2017} & 2017 & Grafos & -- &  \\
@@ -198,7 +192,7 @@ El análisis de estos trabajos permite identificar un patrón común en la defin
 
 \section{Conjuntos de datos utilizados (RQ3)}
 
-La Figura~\ref{fig:datasets} presenta los conjuntos de datos empleados en los estudios del corpus. El hallazgo más relevante de esta dimensión es la ausencia de un conjunto de referencia consolidado: ningún dataset supera los seis estudios, y la categoría más frecuente corresponde a conjuntos propios o generados sintéticamente por los propios autores, lo que dificulta la comparación directa entre propuestas.
+La Figura~\ref{fig:datasets} presenta los conjuntos de datos mencionados en el texto completo de los estudios del corpus. El hallazgo más relevante de esta dimensión es la ausencia de un conjunto de referencia consolidado: la categoría más frecuente, con 33 estudios, corresponde a trabajos que no declaran un conjunto público (conjuntos propios, generados sintéticamente o propuestas sin evaluación sobre datos abiertos), y ningún conjunto público alcanza un tercio del corpus. Entre los públicos predominan DARPA/OpTC y conjuntos de intrusiones de uso general (CICIDS, NSL-KDD, UNSW-NB15, KDD99), mientras que los conjuntos etiquetados por etapas de APT, DAPT2020 y Unraveled, aparecen en nueve estudios cada uno, lo que dificulta la comparación directa entre propuestas.
 
 \begin{figure}[h!]
 \centering
@@ -206,18 +200,18 @@ La Figura~\ref{fig:datasets} presenta los conjuntos de datos empleados en los es
 \begin{axis}[
     width=11cm, height=6.5cm,
     xbar, bar width=12pt,
-    xmin=0, xmax=8,
-    symbolic y coords={ToN-IoT,CICIDS,NSL-KDD,Unraveled,UNSW-NB15,DAPT2020,CICAPT-IIoT,{DARPA / OpTC},{Propio / sintético}},
+    xmin=0, xmax=40,
+    symbolic y coords={CICAPT-IIoT,Unraveled,DAPT2020,ToN-IoT,KDD99,UNSW-NB15,NSL-KDD,CICIDS,{DARPA / OpTC},{Sin conjunto público}},
     ytick=data,
     xlabel={Número de estudios},
     nodes near coords, nodes near coords style={font=\footnotesize},
     grid=major, grid style={dashed,gray!30},
     tick label style={font=\small}, label style={font=\small},
 ]
-\addplot[fill=orange!60,draw=orange!80!black] coordinates {(1,ToN-IoT)(2,CICIDS)(3,NSL-KDD)(3,Unraveled)(4,UNSW-NB15)(4,DAPT2020)(4,CICAPT-IIoT)(6,{DARPA / OpTC})(6,{Propio / sintético})};
+\addplot[fill=orange!60,draw=orange!80!black] coordinates {(6,CICAPT-IIoT)(9,Unraveled)(9,DAPT2020)(10,ToN-IoT)(13,KDD99)(17,UNSW-NB15)(18,NSL-KDD)(21,CICIDS)(22,{DARPA / OpTC})(33,{Sin conjunto público})};
 \end{axis}
 \end{tikzpicture}
-\caption{Conjuntos de datos utilizados en los estudios del corpus. Fuente: Elaboración propia.}
+\caption{Conjuntos de datos mencionados en los estudios del corpus. Fuente: Elaboración propia.}
 \label{fig:datasets}
 \end{figure}
 \FloatBarrier
@@ -228,9 +222,9 @@ La literatura reciente documenta de forma explícita estas limitaciones. \textci
 
 \section{Estrategias frente al desbalance de clases (RQ4)}
 
-Cuarenta y un estudios del corpus abordan explícitamente el problema del desbalance de clases en la detección de amenazas, aproximadamente la mitad del total. Las estrategias identificadas se concentran en técnicas de remuestreo, entre las que predomina el sobremuestreo sintético de la clase minoritaria \parencite{chawla2002smote}, junto con variantes que incorporan información de la distribución de los datos, como la técnica basada en distancia de variedad propuesta por \textcite{yang_manifold_2019}, y aproximaciones híbridas que combinan sobremuestreo y submuestreo.
+Treinta y seis estudios del corpus abordan explícitamente el problema del desbalance de clases en la detección de amenazas, cerca de la mitad del total. Las estrategias identificadas se concentran en técnicas de remuestreo, entre las que predomina el sobremuestreo sintético de la clase minoritaria \parencite{chawla2002smote}, junto con aproximaciones híbridas que combinan sobremuestreo y submuestreo. Estas técnicas operan sobre instancias tratadas como independientes entre sí, supuesto cuyas implicancias para un modelo secuencial se discuten en el Capítulo~\ref{cap:propuesta}.
 
-No obstante, el hallazgo más significativo de esta dimensión no proviene de las estrategias empleadas, sino de las métricas utilizadas para evaluarlas. Como muestra la Figura~\ref{fig:metricas}, 39 estudios del corpus reportan \textit{accuracy}, mientras que solo 14 reportan F1-score, 9 precisión y 6 exhaustividad. Esta distribución resulta problemática: en escenarios con desbalance severo, donde la actividad maliciosa constituye una fracción mínima del tráfico total, la exactitud global puede alcanzar valores elevados aun cuando el modelo falle sistemáticamente en la clase minoritaria, que es precisamente la de interés.
+No obstante, el hallazgo más significativo de esta dimensión no proviene de las estrategias empleadas, sino de las métricas utilizadas para evaluarlas. Como muestra la Figura~\ref{fig:metricas}, 35 estudios del corpus reportan \textit{accuracy}, mientras que solo 14 reportan F1-score, 8 precisión y 6 exhaustividad. Esta distribución resulta problemática: en escenarios con desbalance severo, donde la actividad maliciosa constituye una fracción mínima del tráfico total, la exactitud global puede alcanzar valores elevados aun cuando el modelo falle sistemáticamente en la clase minoritaria, que es precisamente la de interés.
 
 \begin{figure}[h!]
 \centering
@@ -246,7 +240,7 @@ No obstante, el hallazgo más significativo de esta dimensión no proviene de la
     grid=major, grid style={dashed,gray!30},
     tick label style={font=\small}, label style={font=\small},
 ]
-\addplot[fill=red!45,draw=red!70!black] coordinates {(6,Exhaustividad)(8,{AUC / ROC})(9,Precisión)(14,F1-score)(39,Accuracy)};
+\addplot[fill=red!45,draw=red!70!black] coordinates {(6,Exhaustividad)(7,{AUC / ROC})(8,Precisión)(14,F1-score)(35,Accuracy)};
 \end{axis}
 \end{tikzpicture}
 \caption{Métricas de evaluación reportadas en los estudios del corpus. Fuente: Elaboración propia.}
