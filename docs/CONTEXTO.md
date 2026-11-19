@@ -7,7 +7,7 @@
 ## 1. Quién y qué
 
 - **Autora:** Francisca Antonia Abarca Pezo (Fran), Ingeniería Civil Informática, PUCV.
-- **Profesor guía:** Sebastián Berríos. **Profesora correferente:** Pamela Hermosilla
+- **Profesor guía:** Sebastián Berrios. **Profesora correferente:** Pamela Hermosilla
   (Escuela de Ingeniería Informática, PUCV).
 - **Título:** *Modelos Probabilísticos para la Detección de Amenazas Persistentes Avanzadas (APT)*.
   El tema viene de una lista propuesta por el profesor y **ya no se puede cambiar**.
@@ -137,8 +137,10 @@ Problema · 3 Objetivos · 4 Marco Teórico · 5 Metodología (DSR + SLR, diagra
 |---|---|
 | `reglamento-seminario-titulo-2026.pdf` | Reglamento interno del Seminario de Título (marzo 2026) |
 | `rubrica-informes-escritos.pdf` | Rúbrica oficial de informes escritos ICI/INF (ver sección 2) |
-| `ejemplo-informe-final-seminario.pdf` | Informe Final de Seminario de otro grupo (jun. 2026, 92 págs.; guía Hermosilla, correferente Berríos): agente LLM para análisis de logs |
+| `ejemplo-informe-final-seminario.pdf` | Informe Final de Seminario de otro grupo (jun. 2026, 92 págs.; guía Hermosilla, correferente Berrios): agente LLM para análisis de logs |
 | `ejemplo-presentacion-final-seminario.pdf` | Presentación Final del mismo grupo (39 diapositivas, plantilla PUCV) |
+| `papers/` | PDF de los 77 estudios del corpus final de la SLR (coincide con la Tabla de hallazgos) |
+| `papers_excluidos/` | PDF de los 6 estudios excluidos por CE-1 en la verificación de consistencia |
 
 Los ejemplos son de **otro proyecto**: úsalos como modelo de estructura, extensión y nivel
 de detalle, nunca como fuente de contenido. El informe de ejemplo agrega en la Propuesta:

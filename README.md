@@ -3,7 +3,7 @@
 Seminario de Título — Ingeniería Civil Informática, Pontificia Universidad Católica de Valparaíso (PUCV).
 
 - **Autora:** Francisca Abarca
-- **Profesor guía:** Sebastián Berríos
+- **Profesor guía:** Sebastián Berrios
 - **Profesora correferente:** Pamela Hermosilla
 
 ## Resumen
