@@ -101,6 +101,7 @@ informe/            Informe LaTeX (plantilla pucv_inf_2024). Hoy contiene el Inf
   assets/           CartaGantt1.png (seminario), CartaGantt2.png (proyecto 2027)
 src/ notebooks/     Código del HMM y experimentos (vacíos por ahora)
 data/               Datasets locales, NO versionados (data/dapt2020/, data/unraveled/)
+docs/               CONTEXTO.md (este archivo) y referencia/ (reglamento, rúbrica, ejemplos)
 build/              PDF compilado, NO versionado
 CLAUDE.md           Lo carga Claude Code al abrir el repo; importa docs/CONTEXTO.md
 Makefile            make / make watch / make clean
@@ -112,10 +113,22 @@ Problema · 3 Objetivos · 4 Marco Teórico · 5 Metodología (DSR + SLR, diagra
 6 Estado del Arte (gráficos pgfplots, tabla xltabular de 83 estudios, síntesis por RQ, brechas) ·
 7 Plan de Trabajo (Gantt como imágenes) · 8 Propuesta de Solución · 9 Conclusión · 10 Declaración sobre el uso de herramientas de IA.
 
-**Referencia de estructura para el Informe Final:** el informe de ejemplo del profesor
-(otro proyecto, agente LLM para logs) agrega en la Propuesta: arquitectura general con
-diagrama, componentes, tecnologías consideradas (tablas), requerimientos de hardware/software,
-datasets de evaluación, diseño experimental con métricas, alcance y limitaciones.
+**Documentos de referencia en `docs/referencia/`** (léelos cuando la tarea lo requiera):
+
+| Archivo | Qué es |
+|---|---|
+| `reglamento-seminario-titulo-2026.pdf` | Reglamento interno del Seminario de Título (marzo 2026) |
+| `rubrica-informes-escritos.pdf` | Rúbrica oficial de informes escritos ICI/INF (ver sección 2) |
+| `ejemplo-informe-final-seminario.pdf` | Informe Final de Seminario de otro grupo (jun. 2026, 92 págs.; guía Hermosilla, correferente Berríos): agente LLM para análisis de logs |
+| `ejemplo-presentacion-final-seminario.pdf` | Presentación Final del mismo grupo (39 diapositivas, plantilla PUCV) |
+
+Los ejemplos son de **otro proyecto**: úsalos como modelo de estructura, extensión y nivel
+de detalle, nunca como fuente de contenido. El informe de ejemplo agrega en la Propuesta:
+arquitectura general con diagrama, componentes, tecnologías consideradas (tablas),
+requerimientos de hardware/software, datasets de evaluación, diseño experimental con
+métricas, alcance y limitaciones. La presentación sigue: Introducción → Objetivos →
+Metodología (RQ, criterios, selección, categorías) → Estado del Arte → Propuesta
+(descripción, arquitectura, diseño, limitaciones) → Conclusión.
 
 ## 6. Cómo trabajar en este repo
 
