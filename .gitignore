@@ -43,3 +43,8 @@ data/*
 # Sistema
 .DS_Store
 Thumbs.db
+
+# Claude Code: estado local entre sesiones (/start lo lee, /cierre lo escribe)
+# y ajustes locales. Los comandos de .claude/commands/ sí se versionan.
+.claude/sesion/
+.claude/settings.local.json

@@ -24,6 +24,7 @@ notebooks/    Exploración y experimentos
 data/         Datasets locales (no versionados, ver data/README.md)
 build/        PDF compilado (no versionado)
 Makefile      make / make watch / make clean
+.claude/      Comandos /start y /cierre de Claude Code
 .vscode/      Configuración de LaTeX Workshop
 ```
 
@@ -65,6 +66,11 @@ Con LaTeX Workshop instalado, abre cualquier `.tex` de `informe/` y guarda: comp
 | latexmk dice que ya hubo un error y no recompila | `make clean` y vuelve a compilar |
 | Error de biber (versión de `biblatex` no coincide) | Actualiza MiKTeX completo desde la consola de MiKTeX (*Updates*) |
 | Citas como **[clave]** en negrita | Faltó la pasada de biber: `make clean && make` |
+
+## Retomar el trabajo entre sesiones (Claude Code)
+
+- `/start` — lee el estado que dejó la sesión anterior, revisa qué cambió en el repo y el estado del PDF, y propone qué sigue. Solo lectura.
+- `/cierre [nota]` — escribe `.claude/sesion/ultimo_estado.md` (local, fuera de git) con lo hecho, decisiones, pendientes y siguiente paso.
 
 ## Estado
 
