@@ -1,4 +1,7 @@
-# LaTeX auxiliares
+# Salida de latexmk (make / LaTeX Workshop): nunca se versiona
+build/
+
+# LaTeX auxiliares (por si alguien compila dentro de informe/)
 *.aux
 *.log
 *.out
@@ -22,6 +25,8 @@
 *.nlo
 *.nls
 *.xdy
+*.nlg
+*.bcf-SAVE-ERROR
 informe/main.pdf
 
 # Python
