@@ -74,10 +74,12 @@ referencias 10 % · Contribución 10 %.
   con Rayyan y Zotero.
 - **Objetivos** (tres dimensiones, como en el informe de ejemplo del profesor):
   - *Estudio:* OE1 SLR · OE2 marco formal de estados ocultos y observables.
-  - *Desarrollo:* OE3 arquitectura HMM (componentes, Baum-Welch/Viterbi, flujo de datos) ·
-    OE4 prototipo funcional que infiere la progresión de la APT con probabilidades.
-  - *Validación:* OE5 experimentos sobre DAPT2020 y Unraveled, métricas por etapa, efecto del
-    desbalance y comparación con la literatura.
+  - *Desarrollo:* OE3 arquitectura HMM (componentes, estimación supervisada + Baum-Welch
+    restringido, inferencia filtrada y Viterbi, correspondencia estados-etapas, flujo de
+    datos) · OE4 prototipo funcional que infiere la progresión de la APT con probabilidades.
+  - *Validación:* OE5 experimentos sobre DAPT2020 y Unraveled, métricas por etapa y de
+    detección temprana, efecto del desbalance y comparación con RF/XGBoost bajo las mismas
+    condiciones.
   - Objetivo general: *Desarrollar un modelo probabilístico basado en HMM que permita detectar
     APT mediante la identificación temprana de su progresión por etapas.*
 
@@ -109,7 +111,7 @@ referencias 10 % · Contribución 10 %.
 ## 5. El repo
 
 ```
-informe/            Informe LaTeX (plantilla pucv_inf_2024). Hoy contiene el Informe de Avance.
+informe/            Informe LaTeX (plantilla pucv_inf_2024). Hoy contiene el Informe Final de Seminario.
   main.tex          Documento raíz; \include de Portadas/ y seccion/
   .latexmkrc        biber + makeglossaries + crea subcarpetas en build/ (no tocar sin motivo)
   pucv_inf_2024.sty Estilo de la Escuela (biblatex style=apa, backend=biber; glossaries; Times)
@@ -171,10 +173,10 @@ Metodología (RQ, criterios, selección, categorías) → Estado del Arte → Pr
 
 ## 7. Siguiente etapa
 
-Fran está empezando a armar en este repo la **propuesta preliminar del proyecto** (cierre del
-Seminario de Título y base del Proyecto de Título), partiendo del Informe de Avance. Lo que
-queda por delante, según el plan:
-1. Informe Final y Presentación Final del Seminario (20-nov y 30-nov-2026).
+El Informe Final de Seminario (con las correcciones del profesor guía al Informe de Avance)
+está en `main` desde el 19-nov-2026. Lo que queda por delante, según el plan:
+1. Entrega del Informe Final (20-nov) y Presentación Final del Seminario (30-nov-2026).
 2. Proyecto de Título (2027): implementar el preprocesamiento y el motor HMM en Python
-   (`src/`), calibrar con Baum-Welch con y sin SMOTE, y evaluar por etapa sobre DAPT2020 y
-   Unraveled.
+   (`src/`), con estimación supervisada + Baum-Welch restringido, estrategias de desbalance
+   que preservan la secuencia, línea base RF/XGBoost y evaluación por etapa y de detección
+   temprana sobre DAPT2020 y Unraveled.
