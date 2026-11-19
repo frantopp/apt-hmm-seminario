@@ -1,0 +1,15 @@
+\chapter{Conclusión}
+El presente Informe de Avance de Seminario de Título consolida la fundamentación metodológica, el estado del arte y el diseño arquitectónico de un sistema probabilístico basado en Cadenas Ocultas de Markov (HMM) para la detección temprana de Amenazas Persistentes Avanzadas (APT).
+
+A través de una Revisión Sistemática de la Literatura conducida bajo las directrices de Kitchenham y documentada según la declaración PRISMA 2020, se analizó un corpus final de 83 estudios primarios extraídos de Scopus, Web of Science e IEEE Xplore. Los hallazgos evidenciaron cuatro brechas estructurales en la investigación actual: la dependencia de infraestructuras de correlación previa de alertas, la escasa validación directa de modelos HMM sobre flujos de tráfico sin procesar, la limitada representatividad temporal de los conjuntos de datos comúnmente utilizados y la evaluación de modelos mediante métricas globales como \textit{Accuracy}, las cuales enmascaran el desempeño real frente a clases minoritarias.
+
+Para responder a estos vacíos, la propuesta adoptó la metodología Design Science Research (DSR), formulando un modelo HMM generativo capaz de mapear directamente la telemetría de red a los estados de la progresión del ataque. Asimismo, se estableció una estrategia de evaluación dual sobre los datasets DAPT2020 y Unraveled, asegurando tanto la comparabilidad con el estado del arte como la validez ecológica sobre trazas de varias semanas de operación.
+
+Para la etapa posterior correspondiente a Proyecto de Título, el trabajo se concentrará en: 
+\begin{enumerate}
+    \item La implementación computacional del motor HMM y sus rutinas de preprocesamiento en Python.
+    \item La calibración de parámetros mediante Baum-Welch contrastando experimentos con y sin sobremuestreo sintético (SMOTE).
+    \item La evaluación experimental rigurosa desagregada por etapas de ataque mediante métricas de precisión, exhaustividad y $F_1$-score.
+\end{enumerate}
+
+Con ello, se busca proporcionar un artefacto funcional que reduzca el tiempo de exposición frente a campañas dirigidas en infraestructuras críticas.

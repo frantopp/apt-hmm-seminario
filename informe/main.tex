@@ -1,0 +1,94 @@
+\documentclass[12pt, letterpaper]{report} % Usa la clase report para documentos divididos en capítulos
+
+%Paquete que da el formato al documento
+\usepackage{pucv_inf_2024}
+\usepackage{pdfpages}
+\usepackage{tabularx}
+\usepackage{caption}
+\usepackage{lipsum}
+\usepackage{graphicx}
+\usepackage{biblatex}
+\usepackage{pdflscape}
+\usepackage{xltabular}
+\usepackage{longtable}
+\usepackage{booktabs}
+\usepackage{placeins}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta, positioning, fit, backgrounds}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=black,
+    citecolor=black,
+    urlcolor=black
+}
+
+\renewcommand{\tablename}{Tabla}
+\renewcommand{\figurename}{Figura}
+
+\addbibresource{referencias.bib}
+
+% Glosario
+\loadglsentries{glosario}
+\makeglossaries
+
+\begin{document}
+
+%% TEX CON PORTADA DEL INFORME
+% Portada para informes en asignaturas
+%\include{Portadas/portada_principal.tex}
+
+% Portada para informes de TFT a excepción del final de Proyecto
+\include{Portadas/portada_TFT_nofinal.tex}
+
+% Portada informe final de proyecto 
+%\include{Portadas/portada_TFT_final.tex}
+
+%% DEDICATORIA (incluir solo en TFT y TFG, sino comentar)
+%\include{seccion/Dedicatoria/dedicatoria}
+
+%% RESUMEN/ABSTRACT DEL INFORME
+\include{seccion/Resumen/resumen}
+
+%% INDICE, LISTAS de FIGURAS/TABLAS/ALGORITMOS, GLOSARIO, ETC.
+%% COMENTAR EN CASO DE NO QUERER INCLUIR ALGUNA DE ESTAS LISTAS/INDICES
+\newpage\addcontentsline{toc}{chapter}{Índice General\vspace{-0.5cm}}
+\tableofcontents % Este comando genera el índice
+
+\newpage\addcontentsline{toc}{chapter}{Lista de Figuras\vspace{-0.5cm}}
+\listoffigures % Índice de figuras
+
+\newpage\addcontentsline{toc}{chapter}{Lista de Tablas\vspace{-0.5cm}}
+\listoftables  % Índice de tablas
+
+%\newpage\addcontentsline{toc}{chapter}{Lista de Algoritmos\vspace{-0.5cm}}
+%\listofalgorithms 
+
+% Lista de Símbolos
+%\include{seccion/Simbolos/simbolos}
+%\newpage\addcontentsline{toc}{chapter}{Lista de Símbolos\vspace{-0.5cm}}
+%\printnomenclature
+
+%\input{glosario}\glsaddall
+%\addcontentsline{toc}{chapter}{Glosario}
+%\printglossary[type=\acronymtype]
+
+\newpage
+\pagenumbering{arabic} % Cambia a numeración arábiga para el resto del documento
+
+% CONTENIDO PRINCIPAL DEL DOCUMENTO
+\include{seccion/1-Introduccion}
+\include{seccion/2-Problema}
+\include{seccion/3-Objetivos}
+\include{seccion/4-MarcoTeorico}
+\include{seccion/5-Metodologia}
+\include{seccion/6-EstadoArte}
+\include{seccion/7-Plan}
+\include{seccion/8-Propuesta}
+\include{seccion/9-Conclusion}
+\include{seccion/10-Ia}
+
+\printbibliography[title={Referencias}]
+\end{document}

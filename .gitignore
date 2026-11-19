@@ -1,0 +1,40 @@
+# LaTeX auxiliares
+*.aux
+*.log
+*.out
+*.toc
+*.lof
+*.lot
+*.bbl
+*.bcf
+*.blg
+*.run.xml
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+*.glo
+*.gls
+*.glg
+*.ist
+*.acn
+*.acr
+*.alg
+*.nlo
+*.nls
+*.xdy
+informe/main.pdf
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+.ipynb_checkpoints/
+
+# Datasets (no se versionan: DAPT2020 / Unraveled son pesados)
+data/*
+!data/README.md
+
+# Sistema
+.DS_Store
+Thumbs.db

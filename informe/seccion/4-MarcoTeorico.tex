@@ -1,0 +1,68 @@
+\chapter{Marco Teórico}
+En este capítulo se presentan los fundamentos conceptuales y matemáticos que sustentan el desarrollo de la investigación. Se formalizan las características operacionales de las Amenazas Persistentes Avanzadas, los fundamentos teóricos de los Modelos Ocultos de Markov (HMM), los algoritmos clásicos de entrenamiento e inferencia, las propiedades de los conjuntos de datos evaluados y las técnicas para abordar el desbalance severo de clases.
+
+\section{Amenazas Persistentes Avanzadas (APT)}
+Una Amenaza Persistente Avanzada (APT) es una campaña de intrusión dirigida, sigilosa y estructurada en múltiples fases sucesivas ejecutada por actores con capacidades técnicas avanzadas \parencite{hutchins2011killchain}. A diferencia del malware convencional, una APT no persigue la disrupción inmediata, sino la permanencia prolongada dentro de la infraestructura para exfiltrar activos estratégicos.
+
+Formalmente, el ciclo de vida de una APT se modela a través de la \textit{Cyber Kill Chain} o la matriz \textit{MITRE ATT\&CK}, transitando por una secuencia finita y ordenada de etapas:
+\begin{equation}
+\mathcal{E} = \{e_{\text{recon}}, e_{\text{foothold}}, e_{\text{lateral}}, e_{\text{exfil}}\}
+\end{equation}
+donde cada fase presenta tácticas y patrones de tráfico de red específicos. Dado que las acciones individuales imitan el tráfico benigno, su identificación requiere modelar la dependencia temporal entre eventos secuenciales.
+
+\section{Modelos Ocultos de Markov (HMM)}
+Un Modelo Oculto de Markov es un modelo estadístico generativo en el cual el sistema modelado es un proceso estocástico de Markov con estados no directamente observables (ocultos), pero inferibles a través de un conjunto de observaciones estocásticas generadas por dichos estados \parencite{rabiner1989}.
+
+Formalmente, un HMM se define mediante la 5-tupla $\lambda = (S, V, A, B, \pi)$:
+\begin{enumerate}
+    \item \textbf{Conjunto de estados ocultos:} $S = \{s_1, s_2, \dots, s_N\}$, donde $N$ representa el número de estados en el modelo (correspondientes a las etapas de la APT y el estado benigno). El estado en el instante temporal $t$ se denota como $q_t \in S$.
+    \item \textbf{Conjunto de observaciones discretas:} $V = \{v_1, v_2, \dots, v_M\}$, donde $M$ representa la cardinalidad del espacio de observaciones observables derivadas del tráfico de red. La observación en el instante $t$ se denota como $O_t \in V$.
+    \item \textbf{Matriz de transición de estados ($A$):} Define la probabilidad de transitar de un estado $s_i$ a un estado $s_j$:
+    \begin{equation}
+    A = [a_{ij}], \quad a_{ij} = P(q_{t+1} = s_j \mid q_t = s_i), \quad 1 \le i, j \le N
+    \end{equation}
+    sujeta a las restricciones estocásticas $a_{ij} \ge 0$ y $\sum_{j=1}^N a_{ij} = 1$.
+    \item \textbf{Matriz de probabilidades de emisión ($B$):} Define la probabilidad de generar una observación observable $v_k$ dado que el sistema se encuentra en el estado oculto $s_j$:
+    \begin{equation}
+    B = [b_j(k)], \quad b_j(k) = P(O_t = v_k \mid q_t = s_j), \quad 1 \le j \le N, \, 1 \le k \le M
+    \end{equation}
+    con $b_j(k) \ge 0$ y $\sum_{k=1}^M b_j(k) = 1$.
+    \item \textbf{Distribución de estados iniciales ($\pi$):} Vector de probabilidades de inicio del proceso:
+    \begin{equation}
+    \pi = [\pi_i], \quad \pi_i = P(q_1 = s_i), \quad 1 \le i \le N, \quad \sum_{i=1}^N \pi_i = 1
+    \end{equation}
+\end{enumerate}
+
+\subsection{Algoritmo de Inferencia: Decodificación de Viterbi}
+Dado un modelo calibrado $\lambda = (A, B, \pi)$ y una secuencia de tráfico observada $O = (O_1, O_2, \dots, O_T)$, el problema de inferencia consiste en encontrar la secuencia de estados ocultos más probable $Q^* = (q_1^*, q_2^*, \dots, q_T^*)$ que optimiza $P(Q \mid O, \lambda)$. 
+
+El algoritmo de Viterbi resuelve esta optimización mediante programación dinámica definiendo la variable de mejor puntaje $\delta_t(i)$:
+\begin{equation}
+\delta_t(i) = \max_{q_1, q_2, \dots, q_{t-1}} P(q_1 q_2 \dots q_t = s_i, O_1 O_2 \dots O_t \mid \lambda)
+\end{equation}
+cuya recursión para $1 \le t \le T-1$ y $1 \le j \le N$ corresponde a:
+\begin{equation}
+\delta_{t+1}(j) = \left[ \max_{1 \le i \le N} \delta_t(i) a_{ij} \right] \cdot b_j(O_{t+1})
+\end{equation}
+almacenando el puntero hacia atrás $\psi_{t+1}(j) = \arg\max_{1 \le i \le N} [\delta_t(i) a_{ij}]$ para reconstruir la trayectoria causal del atacante al tiempo $T$.
+
+\subsection{Algoritmo de Entrenamiento: Baum-Welch (Expectation-Maximization)}
+La estimación de los parámetros $\lambda = (A, B, \pi)$ a partir de secuencias de tráfico no etiquetadas o semi-supervisadas se lleva a cabo mediante el algoritmo de Baum-Welch, el cual maximiza iterativamente la función de verosimilitud $P(O \mid \lambda)$ mediante las probabilidades forward ($\alpha_t$) y backward ($\beta_t$):
+\begin{align}
+\alpha_t(i) &= P(O_1 O_2 \dots O_t, q_t = s_i \mid \lambda) \\
+\beta_t(i) &= P(O_{t+1} O_{t+2} \dots O_T \mid q_t = s_i, \lambda)
+\end{align}
+Las probabilidades marginales a posteriori $\gamma_t(i)$ y $\xi_t(i, j)$ permiten recalcular de forma analítica las matrices de transición y emisión en cada iteración del paso $M$.
+
+\section{Tratamiento del Desbalance Severo de Clases}
+En entornos reales de detección de intrusiones, la actividad de un atacante APT representa una fracción marginal ($< 0.1\%$) del volumen total de registros de red \parencite{myneni2020dapt2020}. Esta desproporción introduce sesgos críticos en clasificadores discriminativos tradicionales, los cuales tienden a ignorar la clase minoritaria. 
+
+Frente a esta limitación, el presente trabajo evalúa dos aproximaciones complementarias:
+\begin{enumerate}
+    \item \textbf{Modelamiento Generativo Intrínseco:} El HMM modela la densidad conjunta de probabilidad $P(O, Q)$ en lugar de la frontera condicional $P(Q \mid O)$. Al calibrar el perfil de transición de estados $A$ y emisiones $B$ sobre secuencias temporales, el modelo preserva la coherencia estructural de la fase minoritaria sin depender de la cardinalidad total de instancias.
+    \item \textbf{Técnicas de Remuestreo Sintético (SMOTE):} La técnica \textit{Synthetic Minority Over-sampling Technique} \parencite{chawla2002smote} se utiliza en el espacio de características del vector de observaciones para generar interpolaciones lineales sintéticas de eventos maliciosos:
+    \begin{equation}
+    x_{\text{nuevo}} = x_i + \lambda \cdot (x_{zi} - x_i), \quad \lambda \in [0, 1]
+    \end{equation}
+    donde $x_i$ es una muestra minoritaria y $x_{zi}$ representa uno de sus $k$ vecinos más cercanos del mismo estado.
+\end{enumerate}

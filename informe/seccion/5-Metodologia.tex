@@ -1,0 +1,384 @@
+\chapter{Metodología}
+
+Dado que el resultado esperado de este trabajo es un artefacto, un modelo basado en Cadenas Ocultas de Markov, implementado y validado empíricamente sobre datos reales, la investigación adopta como metodología el Design Science Research (DSR) propuesto por Peffers et al. \parencite{peffers2007dsrm}, orientado a disciplinas centradas en la creación de artefactos que resuelven problemas concretos. Esta metodología estructura el proceso de investigación en seis fases, las cuales se corresponden con las dimensiones metodológicas definidas para los objetivos específicos de este proyecto, según se detalla en la Tabla~\ref{tab:dsr}.
+
+\begin{table}[h!]
+\centering
+\small
+\caption{Correspondencia entre las fases del ciclo DSR y las dimensiones del proyecto.}
+\label{tab:dsr}
+\begin{tabular}{p{7.2cm} p{3cm} p{4.4cm}}
+\hline
+\textbf{Fase DSR} & \textbf{Dimensión} & \textbf{Objetivos asociados} \\
+\hline
+1. Identificación del problema y motivación & Estudio & OE1 \\
+2. Definición de los objetivos de la solución & Estudio & OE1, OE2 \\
+3. Diseño y desarrollo & Desarrollo & OE3, OE4 \\
+4. Demostración & Validación & OE5 \\
+5. Evaluación & Validación & OE5 \\
+6. Comunicación & --- & Informe y defensa \\
+\hline
+\end{tabular}
+\end{table}
+
+Las dos primeras fases del ciclo requieren caracterizar el estado actual del conocimiento sobre el problema abordado. Para ello se emplea como método una Revisión Sistemática de la Literatura (SLR), conducida conforme a las directrices de Kitchenham y Charters \parencite{kitchenham2007guidelines}, que estructuran este tipo de estudio en tres fases, planificación, ejecución y reporte, con el fin de asegurar un proceso reproducible y auditable. La documentación del proceso de identificación, cribado y selección de estudios se realiza siguiendo la declaración PRISMA 2020 \parencite{page2021prisma}, empleada aquí como guía de reporte y no como metodología de investigación.
+
+La Figura~\ref{fig:dsr} presenta el esquema integrado de la metodología, indicando para cada fase del ciclo sus entradas, actividades y salidas. Como se observa, la Revisión Sistemática de la Literatura constituye la actividad central de las dos primeras fases, y sus salidas (el estado del arte y las brechas identificadas) corresponden a las entradas directas de la fase de diseño y desarrollo.
+
+\begin{figure}[h!]
+\centering
+\resizebox{\textwidth}{!}{%
+\begin{tikzpicture}[
+    font=\footnotesize,
+    box/.style={draw, rectangle, rounded corners=1pt, align=center, inner sep=4pt, minimum height=9mm},
+    fase/.style={box, fill=gray!15, text width=3.4cm},
+    ent/.style={box, fill=white, text width=4.0cm},
+    act/.style={box, fill=white, text width=5.4cm},
+    sal/.style={box, fill=white, text width=4.2cm},
+    slr/.style={box, fill=gray!30, text width=5.4cm},
+    fl/.style={-{Latex[length=2mm]}, thin}
+]
+ 
+\node at (0,1.1) {\bfseries FASE DSR};
+\node at (4.6,1.1) {\bfseries ENTRADAS};
+\node at (10.2,1.1) {\bfseries ACTIVIDADES};
+\node at (15.7,1.1) {\bfseries SALIDAS};
+ 
+% --- Bloque 1: Estudio ---
+\node[fase] (f1) at (0,-0.6) {Fases 1--2\\Identificación del problema\\y objetivos de la solución\\\textit{(Estudio)}};
+\node[ent]  (e1) at (4.6,-0.6) {Problema de detección de APT\\Literatura científica indexada};
+\node[slr]  (a1) at (10.2,-0.6) {\textbf{Revisión Sistemática de la Literatura}\\(directrices de Kitchenham,\\reporte según PRISMA)};
+\node[sal]  (s1) at (15.7,-0.6) {Estado del arte\\Brechas identificadas\\Marco formal de estados\\y observables};
+\draw[fl] (e1) -- (a1);
+\draw[fl] (a1) -- (s1);
+\begin{scope}[on background layer]
+\node[draw, gray, rounded corners, fit=(f1)(e1)(a1)(s1), inner sep=6pt] (b1) {};
+\end{scope}
+ 
+% --- Bloque 2: Desarrollo ---
+\node[fase] (f2) at (0,-3.6) {Fase 3\\Diseño y desarrollo\\\textit{(Desarrollo)}};
+\node[ent]  (e2) at (4.6,-3.6) {Marco formal y brechas\\Datasets DAPT2020 y Unraveled};
+\node[act]  (a2) at (10.2,-3.6) {Diseño de la arquitectura HMM\\Preprocesamiento en secuencias\\Entrenamiento (Baum-Welch)};
+\node[sal]  (s2) at (15.7,-3.6) {Prototipo funcional\\del modelo HMM};
+\draw[fl] (e2) -- (a2);
+\draw[fl] (a2) -- (s2);
+\begin{scope}[on background layer]
+\node[draw, gray, rounded corners, fit=(f2)(e2)(a2)(s2), inner sep=6pt] (b2) {};
+\end{scope}
+ 
+% --- Bloque 3: Validación ---
+\node[fase] (f3) at (0,-6.6) {Fases 4--5\\Demostración y evaluación\\\textit{(Validación)}};
+\node[ent]  (e3) at (4.6,-6.6) {Prototipo del modelo\\Secuencias de prueba};
+\node[act]  (a3) at (10.2,-6.6) {Inferencia de etapas (Viterbi)\\Cálculo de métricas por etapa\\Análisis del desbalance de clases};
+\node[sal]  (s3) at (15.7,-6.6) {Métricas de desempeño\\Comparación con la literatura};
+\draw[fl] (e3) -- (a3);
+\draw[fl] (a3) -- (s3);
+\begin{scope}[on background layer]
+\node[draw, gray, rounded corners, fit=(f3)(e3)(a3)(s3), inner sep=6pt] (b3) {};
+\end{scope}
+ 
+% --- Bloque 4: Comunicación ---
+\node[fase] (f4) at (0,-9.2) {Fase 6\\Comunicación};
+\node[ent]  (e4) at (4.6,-9.2) {Resultados obtenidos};
+\node[act]  (a4) at (10.2,-9.2) {Redacción y documentación};
+\node[sal]  (s4) at (15.7,-9.2) {Informe final y defensa};
+\draw[fl] (e4) -- (a4);
+\draw[fl] (a4) -- (s4);
+\begin{scope}[on background layer]
+\node[draw, gray, rounded corners, fit=(f4)(e4)(a4)(s4), inner sep=6pt] (b4) {};
+\end{scope}
+ 
+% flechas entre bloques
+\draw[fl, thick] (b1.south -| f1) -- (b2.north -| f1);
+\draw[fl, thick] (b2.south -| f2) -- (b3.north -| f2);
+\draw[fl, thick] (b3.south -| f3) -- (b4.north -| f3);
+ 
+\end{tikzpicture}%
+}
+\caption{Esquema integrado de la metodología de investigación. Fuente: Elaboración propia.}
+\label{fig:dsr}
+\end{figure}
+\FloatBarrier
+
+\section{Diseño de la revisión}
+
+La Figura~\ref{fig:metodologia} desglosa el procedimiento interno de la revisión sistemática, correspondiente a la actividad central de las Fases 1 y 2 del esquema anterior. Mientras la Figura~\ref{fig:dsr} representa el ciclo completo de la investigación, esta detalla las tres etapas consecutivas en que se organiza la revisión (planificación, ejecución y reporte) junto con las herramientas empleadas en cada una. La primera etapa contempla la formulación de las preguntas de investigación y la definición de los criterios de inclusión y exclusión, cuyo resultado es un protocolo de revisión que fija las reglas antes de consultar cualquier base de datos. La segunda etapa corresponde a la ejecución de las ecuaciones de búsqueda sobre las fuentes seleccionadas y al cribado progresivo de los registros recuperados, procedimiento documentado mediante el diagrama de flujo PRISMA hasta obtener el corpus final. La tercera etapa se enfoca en la extracción, clasificación y síntesis de la información contenida en los estudios incluidos, con el fin de comparar los enfoques reportados en la literatura e identificar las brechas que fundamentan la propuesta.
+
+\begin{figure}[h!]
+\centering
+\resizebox{\textwidth}{!}{%
+\begin{tikzpicture}[
+    font=\footnotesize,
+    box/.style={draw, rectangle, rounded corners=1pt, align=center, inner sep=4pt, minimum height=8mm},
+    etapa/.style={box, fill=gray!15, text width=2.8cm},
+    herr/.style={box, fill=white, text width=3.2cm},
+    act/.style={box, fill=white, text width=4.6cm},
+    ent/.style={box, fill=white, text width=3.2cm},
+    flecha/.style={-{Latex[length=2mm]}, thin}
+]
+\node (h1) at (0,0.9) {\bfseries ETAPA};
+\node (h2) at (3.6,0.9) {\bfseries HERRAMIENTAS};
+\node (h3) at (8.5,0.9) {\bfseries ACTIVIDADES};
+\node (h4) at (13.3,0.9) {\bfseries ENTREGABLES};
+
+\node[etapa] (e1) at (0,-0.85) {(1)\\Planificación\\de la revisión};
+\node[herr]  (t1) at (3.6,-0.85) {Directrices de\\Kitchenham,\\matriz de RQ};
+\node[act]   (a1a) at (8.5,-0.05) {Definición de preguntas\\de investigación};
+\node[act]   (a1b) at (8.5,-1.55) {Definición de criterios de inclusión y exclusión};
+\node[ent]   (d1) at (13.3,-1.55) {Protocolo de revisión};
+%\draw[flecha] (e1) -- (t1);
+\draw[flecha] (t1.east) -- ++(0.3,0) |- (a1a.west);
+\draw[flecha] (a1a) -- (a1b);
+\draw[flecha] (a1b) -- (d1);
+\begin{scope}[on background layer]
+\node[draw, gray, rounded corners, fit=(e1)(t1)(a1a)(a1b)(d1), inner sep=6pt] {};
+\end{scope}
+
+\node[etapa] (e2) at (0,-3.85) {(2)\\Ejecución de\\la revisión};
+\node[herr]  (t2) at (3.6,-3.85) {Bases de datos\\(Scopus, Web of Science e IEEE Xplore), Rayyan};
+\node[act]   (a2a) at (8.5,-3.15) {Ejecución de ecuaciones\\de búsqueda};
+\node[act]   (a2b) at (8.5,-4.65) {Cribado por título/resumen y texto completo};
+\node[ent]   (d2a) at (13.3,-3.15) {Diagrama de flujo PRISMA};
+\node[ent]   (d2b) at (13.3,-4.65) {Corpus final de estudios};
+%\draw[flecha] (e2) -- (t2);
+\draw[flecha] (t2.east) -- ++(0.3,0) |- (a2a.west);
+\draw[flecha] (a2a) -- (a2b);
+\draw[flecha] (a2a) -- (d2a);
+\draw[flecha] (a2b) -- (d2b);
+\begin{scope}[on background layer]
+\node[draw, gray, rounded corners, fit=(e2)(t2)(a2a)(a2b)(d2a)(d2b), inner sep=6pt] {};
+\end{scope}
+
+\node[etapa] (e3) at (0,-7.4) {(3)\\Reporte de\\la revisión};
+\node[herr]  (t3) at (3.6,-7.4) {Matriz de extracción\\de datos, categorías\\de análisis};
+\node[act]   (a3a) at (8.5,-6.3) {Extracción de información};
+\node[act]   (a3b) at (8.5,-7.5) {Clasificación según RQ};
+\node[act]   (a3c) at (8.5,-8.8) {Síntesis y comparación\\de resultados};
+\node[ent]   (d3a) at (13.3,-7.5) {Tabla de hallazgos\\y resultados};
+\node[ent]   (d3b) at (13.3,-8.8) {Brechas de\\investigación};
+%\draw[flecha] (e3) -- (t3);
+\draw[flecha] (t3.east) -- ++(0.3,0) |- (a3a.west);
+\draw[flecha] (a3a) -- (a3b);
+\draw[flecha] (a3b) -- (a3c);
+\draw[flecha] (a3b) -- (d3a);
+\draw[flecha] (a3c) -- (d3b);
+\begin{scope}[on background layer]
+\node[draw, gray, rounded corners, fit=(e3)(t3)(a3a)(a3b)(a3c)(d3a)(d3b), inner sep=6pt] {};
+\end{scope}
+\end{tikzpicture}%
+}
+\caption{Etapas de la revisión sistemática de la literatura. Fuente: Elaboración propia.}
+\label{fig:metodologia}
+\end{figure}
+\FloatBarrier
+
+\section{Preguntas de investigación}
+
+Para guiar el proceso de revisión y asegurar coherencia con los objetivos del proyecto, se definieron cuatro preguntas de investigación, cada una asociada a una ecuación de búsqueda propia (Tabla~\ref{tab:rqs}).
+
+La formulación de las preguntas de investigación siguió la estructura PICOC recomendada por Kitchenham y Charters \parencite{kitchenham2007guidelines}, considerando como población las campañas de Amenazas Persistentes Avanzadas, como intervención los modelos probabilísticos aplicados a su detección, y como resultados las características, limitaciones y desempeño reportados. El criterio de comparación no se define de forma explícita, dado el carácter exploratorio de la revisión, orientada a caracterizar el estado del conocimiento antes que a contrastar dos tratamientos específicos. El contexto corresponde a entornos de red organizacionales.
+
+\begin{table}[h!]
+\centering
+\small
+\caption{Preguntas de investigación de la revisión sistemática.}
+\label{tab:rqs}
+\begin{tabular}{p{1.2cm} p{14.4cm}}
+\hline
+\textbf{ID} & \textbf{Pregunta de investigación} \\
+\hline
+RQ1 & ¿Qué modelos probabilísticos se han aplicado a la detección de Amenazas Persistentes Avanzadas, y cuáles son sus principales características? \\
+RQ2 & ¿Cómo se han aplicado específicamente los Modelos Ocultos de Markov (HMM) a la detección o predicción de APT, y qué variantes se han utilizado? \\
+RQ3 & ¿Qué datasets se han utilizado para entrenar y validar estos modelos, y qué limitaciones presentan? \\
+RQ4 & ¿Qué estrategias existen para abordar el desbalance de clases en la detección de amenazas, y cómo afectan el desempeño de los modelos? \\
+\hline
+\end{tabular}
+\end{table}
+\FloatBarrier
+
+La RQ1 busca caracterizar el panorama general de enfoques probabilísticos aplicados al problema, estableciendo una base comparativa que permita situar la propuesta dentro de una familia de técnicas más amplia. La RQ2 profundiza en los Modelos Ocultos de Markov, identificando cómo se han definido los estados ocultos y las variables observables en trabajos previos, así como las variantes empleadas y sus resultados. Por su parte, la RQ3 se orienta a los conjuntos de datos disponibles para la validación empírica, atendiendo tanto a su representatividad respecto de campañas APT reales como a sus limitaciones documentadas. Finalmente, la RQ4 aborda el desbalance de clases, condición inherente a los escenarios de detección de amenazas, con el fin de identificar qué estrategias de mitigación se han probado y qué efecto tienen sobre el desempeño de los modelos.
+
+\section{Criterios de inclusión y exclusión}
+
+Para asegurar la relevancia y calidad de los estudios seleccionados, se definieron los siguientes criterios:
+
+\begin{table}[h!]
+\centering
+\small
+\caption{Criterios de inclusión.}
+\label{tab:inclusion}
+\begin{tabular}{p{1.2cm} p{14.4cm}}
+\hline
+\textbf{ID} & \textbf{Criterio de Inclusión (CI)} \\
+\hline
+CI-1 & Abordan la detección o predicción de Amenazas Persistentes Avanzadas o ataques multi-etapa. \\
+CI-2 & Emplean modelos probabilísticos, con especial atención a enfoques basados en Modelos de Markov. \\
+CI-3 & Presentan validación empírica sobre datos, mediante experimentación o métricas cuantitativas. \\
+CI-4 & Publicados desde 2011, año de formalización del modelo de \textit{kill chain} de intrusión. Se exceptúan los estudios asociados a la RQ4, dado que la literatura sobre desbalance de clases es anterior a esa fecha y cuenta con trabajos seminales previos. \\
+CI-5 & Publicados en fuentes académicas con revisión por pares. Se exceptúan los reportes técnicos fundacionales ampliamente citados en el área, dado su rol como referencia seminal. \\
+CI-6 & Publicaciones en inglés o español. \\
+CI-7 & Correspondientes a artículos de revista, \textit{proceedings} de conferencias o capítulos de libro. \\
+CI-8 & Texto completo disponible mediante acceso institucional o abierto. \\
+\hline
+\end{tabular}
+\end{table}
+\FloatBarrier
+
+\begin{table}[h!]
+\centering
+\small
+\caption{Criterios de exclusión.}
+\label{tab:exclusion}
+\begin{tabular}{p{1.2cm} p{14.4cm}}
+\hline
+\textbf{ID} & \textbf{Criterio de Exclusión (CE)} \\
+\hline
+CE-1 & No alineados con la detección de amenazas en sistemas o redes computacionales. \\
+CE-2 & Estudios puramente teóricos sobre modelos probabilísticos, sin aplicación al dominio de la seguridad. \\
+CE-3 & Registros duplicados identificados en múltiples fuentes. Ante versiones múltiples de una misma investigación, se conserva la más completa o reciente. \\
+CE-4 & Publicaciones no académicas o sin proceso de revisión por pares, salvo la excepción indicada en el criterio CI-5. \\
+CE-5 & Detección de amenazas basada en eventos aislados, sin componente secuencial o multi-etapa, por no aportar a la modelación de la progresión de un ataque. \\
+CE-6 & Sin disponibilidad del texto completo. \\
+CE-7 & Revisiones sistemáticas de literatura (SLR) previas. Estas pueden citarse como contexto narrativo, pero no se extraen como estudio primario en la matriz de extracción de datos. \\
+CE-8 & Estudios que, si bien abordan la detección de amenazas, no aportan evidencia relevante a ninguna de las preguntas de investigación formuladas: emplean conjuntos de datos de intrusiones genéricos sin etiquetado por etapas de ataque, o no describen ni discuten las características de los datos utilizados. \\
+\hline
+\end{tabular}
+\end{table}
+\FloatBarrier
+
+Cabe señalar una excepción respecto del criterio CI-5: se admite la inclusión de reportes técnicos fundacionales ampliamente citados en el área, como el trabajo de Hutchins et al. \parencite{hutchins2011killchain}, dado su carácter de referencia seminal para la caracterización por etapas de las campañas APT.
+
+\section{Fuentes de información y estrategia de búsqueda}
+
+La búsqueda sistemática considera tres fuentes de información científica seleccionadas por su cobertura en ciencias de la computación y ciberseguridad, y por su disponibilidad mediante acceso institucional: Scopus, Web of Science e IEEE Xplore. Las dos primeras corresponden a bases de datos de indexación multidisciplinar que agregan contenido de las principales editoriales del área (incluidas ACM, Springer, Elsevier y Wiley), mientras que IEEE Xplore se incorpora de forma complementaria dada la concentración de literatura especializada en detección de intrusiones presente en sus publicaciones.
+
+Para garantizar una adecuada correspondencia entre los objetivos del estudio y la evidencia recuperada, se definió una ecuación de búsqueda específica para cada pregunta de investigación, evitando el uso de una única consulta general replicada en todas las bases de datos. Esta decisión permite capturar con mayor precisión los conceptos particulares abordados por cada pregunta. Asimismo, todas las búsquedas se aplicaron sobre los campos de título, resumen y palabras clave, dado que restringirlas únicamente al título excluiría trabajos cuya contribución metodológica solo se explicita en el resumen. Las ecuaciones utilizadas se presentan en la Tabla~\ref{tab:ecuaciones}.
+
+\begin{table}[h!]
+\centering
+\small
+\caption{Ecuaciones de búsqueda por pregunta de investigación.}
+\label{tab:ecuaciones}
+\begin{tabular}{c p{9.4cm} c c c c}
+\hline
+\textbf{RQ} & \textbf{Ecuación de búsqueda} & \textbf{Scopus} & \textbf{WoS} & \textbf{IEEE} & \textbf{Total} \\
+\hline
+RQ1 & \textit{("advanced persistent threat*" OR APT OR "multi-stage attack*" OR "multi-step attack*") AND ("probabilistic model*" OR "Bayesian network*" OR "Markov model*" OR "stochastic model*" OR "probabilistic approach*") AND (detect* OR predict* OR classif*)} & 127 & 67 & 85 & 279 \\
+\hline
+RQ2 & \textit{("advanced persistent threat*" OR APT OR "attack campaign*" OR "kill chain" OR "multi-stage attack*") AND ("hidden Markov model*" OR HMM OR "Markov chain*" OR "hidden semi-Markov*") AND (detect* OR predict* OR model* OR classif*)} & 103 & 27 & 80 & 210 \\
+\hline
+RQ3 & \textit{("advanced persistent threat*" OR APT OR "multi-stage attack*") AND (dataset* OR benchmark* OR corpus) AND ("machine learning" OR "deep learning" OR classif*)} & 279 & 154 & 40 & 473 \\
+\hline
+RQ4 & \textit{("class imbalance*" OR "imbalanced data*" OR SMOTE) AND ("intrusion detection" OR "threat detection" OR "anomaly detection") AND ("advanced persistent threat*" OR APT OR "multi-stage attack*")} & 47 & 19 & 48 & 114 \\
+\hline
+\multicolumn{2}{r}{\textbf{Total de registros identificados}} & 556 & 267 & 253 & 1076 \\
+\hline
+\end{tabular}
+
+\vspace{2mm}
+
+\vspace{2mm}
+\begin{minipage}{\textwidth}
+\small
+\textit{Nota:} Las ecuaciones se presentan en su forma genérica. Su sintaxis específica varía según la plataforma: \texttt{TITLE-ABS-KEY(...)} en Scopus, \texttt{TS=(...)} en Web of Science y el campo \textit{All Metadata} en IEEE Xplore. En esta última, la ecuación de RQ1 omite el término \textit{"probabilistic approach*"} debido a la restricción de la plataforma, que admite un máximo de diez comodines por consulta. El criterio temporal establecido en CI-4 se aplicó mediante el operador \texttt{PUBYEAR} en Scopus y mediante los filtros propios de cada plataforma en Web of Science e IEEE Xplore. La ecuación de RQ4 no incorpora restricción temporal, conforme a la excepción prevista en dicho criterio.
+\end{minipage}
+
+\end{table}
+\FloatBarrier
+
+
+\section{Proceso de selección de estudios}
+
+El proceso de selección se ejecutó siguiendo las cuatro etapas del modelo PRISMA 2020, cuyo resultado se sintetiza en la Figura~\ref{fig:prisma}. La búsqueda inicial recuperó 1.076 registros, distribuidos entre Scopus (556), Web of Science (267) e IEEE Xplore (253). Tras la eliminación de 473 duplicados, atribuibles al solapamiento entre las bases de datos consultadas y entre las ecuaciones asociadas a cada pregunta de investigación, se sometieron 603 registros al cribado por título y resumen.
+
+En esta etapa se excluyeron 311 registros. La causa predominante correspondió al criterio CE-8, aplicado a estudios que, pese a situarse en el dominio de la detección de amenazas, no aportaban evidencia relevante respecto de las preguntas formuladas. Un número significativo de exclusiones bajo el criterio CE-1 se originó en coincidencias léxicas espurias, derivadas de la coincidencia de la sigla APT con fragmentos de términos como \textit{adaptive} o \textit{adaptation}, así como con su acepción en otras disciplinas.
+
+De los 292 artículos que avanzaron a la evaluación de texto completo, 199 debieron ser excluidos por no disponerse de acceso al documento completo (CE-6) y 10 por corresponder a dominios ajenos al objeto de estudio (CE-1). El corpus final quedó constituido por 83 estudios primarios, de los cuales 16 emplean modelos de Markov, 18 abordan explícitamente el desbalance de clases y 6 utilizan los conjuntos de datos seleccionados para este trabajo.
+
+\begin{figure}[h!]
+\centering
+\resizebox{0.95\textwidth}{!}{%
+\begin{tikzpicture}[
+    font=\small,
+    caja/.style={draw, rectangle, align=left, inner sep=6pt, text width=6.6cm, minimum height=10mm},
+    exc/.style={draw, rectangle, align=left, inner sep=6pt, text width=6.2cm, minimum height=10mm},
+    etapa/.style={draw, rectangle, fill=gray!15, align=center, inner sep=5pt, text width=2.5cm, minimum height=14mm},
+    fl/.style={-{Latex[length=2.5mm]}, thin}
+]
+ 
+\node[etapa] (l1) at (-4.8,0)    {\textbf{Identificación}};
+\node[etapa] (l2) at (-4.8,-3.4) {\textbf{Cribado}};
+\node[etapa] (l3) at (-4.8,-7.0) {\textbf{Elegibilidad}};
+\node[etapa] (l4) at (-4.8,-10.2){\textbf{Inclusión}};
+ 
+\node[caja] (c1) at (0.5,0) {Registros identificados en las bases de datos ($n = 1{.}076$)\\[2pt]
+\footnotesize Scopus ($n=556$), Web of Science \newline ($n=267$), IEEE Xplore ($n=253$)};
+ 
+\node[caja] (c2) at (0.5,-3.4) {Registros tras eliminar duplicados ($n = 603$)};
+ 
+\node[caja] (c3) at (0.5,-7.0) {Artículos evaluados a texto completo ($n = 292$)};
+ 
+\node[caja] (c4) at (0.5,-10.2) {Estudios incluidos en la síntesis ($n = 83$)};
+ 
+\node[exc] (e1) at (8.6,0) {Duplicados eliminados ($n = 473$)\\
+\footnotesize Criterio CE-3};
+ 
+\node[exc] (e2) at (8.6,-3.4) {Registros excluidos en el cribado por título y resumen ($n = 311$)\\[2pt]
+\footnotesize CE-8 ($n=249$), CE-1 ($n=29$), CE-7 ($n=16$), CE-5 ($n=12$), CE-6 ($n=3$), CE-2 ($n=1$), CE-3 ($n=1$)};
+ 
+\node[exc] (e3) at (8.6,-7.0) {Artículos excluidos tras la evaluación de texto completo ($n = 209$)\\[2pt]
+\footnotesize CE-6, sin disponibilidad de texto completo ($n=199$); CE-1, fuera del dominio de estudio ($n=10$)};
+ 
+\draw[fl] (c1) -- (c2);
+\draw[fl] (c2) -- (c3);
+\draw[fl] (c3) -- (c4);
+ 
+\draw[fl] (c1.east) -- (e1.west);
+\draw[fl] (c2.east) -- (e2.west);
+\draw[fl] (c3.east) -- (e3.west);
+ 
+\end{tikzpicture}%
+}
+\caption{Diagrama de flujo del proceso de selección de estudios, según la declaración PRISMA 2020. Fuente: Elaboración propia.}
+\label{fig:prisma}
+\end{figure}
+
+\section{Categorías de análisis}
+
+Con el propósito de orientar sistemáticamente el análisis de la literatura recopilada, se definió un conjunto de categorías derivadas directamente de las preguntas de investigación. Esta estructura permite clasificar la información extraída de cada estudio de forma coherente con los objetivos del proyecto y facilita la comparación entre enfoques.
+
+\begin{table}[h!]
+\centering
+\small
+\caption{Categorías y subcategorías de análisis.}
+\begin{tabular}{p{1.0cm} p{4.6cm} p{9.6cm}}
+\hline
+\textbf{RQ} & \textbf{Categoría} & \textbf{Subcategorías} \\
+\hline
+RQ1 & C1. Modelos probabilísticos & Redes bayesianas, grafos de ataque bayesianos, modelos \newline estocásticos \\
+RQ2 & C2. Modelos de Markov & Definición de estados ocultos, variables observables, \newline algoritmos de entrenamiento e inferencia \\
+RQ3 & C3. Conjuntos de datos & Representatividad de campañas APT, etapas etiquetadas, \newline limitaciones documentadas \\
+RQ4 & C4. Desbalance de clases & Estrategias de sobremuestreo, submuestreo, métricas robustas al desbalance \\
+\hline
+\end{tabular}
+\end{table}
+\FloatBarrier
+
+A partir de este esquema, cada estudio incluido se registra en la matriz de extracción de datos indicando el modelo empleado, el conjunto de datos utilizado, las métricas reportadas y las limitaciones declaradas por sus autores, junto con la categoría o categorías a las que responde. Este procedimiento permite construir de manera sistemática el Estado del Arte y sustentar la identificación de brechas que fundamentan la propuesta desarrollada en este trabajo.
+
+\subsection{Evaluación del riesgo de sesgo y extracción de evidencia}
+De manera análoga a los estudios secundarios en ciberseguridad empírica, no se aplicó una herramienta estandarizada de sesgo clínico (como RoB 2 o Newcastle-Ottawa), debido a la naturaleza estrictamente técnica, experimental y computacional de los estudios analizados. La heterogeneidad de métricas, conjuntos de datos propietarios y topologías de red en la literatura dificulta el uso de escalas cuantitativas universales de sesgo.
+
+En su lugar, la validez interna y reproducibilidad de la revisión se resguardó mediante tres mecanismos operativos:
+\begin{enumerate}
+    \item \textbf{Filtrado por pares e impacto:} Restricción a fuentes con revisión por pares indexadas en Scopus, Web of Science e IEEE Xplore, exigiendo un umbral mínimo de tres citas (CI-8) para publicaciones anteriores a 2025.
+    \item \textbf{Verificación de consistencia cruzada en extracción:} Cada estudio del corpus final ($n=83$) fue analizado mediante una matriz estructurada que desagrega explícitamente: 
+    \begin{itemize}
+        \item Familia del modelo probabilístico.
+        \item Definición formal de estados y observaciones.
+        \item Dataset utilizado.
+        \item Métricas reportadas.
+        \item Tratamiento del desbalance de datos.
+    \end{itemize}
+    \item \textbf{Control de sesgo de reporte de métricas:} Se contrastó sistemáticamente la disparidad entre exactitud global (\textit{Accuracy}) y métricas sensibles a la clase minoritaria ($F_1$-score y \textit{Recall}), permitiendo aislar publicaciones con evaluaciones sobredimensionadas debidas al desbalance de clases.
+\end{enumerate}

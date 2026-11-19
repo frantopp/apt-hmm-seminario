@@ -1,0 +1,50 @@
+\chapter{Definición de objetivos}
+
+\section{Objetivo General}
+\vspace{-0.17cm}
+Desarrollar un modelo probabilístico basado en Cadenas Ocultas de Markov que permita detectar Amenazas Persistentes Avanzadas mediante la identificación temprana de su progresión por etapas.
+\vspace{-0.35cm}
+
+\section{Objetivos Específicos}
+\vspace{-0.1cm}
+Los objetivos específicos se organizan en tres dimensiones metodológicas: \textbf{Estudio}, \textbf{Desarrollo} y \textbf{Validación}, las cuales cubren el ciclo completo del proyecto desde la revisión del conocimiento existente hasta la evaluación empírica de la propuesta.
+\vspace{-0.45cm}
+
+\begin{center}
+    \small
+    \renewcommand{\arraystretch}{1.3}
+
+    % --- TABLA 1: ESTUDIO ---
+    \begin{tabularx}{\textwidth}{|c|X|}
+    \hline
+    \multicolumn{2}{|l|}{\textbf{Dimensión: Estudio}} \\ \hline
+    \textbf{OE1} & Realizar una revisión sistemática de literatura (SLR), conforme a las directrices de Kitchenham y Charters \parencite{kitchenham2007guidelines} y reportada según la declaración PRISMA \parencite{page2021prisma}, para identificar, analizar y sintetizar las principales contribuciones científicas sobre modelos probabilísticos aplicados a la detección de Amenazas Persistentes Avanzadas, con énfasis en enfoques basados en Modelos Ocultos de Markov, identificando las limitaciones de los enfoques existentes y las brechas que justifican la propuesta. \\ \hline
+    \textbf{OE2} & Formular un marco formal que caracterice los estados ocultos y las variables observables del proceso de una APT, en base a las etapas de ataque y las características del tráfico definidas en los conjuntos de datos DAPT2020 y Unraveled, identificando los criterios que debe satisfacer el modelo para representar la progresión del ataque. \\ \hline
+    \end{tabularx}
+    \captionof{table}{Objetivos específicos correspondientes a la dimensión de Estudio.}
+    \label{tab:obj_estudio}
+    
+    \vspace{0cm}
+
+    % --- TABLA 2: DESARROLLO ---
+    \begin{tabularx}{\textwidth}{|c|X|}
+    \hline
+    \multicolumn{2}{|l|}{\textbf{Dimensión: Desarrollo}} \\ \hline
+    \textbf{OE3} & Diseñar la arquitectura del modelo HMM para la detección de APT, especificando sus componentes (estados ocultos, variables observables, matrices de transición y emisión), los algoritmos de entrenamiento e inferencia a utilizar (Baum-Welch y Viterbi), y el flujo de datos desde el preprocesamiento de los conjuntos de datos hasta la entrada del modelo. \\ \hline
+    \textbf{OE4} & Implementar un prototipo funcional del modelo HMM que procese el tráfico de red de los conjuntos de datos seleccionados, infiera la secuencia más probable de etapas de una APT en curso y reporte dicha progresión junto con las probabilidades asociadas a cada etapa. \\ \hline
+    \end{tabularx}
+    \captionof{table}{Objetivos específicos correspondientes a la dimensión de Desarrollo.}
+    \label{tab:obj_desarrollo}
+    
+    \vspace{0cm}
+
+    % --- TABLA 3: VALIDACIÓN ---
+    \begin{tabularx}{\textwidth}{|c|X|}
+    \hline
+    \multicolumn{2}{|l|}{\textbf{Dimensión: Validación}} \\ \hline
+    \textbf{OE5} & Evaluar el desempeño del modelo HMM mediante experimentos controlados sobre los conjuntos de datos DAPT2020 y Unraveled, considerando métricas de precisión, exhaustividad y F1-score por etapa de ataque, el efecto del desbalance de clases sobre los resultados, y su comparación con los enfoques reportados en la literatura. \\ \hline
+    \end{tabularx}
+    \captionof{table}{Objetivo específico correspondiente a la dimensión de Validación.}
+    \label{tab:obj_validacion}
+
+\end{center}

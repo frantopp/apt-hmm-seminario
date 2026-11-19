@@ -1,0 +1,55 @@
+\chapter{Propuesta de Solución}
+Este capítulo presenta la propuesta preliminar de solución desarrollada a partir de los hallazgos de la revisión sistemática de la literatura. Dado que este informe corresponde al hito de avance del Seminario de Título, las decisiones aquí expuestas constituyen la base de diseño conceptual y formal del artefacto, cuya codificación, calibración y validación experimental exhaustiva se desarrollarán en las etapas siguientes conforme al plan de trabajo establecido.
+
+\section{De las brechas identificadas a las decisiones de diseño}
+Las decisiones arquitectónicas adoptadas responden directamente a las cuatro brechas identificadas en el Estado del Arte, garantizando una trazabilidad metodológica entre la evidencia secundaria y el diseño del artefacto. La Tabla \ref{tab:trazabilidad_brechas} resume esta correspondencia.
+
+\begin{table}[h!]
+\centering
+\small
+\renewcommand{\arraystretch}{1.25}
+\begin{tabular}{|c|p{6.5cm}|p{7cm}|}
+\hline
+\textbf{RQ} & \textbf{Brecha identificada en la literatura} & \textbf{Decisión de diseño preliminar} \\ \hline
+\textbf{RQ1} & Los modelos probabilísticos aplicados a APT operan mayoritariamente sobre alertas o grafos previamente correlacionados, generando dependencia de una infraestructura previa. & El modelo se diseña para operar directamente sobre registros de tráfico de red, suprimiendo la dependencia de subsistemas externos de correlación. \\ \hline
+\textbf{RQ2} & Los estudios con HMM definen variables observables a partir de alertas de terceros; su modelación sobre tráfico estructurado por etapas está poco explorada. & Las variables observables se derivarán de características estadísticas del flujo de red, asociando los estados ocultos a las fases de ataque de los datasets. \\ \hline
+\textbf{RQ3} & Ausencia de un benchmark consolidado y baja representatividad temporal en los conjuntos de datos comúnmente evaluados. & Se adopta una estrategia dual con DAPT2020 (comparabilidad histórica) y Unraveled (seis semanas de emulación organizacional realista). \\ \hline
+\textbf{RQ4} & El 70\% de los estudios evalúa mediante \textit{Accuracy} global, enmascarando el desempeño deficiente sobre la clase minoritaria en entornos desbalanceados. & Se adopta un modelo generativo intrínseco evaluado con métricas desagregadas por etapa ($F_1$-score, \textit{Recall}), contrastándolo con técnicas de remuestreo (SMOTE). \\ \hline
+\end{tabular}
+\caption{Trazabilidad entre brechas de la revisión sistemática y decisiones de diseño preliminares.}
+\label{tab:trazabilidad_brechas}
+\end{table}
+
+\section{Componentes de la propuesta preliminar}
+
+\subsection{Entradas y preprocesamiento proyectado}
+El sistema recibirá flujos de red provenientes de DAPT2020 y Unraveled. El preprocesamiento preliminar contempla:
+\begin{enumerate}
+    \item \textbf{Agregación temporal:} Los registros de flujo se estructurarán en secuencias discretas temporales ordenadas cronológicamente por host o sesión mediante ventanas de tiempo $\Delta t$.
+    \item \textbf{Vector de observaciones:} Se seleccionará un conjunto acotado de atributos representativos (tasa de bytes, duración del flujo, distribución de puertos y flags TCP), los cuales serán discretizados mediante cuantización por intervalos para conformar el alfabeto de símbolos observables $V = \{v_1, \dots, v_M\}$.
+\end{enumerate}
+
+\subsection{Definición formal del modelo generativo}
+El núcleo de procesamiento se modela formalmente como una tupla $\lambda = (A, B, \pi)$:
+\begin{itemize}
+    \item \textbf{Estados Ocultos ($S$):} Representan las etapas no visibles del ataque: $S = \{s_{\text{benigno}}, s_{\text{reconocimiento}}, \newline s_{\text{foothold}}, s_{\text{lateral}}, s_{\text{exfiltracion}}\}$.
+    \item \textbf{Matriz de Transición ($A$):} Matriz estocástica $N \times N$ que modela la probabilidad de evolución secuencial del adversario entre etapas.
+    \item \textbf{Matriz de Emisión ($B$):} Matriz $N \times M$ que define la probabilidad de registrar un determinado patrón de tráfico $v_k$ condicionada al estado activo $s_j$.
+    \item \textbf{Distribución Inicial ($\pi$):} Vector de probabilidades de inicio del proceso.
+\end{itemize}
+El ajuste de parámetros se proyecta mediante el algoritmo de Baum-Welch (EM) sobre el conjunto de entrenamiento, mientras que la inferencia de la secuencia de etapas más probable se ejecutará mediante el algoritmo de Viterbi.
+
+\subsection{Salidas esperadas}
+Ante una secuencia de observaciones $O = (O_1, \dots, O_T)$, el modelo reportará:
+\begin{itemize}
+    \item La secuencia óptima de estados estimada $Q^* = (q_1^*, \dots, q_T^*)$, indicando la fase de ataque activa en el instante $T$.
+    \item Un nivel de confianza probabilístico asociado a la etapa inferida y la proyección de la probabilidad de transición hacia la siguiente fase de la campaña.
+\end{itemize}
+
+\section{Estrategia de validación experimental preliminar}
+La validación se proyecta en tres etapas metodológicas:
+\begin{enumerate}
+    \item \textbf{Evaluación sobre DAPT2020:} Permite la comparación directa con los clasificadores supervisados y semi-supervisados reportados en la literatura.
+    \item \textbf{Evaluación sobre Unraveled:} Valida la estabilidad del modelo sobre trazas longitudinales de seis semanas con desbalance severo de clases.
+    \item \textbf{Análisis de robustez frente al desbalance:} Contraste del desempeño del modelo HMM operando sobre los datos originales versus datos tratados con balanceo sintético (SMOTE), evaluando métricas desagregadas de precisión, exhaustividad y $F_1$-score por cada fase de la intrusión.
+\end{enumerate}
