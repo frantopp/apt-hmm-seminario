@@ -1,0 +1,27 @@
+\chapter{Modelo probabilístico implementado en Python}
+\label{anx:modelo}
+Este anexo reproduce el módulo \texttt{hmm.py} del prototipo descrito en el Capítulo~\ref{cap:experimentos}, que implementa el modelo $\lambda = (A, B, \pi)$ definido en la Sección~\ref{sec:modelo_formal} y la estrategia de correspondencia entre estados y etapas de la Sección~\ref{sec:correspondencia}. La Tabla~\ref{tab:anexo_funciones} relaciona cada función del módulo con el elemento de la propuesta que implementa.
+
+\begin{table}[h!]
+\centering
+\small
+\renewcommand{\arraystretch}{1.25}
+\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{4.6cm}|>{\raggedright\arraybackslash}X|}
+\hline
+\textbf{Función} & \textbf{Elemento de la propuesta} \\ \hline
+\texttt{mascara\_estructural} & Ceros estructurales de la matriz de transición: se prohíben las transiciones entre dos estados de ataque que no aparecen en entrenamiento \\ \hline
+\texttt{HMM.supervisado} & Anclaje por supervisión: estimación de $A$, $B$ y $\pi$ por conteo de frecuencias con suavizado aditivo \\ \hline
+\texttt{HMM.filtrar} & Inferencia en línea: probabilidad filtrada $P(q_t \mid O_1, \dots, O_t, \lambda)$ mediante el algoritmo \textit{forward} escalado \\ \hline
+\texttt{HMM.viterbi} & Reconstrucción retrospectiva de la secuencia de estados $Q^*$ \\ \hline
+\texttt{refinar\_em} & Refinamiento con Baum-Welch restringido, inicializado con la estimación supervisada y detenido según la verosimilitud en validación \\ \hline
+\texttt{no\_supervisado} & Control H0: Baum-Welch sin supervisión desde diez inicializaciones aleatorias \\ \hline
+\texttt{asignacion\_hungara} y \texttt{permutar} & Emparejamiento de los estados del control con las etapas mediante el algoritmo húngaro \\ \hline
+\end{tabularx}
+\caption{Funciones del módulo \texttt{hmm.py} y elementos de la propuesta que implementan. Fuente: Elaboración propia.}
+\label{tab:anexo_funciones}
+\end{table}
+\FloatBarrier
+
+El módulo utiliza constantes definidas en el módulo de configuración del prototipo: los cinco estados del modelo, con el estado benigno en la posición 0, y los suavizados de la matriz de transición y de la distribución inicial, ambos iguales a 1. Los comentarios D9 y D10 remiten a las decisiones de diseño registradas en el plan de experimentación del repositorio del proyecto, que corresponden a los ceros estructurales y al refinamiento restringido con el control no supervisado, respectivamente. Los demás módulos del prototipo, encargados de la carga de datos, la construcción de ventanas, la discretización, los modelos de referencia y las métricas, se encuentran en el mismo repositorio.
+
+\lstinputlisting[caption={Módulo \texttt{hmm.py} del prototipo.}, label={lst:hmm}]{../src/apthmm/hmm.py}

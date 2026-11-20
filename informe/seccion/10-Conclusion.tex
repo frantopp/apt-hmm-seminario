@@ -1,0 +1,18 @@
+\chapter{Conclusión}
+El presente Informe Final de Seminario de Título consolida la fundamentación metodológica, el estado del arte, el diseño y una primera implementación de un sistema probabilístico basado en Cadenas Ocultas de Markov (HMM) para la detección temprana de Amenazas Persistentes Avanzadas (APT).
+
+La Revisión Sistemática de la Literatura, conducida bajo las directrices de Kitchenham y documentada según la declaración PRISMA 2020, analizó un corpus de 77 estudios primarios de Scopus, Web of Science e IEEE Xplore y evidenció cuatro brechas: la dependencia de alertas previamente correlacionadas, la escasa validación de modelos HMM sobre flujos de tráfico, la limitada representatividad temporal de los conjuntos de datos y el predominio de métricas globales como \textit{Accuracy}, que enmascaran el desempeño frente a las clases minoritarias.
+
+Para responder a estos vacíos, la propuesta adoptó la metodología Design Science Research (DSR) y formuló un HMM generativo que vincula directamente el tráfico de red con las etapas del ataque, evaluado sobre DAPT2020 y Unraveled para asegurar tanto la comparabilidad con el estado del arte como la validez ecológica sobre trazas de varias semanas.
+
+El prototipo implementado (Capítulo~\ref{cap:experimentos}) confirma que la estimación supervisada mantiene la correspondencia entre estados y etapas que el entrenamiento no supervisado pierde, y que la verificación posterior impide que el refinamiento con Baum-Welch la degrade. A su vez, muestra que con la configuración actual los modelos de referencia superan al HMM en la clasificación por ventana y en la detección a igual tasa de falsas alarmas.
+
+El trabajo futuro se concentrará en:
+\begin{enumerate}
+    \item Incorporar una línea de tiempo de la campaña a nivel de red y un atributo de volumen saliente acumulado para la exfiltración.
+    \item Seleccionar y congelar en validación la configuración del preprocesamiento, incluida la combinación de la ventana de un minuto con la discretización por terciles.
+    \item Contrastar las estrategias frente al desbalance que preservan la estructura temporal de las secuencias, reservando SMOTE para los modelos de referencia.
+    \item Evaluar el modelo por etapa y en detección temprana frente a la tasa de falsas alarmas, con validación cruzada por día, y compararlo con Random Forest y XGBoost bajo las mismas condiciones.
+\end{enumerate}
+
+Con ello, se busca proporcionar un artefacto funcional que reduzca el tiempo de exposición frente a campañas dirigidas en infraestructuras críticas.

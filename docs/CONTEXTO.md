@@ -117,7 +117,7 @@ informe/            Informe LaTeX (plantilla pucv_inf_2024). Hoy contiene el Inf
   pucv_inf_2024.sty Estilo de la Escuela (biblatex style=apa, backend=biber; glossaries; Times)
   referencias.bib   ~95 entradas (Zotero)
   Portadas/         portada_TFT_nofinal.tex (la que se usa), portada_TFT_final.tex, portada_principal.tex
-  seccion/          1-Introduccion … 10-Ia, Resumen/, Dedicatoria/, Simbolos/
+  seccion/          1-Introduccion … 11-Ia, Resumen/, Dedicatoria/, Simbolos/
     tablas/         hallazgos.tex (Tabla 6.1, generada; no editar a mano)
   assets/           CartaGantt1.png (seminario), CartaGantt2.png (proyecto 2027)
 scripts/tabla_hallazgos/  Generador de la Tabla 6.1 (gen_hallazgos.py + hallazgos.json)

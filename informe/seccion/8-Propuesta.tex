@@ -1,6 +1,6 @@
 \chapter{Propuesta de Solución}
 \label{cap:propuesta}
-Este capítulo presenta la propuesta de solución desarrollada a partir de los hallazgos de la revisión sistemática de la literatura. Las decisiones aquí expuestas constituyen la base de diseño conceptual y formal del artefacto, cuya codificación, calibración y validación experimental se desarrollarán en el Proyecto de Título conforme al plan de trabajo establecido.
+Este capítulo presenta la propuesta de solución desarrollada a partir de los hallazgos de la revisión sistemática de la literatura. Las decisiones aquí expuestas constituyen la base de diseño conceptual y formal del artefacto. Una primera implementación de este diseño y sus resultados preliminares se presentan en el Capítulo~\ref{cap:experimentos}, que identifica además los ajustes necesarios antes de su validación experimental definitiva.
 
 \section{De las brechas identificadas a las decisiones de diseño}
 Las decisiones arquitectónicas adoptadas responden directamente a las cuatro brechas identificadas en el Estado del Arte, garantizando una trazabilidad metodológica entre la evidencia secundaria y el diseño del artefacto. La Tabla \ref{tab:trazabilidad_brechas} resume esta correspondencia.
@@ -22,6 +22,7 @@ Las decisiones arquitectónicas adoptadas responden directamente a las cuatro br
 \end{table}
 \FloatBarrier
 
+\newpage
 \section{Conjuntos de datos de evaluación}
 \label{sec:datasets}
 La evaluación se realizará sobre DAPT2020 \parencite{myneni2020dapt2020} y Unraveled \parencite{myneni2023unraveled}, que cumplen los seis criterios de selección definidos en el Estado del Arte (Sección~\ref{sec:criterios_datasets}): reproducen campañas APT multietapa, etiquetan cada flujo de red con la etapa del ataque, insertan la campaña en tráfico benigno con marcas de tiempo, emulan una red organizacional y han sido empleados en estudios del corpus. La Tabla~\ref{tab:datasets_eval} resume sus características.
@@ -78,6 +79,7 @@ El sistema recibirá flujos de red provenientes de DAPT2020 y Unraveled. El prep
 \end{enumerate}
 
 \subsection{Definición formal del modelo generativo}
+\label{sec:modelo_formal}
 El núcleo de procesamiento se modela formalmente como una tupla $\lambda = (A, B, \pi)$:
 \begin{itemize}
     \item \textbf{Estados Ocultos ($S$):} Representan las etapas no visibles del ataque: $S = \{s_{\text{benigno}}, s_{\text{reconocimiento}}, \newline s_{\text{foothold}}, s_{\text{lateral}}, s_{\text{exfiltracion}}\}$.
@@ -85,7 +87,7 @@ El núcleo de procesamiento se modela formalmente como una tupla $\lambda = (A, 
     \item \textbf{Matriz de Emisión ($B$):} Matriz $N \times M$ que define la probabilidad de registrar un determinado patrón de tráfico $v_k$ condicionada al estado activo $s_j$.
     \item \textbf{Distribución Inicial ($\pi$):} Vector de probabilidades de inicio del proceso.
 \end{itemize}
-Los parámetros se estimarán de forma supervisada a partir de las secuencias etiquetadas y se refinarán con Baum-Welch bajo restricciones, según se detalla en la Sección~\ref{sec:correspondencia}. La inferencia en línea se realizará mediante la probabilidad filtrada, y la reconstrucción retrospectiva de la secuencia completa de etapas mediante el algoritmo de Viterbi.
+Los parámetros se estimarán de forma supervisada a partir de las secuencias etiquetadas y se refinarán con Baum-Welch bajo restricciones, según se detalla en la Sección~\ref{sec:correspondencia}. La inferencia en línea se realizará mediante la probabilidad filtrada, y la reconstrucción retrospectiva de la secuencia completa de etapas mediante el algoritmo de Viterbi. La implementación de este modelo en Python, junto con la estrategia de correspondencia descrita en la Sección~\ref{sec:correspondencia}, se presenta en el Anexo~\ref{anx:modelo}.
 
 \subsection{Salidas esperadas}
 Ante una secuencia de observaciones $O = (O_1, \dots, O_T)$, el modelo reportará:
