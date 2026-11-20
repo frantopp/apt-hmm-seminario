@@ -2,7 +2,7 @@
 En este capítulo se presentan los fundamentos conceptuales y matemáticos que sustentan el desarrollo de la investigación. Se formalizan las características operacionales de las Amenazas Persistentes Avanzadas, los fundamentos teóricos de los Modelos Ocultos de Markov (HMM), los algoritmos de entrenamiento e inferencia y sus limitaciones, las técnicas para abordar el desbalance severo de clases y los modelos de referencia con que se contrastará la propuesta.
 
 \section{Amenazas Persistentes Avanzadas (APT)}
-Una Amenaza Persistente Avanzada (APT) es una campaña de intrusión dirigida, sigilosa y estructurada en múltiples fases sucesivas ejecutada por actores con capacidades técnicas avanzadas \parencite{hutchins2011killchain}. A diferencia del malware convencional, una APT no persigue la disrupción inmediata, sino la permanencia prolongada dentro de la infraestructura para exfiltrar activos estratégicos.
+Una Amenaza Persistente Avanzada (APT) es una campaña de intrusión dirigida, sigilosa y estructurada en múltiples fases sucesivas ejecutada por actores con capacidades técnicas avanzadas \parencite{hutchins2011killchain}. A diferencia del malware convencional, que suele buscar la disrupción inmediata, una APT persigue la permanencia prolongada dentro de la infraestructura para exfiltrar activos estratégicos.
 
 Formalmente, el ciclo de vida de una APT se modela a través de la \textit{Cyber Kill Chain} o la matriz \textit{MITRE ATT\&CK}, transitando por una secuencia finita y ordenada de etapas:
 \begin{equation}
@@ -84,7 +84,7 @@ x_{\text{nuevo}} = x_i + \delta \cdot (x_{zi} - x_i), \quad \delta \in [0, 1]
 SMOTE trata cada instancia como independiente de las demás. Este supuesto es adecuado para clasificadores que evalúan cada ventana por separado, pero entra en conflicto con un modelo secuencial por tres razones:
 \begin{enumerate}
     \item \textbf{Las instancias sintéticas no tienen posición temporal.} Una ventana generada por interpolación carece de antecesora y sucesora reales, por lo que no aporta información válida a la matriz de transición $A$. Si se inserta en una secuencia, introduce transiciones que no ocurrieron y altera la duración aparente de las etapas.
-    \item \textbf{La interpolación no está definida sobre símbolos discretos.} El HMM opera sobre un alfabeto $V$ obtenido por discretización; interpolar entre dos símbolos produce valores intermedios sin significado o símbolos que no corresponden a ningún patrón de tráfico observado.
+    \item \textbf{La interpolación no está definida sobre símbolos discretos.} El HMM opera sobre un alfabeto $V$ obtenido por discretización. Interpolar entre dos símbolos produce valores intermedios sin significado o símbolos que no corresponden a ningún patrón de tráfico observado.
     \item \textbf{Riesgo de filtración de información.} Si el sobremuestreo se aplica antes de particionar los datos, instancias sintéticas derivadas de muestras de evaluación pueden quedar en el entrenamiento, lo que sobreestima el desempeño.
 \end{enumerate}
 Por estas razones, en este trabajo SMOTE no se aplica sobre las secuencias que alimentan al HMM. El tratamiento del desbalance para el modelo secuencial y el uso de SMOTE en el modelo de referencia se detallan en el Capítulo~\ref{cap:propuesta}.

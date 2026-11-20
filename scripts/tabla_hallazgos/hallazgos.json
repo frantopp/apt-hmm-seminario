@@ -1,0 +1,1436 @@
+[
+ {
+  "nombre": "Açıkgözoğlu",
+  "key": "acikgozoglu_explainable_2026",
+  "anio": "2026",
+  "modelos": [
+   "Deep L.",
+   "ML clás.",
+   "Juegos"
+  ],
+  "datos": [
+   "ToN-IoT"
+  ],
+  "desb": "x",
+  "metricas": {
+   "Accuracy": "95.89%",
+   "Precision": "96.26%",
+   "Recall": "96.07%",
+   "F1": "96.26%"
+  },
+  "abstract_ok": true
+ },
+ {
+  "nombre": "Alsubait",
+  "key": "alsubait_large_2026",
+  "anio": "2026",
+  "modelos": [
+   "Markov",
+   "Grafos",
+   "Deep L.",
+   "LLM"
+  ],
+  "datos": [
+   "CICIDS",
+   "NSL-KDD"
+  ],
+  "desb": "x",
+  "metricas": {
+   "Accuracy": "x",
+   "F1": "x",
+   "AUC": "x"
+  },
+  "abstract_ok": true
+ },
+ {
+  "nombre": "El Alami et al.",
+  "key": "el_alami_real-time_2026",
+  "anio": "2026",
+  "modelos": [
+   "Deep L.",
+   "ML clás.",
+   "LLM"
+  ],
+  "datos": [
+   "CICIDS",
+   "UNSW",
+   "KDD99"
+  ],
+  "desb": "x",
+  "metricas": {
+   "Accuracy": "x"
+  },
+  "abstract_ok": true
+ },
+ {
+  "nombre": "Ferazza et al.",
+  "key": "ferazza_logs_2026",
+  "anio": "2026",
+  "modelos": [
+   "Deep L.",
+   "LLM"
+  ],
+  "datos": [
+   "--"
+  ],
+  "desb": "x",
+  "metricas": {
+   "F1": "87%"
+  },
+  "abstract_ok": true
+ },
+ {
+  "nombre": "Giacobbe et al.",
+  "key": "giacobbe_enforcing_2026",
+  "anio": "2026",
+  "modelos": [
+   "Markov"
+  ],
+  "datos": [
+   "--"
+  ],
+  "desb": "",
+  "metricas": {},
+  "abstract_ok": true
+ },
+ {
+  "nombre": "Hölbl y Rotovnik",
+  "key": "holbl_machine_2026",
+  "anio": "2026",
+  "modelos": [
+   "Bayes",
+   "Grafos",
+   "Deep L.",
+   "ML clás."
+  ],
+  "datos": [
+   "DAPT2020",
+   "Unraveled",
+   "DARPA",
+   "CICAPT",
+   "CICIDS",
+   "NSL-KDD",
+   "UNSW"
+  ],
+  "desb": "x",
+  "metricas": {
+   "Accuracy": "0.4%"
+  },
+  "abstract_ok": true
+ },
+ {
+  "nombre": "Hussain y Petrova",
+  "key": "hussain_threat_2026",
+  "anio": "2026",
+  "modelos": [
+   "Bayes",
+   "Deep L.",
+   "ML clás.",
+   "LLM"
+  ],
+  "datos": [
+   "--"
+  ],
+  "desb": "x",
+  "metricas": {
+   "Accuracy": "93.19%"
+  },
+  "abstract_ok": true
+ },
+ {
+  "nombre": "Jiao et al.",
+  "key": "jiao_bg-flipin_2026",
+  "anio": "2026",
+  "modelos": [
+   "Markov",
+   "Bayes",
+   "Juegos"
+  ],
+  "datos": [
+   "--"
+  ],
+  "desb": "",
+  "metricas": {},
+  "abstract_ok": true
+ },
+ {
+  "nombre": "K et al.",
+  "key": "k_advanced_2026",
+  "anio": "2026",
+  "modelos": [
+   "Bayes",
+   "Grafos",
+   "Deep L.",
+   "ML clás."
+  ],
+  "datos": [
+   "DAPT2020",
+   "Unraveled",
+   "CICAPT",
+   "NSL-KDD",
+   "UNSW",
+   "ToN-IoT",
+   "KDD99"
+  ],
+  "desb": "x",
+  "metricas": {
+   "Accuracy": "x",
+   "Precision": "x",
+   "F1": "x"
+  },
+  "abstract_ok": true
+ },
+ {
+  "nombre": "Kumar et al.",
+  "key": "kumar_hlpmmgrsphtru_2026",
+  "anio": "2026",
+  "modelos": [
+   "HMM",
+   "Deep L.",
+   "ML clás."
+  ],
+  "datos": [
+   "CICIDS"
+  ],
+  "desb": "x",
+  "metricas": {
+   "Accuracy": "99%"
+  },
+  "abstract_ok": true
+ },
+ {
+  "nombre": "Lahari et al.",
+  "key": "lahari_intelligent_2026",
+  "anio": "2026",
+  "modelos": [
+   "Deep L.",
+   "ML clás."
+  ],
+  "datos": [
+   "--"
+  ],
+  "desb": "x",
+  "metricas": {
+   "Accuracy": "x",
+   "Precision": "x",
+   "F1": "x"
+  },
+  "abstract_ok": true
+ },
+ {
+  "nombre": "M. U. Basharat et al.",
+  "key": "m_u_basharat_advanced_2026",
+  "anio": "2026",
+  "modelos": [
+   "Deep L.",
+   "ML clás."
+  ],
+  "datos": [
+   "KDD99"
+  ],
+  "desb": "x",
+  "metricas": {
+   "Accuracy": "x"
+  },
+  "abstract_ok": true
+ },
+ {
+  "nombre": "P. Firdani et al.",
+  "key": "p_firdani_multi-layer_2026",
+  "anio": "2026",
+  "modelos": [
+   "Grafos",
+   "Deep L.",
+   "LLM"
+  ],
+  "datos": [
+   "DARPA",
+   "CICAPT"
+  ],
+  "desb": "x",
+  "metricas": {
+   "Accuracy": "52.5%",
+   "AUC": "x"
+  },
+  "abstract_ok": true
+ },
+ {
+  "nombre": "Puccetti et al.",
+  "key": "puccetti_capture_2026",
+  "anio": "2026",
+  "modelos": [
+   "Grafos",
+   "Deep L.",
+   "ML clás."
+  ],
+  "datos": [
+   "DAPT2020",
+   "Unraveled",
+   "DARPA",
+   "OpTC",
+   "CICAPT",
+   "CICIDS",
+   "NSL-KDD",
+   "ToN-IoT",
+   "KDD99"
+  ],
+  "desb": "x",
+  "metricas": {},
+  "abstract_ok": true
+ },
+ {
+  "nombre": "R. Alfageer et al.",
+  "key": "r_alfageer_multi-stage_2026",
+  "anio": "2026",
+  "modelos": [
+   "Deep L.",
+   "ML clás.",
+   "LLM"
+  ],
+  "datos": [
+   "CICIDS",
+   "NSL-KDD",
+   "UNSW",
+   "ToN-IoT"
+  ],
+  "desb": "x",
+  "metricas": {
+   "Accuracy": "99.89%"
+  },
+  "abstract_ok": true
+ },
+ {
+  "nombre": "R. Huang",
+  "key": "r_huang_efficient_2026",
+  "anio": "2026",
+  "modelos": [
+   "Deep L.",
+   "ML clás."
+  ],
+  "datos": [
+   "--"
+  ],
+  "desb": "x",
+  "metricas": {
+   "Accuracy": "62.5%",
+   "Recall": "98.8%"
+  },
+  "abstract_ok": true
+ },
+ {
+  "nombre": "Salah et al.",
+  "key": "salah_dual-model_2026",
+  "anio": "2026",
+  "modelos": [
+   "Grafos",
+   "Deep L.",
+   "ML clás.",
+   "LLM"
+  ],
+  "datos": [
+   "CICAPT",
+   "CICIDS",
+   "UNSW",
+   "ToN-IoT"
+  ],
+  "desb": "x",
+  "metricas": {
+   "Precision": "70.48%",
+   "Recall": "95.02%",
+   "F1": "80.93%",
+   "AUC": "48%"
+  },
+  "abstract_ok": true
+ },
+ {
+  "nombre": "Shahzad et al.",
+  "key": "shahzad_autonomous_2026",
+  "anio": "2026",
+  "modelos": [
+   "Markov",
+   "Deep L.",
+   "ML clás."
+  ],
+  "datos": [
+   "CICIDS",
+   "NSL-KDD",
+   "UNSW",
+   "ToN-IoT"
+  ],
+  "desb": "",
+  "metricas": {
+   "Accuracy": "93.6%",
+   "Precision": "94.7%",
+   "Recall": "94.1%",
+   "F1": "94.7%"
+  },
+  "abstract_ok": true
+ },
+ {
+  "nombre": "Sripada et al.",
+  "key": "sripada_hybridml_2026",
+  "anio": "2026",
+  "modelos": [
+   "Bayes",
+   "Deep L.",
+   "ML clás.",
+   "Juegos"
+  ],
+  "datos": [
+   "CICIDS",
+   "NSL-KDD",
+   "UNSW",
+   "ToN-IoT",
+   "KDD99"
+  ],
+  "desb": "x",
+  "metricas": {
+   "Accuracy": "98.4%",
+   "F1": "x",
+   "AUC": "x"
+  },
+  "abstract_ok": true
+ },
+ {
+  "nombre": "Yilmaz et al.",
+  "key": "yilmaz_non-local_2026",
+  "anio": "2026",
+  "modelos": [
+   "Bayes",
+   "Deep L.",
+   "ML clás."
+  ],
+  "datos": [
+   "CICIDS",
+   "UNSW",
+   "ToN-IoT"
+  ],
+  "desb": "x",
+  "metricas": {
+   "Accuracy": "x",
+   "F1": "x",
+   "AUC": "x"
+  },
+  "abstract_ok": true
+ },
+ {
+  "nombre": "You et al.",
+  "key": "you_comparative_2026",
+  "anio": "2026",
+  "modelos": [
+   "Deep L.",
+   "ML clás."
+  ],
+  "datos": [
+   "CICIDS",
+   "NSL-KDD",
+   "UNSW"
+  ],
+  "desb": "x",
+  "metricas": {
+   "F1": "x"
+  },
+  "abstract_ok": true
+ },
+ {
+  "nombre": "Zhao et al.",
+  "key": "zhao_alert-driven_2026",
+  "anio": "2026",
+  "modelos": [
+   "Bayes",
+   "Deep L.",
+   "Juegos"
+  ],
+  "datos": [
+   "--"
+  ],
+  "desb": "",
+  "metricas": {},
+  "abstract_ok": true
+ },
+ {
+  "nombre": "Bani Melhem et al.",
+  "key": "bani_melhem_lens_2025",
+  "anio": "2025",
+  "modelos": [
+   "Deep L.",
+   "ML clás.",
+   "LLM"
+  ],
+  "datos": [
+   "CICAPT"
+  ],
+  "desb": "x",
+  "metricas": {
+   "Accuracy": "x",
+   "Recall": "x",
+   "F1": "x"
+  },
+  "abstract_ok": true
+ },
+ {
+  "nombre": "Benabderrahmane et al.",
+  "key": "benabderrahmane_ranking-enhanced_2025",
+  "anio": "2025",
+  "modelos": [
+   "Grafos",
+   "Deep L.",
+   "ML clás."
+  ],
+  "datos": [
+   "DARPA",
+   "CICIDS",
+   "NSL-KDD",
+   "UNSW",
+   "KDD99"
+  ],
+  "desb": "x",
+  "metricas": {
+   "Accuracy": "x"
+  },
+  "abstract_ok": true
+ },
+ {
+  "nombre": "Cai et al.",
+  "key": "cai_detecting_2025",
+  "anio": "2025",
+  "modelos": [
+   "Bayes",
+   "Grafos",
+   "Deep L.",
+   "ML clás."
+  ],
+  "datos": [
+   "Unraveled"
+  ],
+  "desb": "x",
+  "metricas": {},
+  "abstract_ok": true
+ },
+ {
+  "nombre": "Chen y Yan",
+  "key": "chen_research_2025",
+  "anio": "2025",
+  "modelos": [
+   "Deep L.",
+   "ML clás."
+  ],
+  "datos": [
+   "--"
+  ],
+  "desb": "x",
+  "metricas": {
+   "Accuracy": "99.8%",
+   "Precision": "99.8%"
+  },
+  "abstract_ok": true
+ },
+ {
+  "nombre": "Chourasiya et al.",
+  "key": "chourasiya_advanced_2025",
+  "anio": "2025",
+  "modelos": [
+   "Bayes",
+   "Deep L.",
+   "ML clás.",
+   "LLM"
+  ],
+  "datos": [
+   "CICIDS",
+   "UNSW"
+  ],
+  "desb": "",
+  "metricas": {
+   "Accuracy": "98.2%"
+  },
+  "abstract_ok": true
+ },
+ {
+  "nombre": "Ibrahim et al.",
+  "key": "ibrahim_optimized_2025",
+  "anio": "2025",
+  "modelos": [
+   "Deep L.",
+   "ML clás."
+  ],
+  "datos": [
+   "DAPT2020",
+   "Unraveled",
+   "CICIDS",
+   "NSL-KDD",
+   "UNSW"
+  ],
+  "desb": "",
+  "metricas": {
+   "Accuracy": "97.12%"
+  },
+  "abstract_ok": true
+ },
+ {
+  "nombre": "L. Zhang",
+  "key": "l_zhang_implementing_2025",
+  "anio": "2025",
+  "modelos": [
+   "Deep L.",
+   "ML clás."
+  ],
+  "datos": [
+   "DARPA"
+  ],
+  "desb": "x",
+  "metricas": {
+   "Accuracy": "94.9%"
+  },
+  "abstract_ok": true
+ },
+ {
+  "nombre": "Mittal et al.",
+  "key": "mittal_proactive_2025",
+  "anio": "2025",
+  "modelos": [
+   "HMM",
+   "Markov",
+   "Grafos",
+   "Deep L.",
+   "ML clás.",
+   "Juegos"
+  ],
+  "datos": [
+   "--"
+  ],
+  "desb": "x",
+  "metricas": {},
+  "abstract_ok": true
+ },
+ {
+  "nombre": "Nicho et al.",
+  "key": "nicho_enhanced_2025",
+  "anio": "2025",
+  "modelos": [
+   "HMM",
+   "Bayes",
+   "Deep L.",
+   "ML clás."
+  ],
+  "datos": [
+   "--"
+  ],
+  "desb": "x",
+  "metricas": {},
+  "abstract_ok": true
+ },
+ {
+  "nombre": "Rivas et al.",
+  "key": "rivas_analysis_2025",
+  "anio": "2025",
+  "modelos": [
+   "Bayes",
+   "Deep L.",
+   "ML clás.",
+   "Juegos"
+  ],
+  "datos": [
+   "DAPT2020",
+   "Unraveled"
+  ],
+  "desb": "x",
+  "metricas": {
+   "Accuracy": "x",
+   "Precision": "x",
+   "Recall": "x",
+   "F1": "x"
+  },
+  "abstract_ok": true
+ },
+ {
+  "nombre": "S. Lee et al.",
+  "key": "s_lee_aptstop_2025",
+  "anio": "2025",
+  "modelos": [
+   "HMM",
+   "Bayes",
+   "Grafos",
+   "Deep L.",
+   "ML clás.",
+   "LLM",
+   "Juegos"
+  ],
+  "datos": [
+   "DARPA"
+  ],
+  "desb": "",
+  "metricas": {
+   "Accuracy": "x"
+  },
+  "abstract_ok": true
+ },
+ {
+  "nombre": "Byrapuneni y Saidireddy",
+  "key": "byrapuneni_efficient_2024",
+  "anio": "2024",
+  "modelos": [
+   "Bayes",
+   "Deep L.",
+   "ML clás."
+  ],
+  "datos": [
+   "DARPA",
+   "NSL-KDD",
+   "KDD99"
+  ],
+  "desb": "x",
+  "metricas": {
+   "Accuracy": "x"
+  },
+  "abstract_ok": true
+ },
+ {
+  "nombre": "Cheng et al.",
+  "key": "cheng_kairos_2024",
+  "anio": "2024",
+  "modelos": [
+   "Grafos",
+   "Deep L."
+  ],
+  "datos": [
+   "DARPA",
+   "OpTC"
+  ],
+  "desb": "",
+  "metricas": {},
+  "abstract_ok": true
+ },
+ {
+  "nombre": "Erfan Mazaheri y Shameli-Sendi",
+  "key": "erfan_mazaheri_aptracker_2024",
+  "anio": "2024",
+  "modelos": [
+   "Bayes",
+   "Deep L.",
+   "ML clás."
+  ],
+  "datos": [
+   "--"
+  ],
+  "desb": "x",
+  "metricas": {},
+  "abstract_ok": true
+ },
+ {
+  "nombre": "J. Jiao et al.",
+  "key": "j_jiao_fpgaa_2024",
+  "anio": "2024",
+  "modelos": [
+   "Grafos",
+   "Deep L."
+  ],
+  "datos": [
+   "DARPA"
+  ],
+  "desb": "",
+  "metricas": {
+   "Accuracy": "x"
+  },
+  "abstract_ok": true
+ },
+ {
+  "nombre": "Lo et al.",
+  "key": "lo_digital_2024",
+  "anio": "2024",
+  "modelos": [
+   "Deep L."
+  ],
+  "datos": [
+   "--"
+  ],
+  "desb": "",
+  "metricas": {},
+  "abstract_ok": true
+ },
+ {
+  "nombre": "Ma et al.",
+  "key": "ma_anomaly_2024",
+  "anio": "2024",
+  "modelos": [
+   "HMM",
+   "Markov",
+   "Bayes",
+   "Deep L.",
+   "ML clás."
+  ],
+  "datos": [
+   "DARPA",
+   "CICIDS"
+  ],
+  "desb": "",
+  "metricas": {
+   "Accuracy": "99%",
+   "Precision": "100%"
+  },
+  "abstract_ok": true
+ },
+ {
+  "nombre": "Mamun et al.",
+  "key": "mamun_limitations_2024",
+  "anio": "2024",
+  "modelos": [
+   "Bayes",
+   "Deep L.",
+   "ML clás."
+  ],
+  "datos": [
+   "DAPT2020",
+   "Unraveled",
+   "DARPA",
+   "CICIDS",
+   "NSL-KDD",
+   "UNSW",
+   "KDD99"
+  ],
+  "desb": "x",
+  "metricas": {
+   "Accuracy": "x"
+  },
+  "abstract_ok": true
+ },
+ {
+  "nombre": "Soliman et al.",
+  "key": "soliman_rank_2024",
+  "anio": "2024",
+  "modelos": [
+   "Grafos",
+   "Deep L."
+  ],
+  "datos": [
+   "DARPA",
+   "KDD99"
+  ],
+  "desb": "",
+  "metricas": {
+   "Accuracy": "87%"
+  },
+  "abstract_ok": true
+ },
+ {
+  "nombre": "Zhang et al.",
+  "key": "zhang_secaas-based_2024",
+  "anio": "2024",
+  "modelos": [
+   "Markov",
+   "Grafos",
+   "Deep L.",
+   "Juegos"
+  ],
+  "datos": [
+   "--"
+  ],
+  "desb": "",
+  "metricas": {},
+  "abstract_ok": true
+ },
+ {
+  "nombre": "Chen et al.",
+  "key": "chen_machine_2023",
+  "anio": "2023",
+  "modelos": [
+   "Deep L.",
+   "ML clás."
+  ],
+  "datos": [
+   "CICIDS",
+   "NSL-KDD",
+   "UNSW",
+   "ToN-IoT",
+   "KDD99"
+  ],
+  "desb": "x",
+  "metricas": {},
+  "abstract_ok": true
+ },
+ {
+  "nombre": "Javed et al.",
+  "key": "javed_apt_2023",
+  "anio": "2023",
+  "modelos": [
+   "HMM",
+   "Bayes",
+   "Deep L.",
+   "ML clás.",
+   "LLM",
+   "Juegos"
+  ],
+  "datos": [
+   "DAPT2020",
+   "CICIDS",
+   "NSL-KDD"
+  ],
+  "desb": "x",
+  "metricas": {
+   "Accuracy": "96.97%"
+  },
+  "abstract_ok": true
+ },
+ {
+  "nombre": "Kazeminajafabadi y Imani",
+  "key": "kazeminajafabadi_optimal_2023",
+  "anio": "2023",
+  "modelos": [
+   "HMM",
+   "Markov",
+   "Bayes",
+   "Grafos",
+   "Deep L."
+  ],
+  "datos": [
+   "--"
+  ],
+  "desb": "",
+  "metricas": {
+   "Accuracy": "x"
+  },
+  "abstract_ok": true
+ },
+ {
+  "nombre": "Kim et al.",
+  "key": "kim_ban_2023",
+  "anio": "2023",
+  "modelos": [
+   "HMM",
+   "Markov",
+   "Bayes",
+   "Grafos",
+   "Deep L.",
+   "Juegos"
+  ],
+  "datos": [
+   "DAPT2020",
+   "Unraveled",
+   "DARPA"
+  ],
+  "desb": "",
+  "metricas": {},
+  "abstract_ok": true
+ },
+ {
+  "nombre": "Kumari y Lee",
+  "key": "kumari_prospective_2023",
+  "anio": "2023",
+  "modelos": [
+   "Markov",
+   "Deep L.",
+   "ML clás."
+  ],
+  "datos": [
+   "DAPT2020",
+   "Unraveled"
+  ],
+  "desb": "x",
+  "metricas": {
+   "Accuracy": "94.468%",
+   "AUC": "x"
+  },
+  "abstract_ok": true
+ },
+ {
+  "nombre": "Smiliotopoulos et al.",
+  "key": "smiliotopoulos_detection_2023",
+  "anio": "2023",
+  "modelos": [
+   "Bayes",
+   "Deep L.",
+   "ML clás."
+  ],
+  "datos": [
+   "--"
+  ],
+  "desb": "x",
+  "metricas": {
+   "F1": "99.41%",
+   "AUC": "99.41%"
+  },
+  "abstract_ok": true
+ },
+ {
+  "nombre": "Wan et al.",
+  "key": "wan_resisting_2023",
+  "anio": "2023",
+  "modelos": [
+   "ML clás.",
+   "Juegos"
+  ],
+  "datos": [
+   "--"
+  ],
+  "desb": "",
+  "metricas": {},
+  "abstract_ok": true
+ },
+ {
+  "nombre": "Y. Javed et al.",
+  "key": "y_javed_prism_2023",
+  "anio": "2023",
+  "modelos": [
+   "HMM",
+   "Markov",
+   "Grafos",
+   "Deep L."
+  ],
+  "datos": [
+   "CICIDS"
+  ],
+  "desb": "",
+  "metricas": {
+   "Accuracy": "x"
+  },
+  "abstract_ok": true
+ },
+ {
+  "nombre": "Zhang et al.",
+  "key": "zhang_application_2023",
+  "anio": "2023",
+  "modelos": [
+   "Markov",
+   "Grafos"
+  ],
+  "datos": [
+   "--"
+  ],
+  "desb": "",
+  "metricas": {},
+  "abstract_ok": true
+ },
+ {
+  "nombre": "Alsanad y Altuwaijri",
+  "key": "alsanad_advanced_2022",
+  "anio": "2022",
+  "modelos": [
+   "Deep L.",
+   "ML clás."
+  ],
+  "datos": [
+   "CICIDS"
+  ],
+  "desb": "x",
+  "metricas": {
+   "Accuracy": "99.2%"
+  },
+  "abstract_ok": true
+ },
+ {
+  "nombre": "Anjum et al.",
+  "key": "anjum2021anubis",
+  "anio": "2022",
+  "modelos": [
+   "Bayes",
+   "Grafos",
+   "Deep L.",
+   "ML clás."
+  ],
+  "datos": [
+   "DARPA",
+   "OpTC"
+  ],
+  "desb": "x",
+  "metricas": {},
+  "abstract_ok": false
+ },
+ {
+  "nombre": "Choumanof et al.",
+  "key": "choumanof_introducing_2022",
+  "anio": "2022",
+  "modelos": [
+   "Deep L."
+  ],
+  "datos": [
+   "DARPA",
+   "NSL-KDD",
+   "UNSW",
+   "ToN-IoT",
+   "KDD99"
+  ],
+  "desb": "",
+  "metricas": {},
+  "abstract_ok": true
+ },
+ {
+  "nombre": "Liu et al.",
+  "key": "liu_new_2022",
+  "anio": "2022",
+  "modelos": [
+   "Grafos",
+   "Deep L.",
+   "ML clás."
+  ],
+  "datos": [
+   "--"
+  ],
+  "desb": "",
+  "metricas": {
+   "F1": "82.27%"
+  },
+  "abstract_ok": true
+ },
+ {
+  "nombre": "Yao et al.",
+  "key": "yao_intrusion_2022",
+  "anio": "2022",
+  "modelos": [
+   "Markov",
+   "Bayes",
+   "Deep L.",
+   "Juegos"
+  ],
+  "datos": [
+   "--"
+  ],
+  "desb": "",
+  "metricas": {},
+  "abstract_ok": true
+ },
+ {
+  "nombre": "Al Amin et al.",
+  "key": "al_amin_hidden_2021",
+  "anio": "2021",
+  "modelos": [
+   "HMM",
+   "Markov",
+   "Bayes",
+   "Grafos",
+   "Juegos"
+  ],
+  "datos": [
+   "DARPA"
+  ],
+  "desb": "",
+  "metricas": {},
+  "abstract_ok": true
+ },
+ {
+  "nombre": "Baksi y Upadhyaya",
+  "key": "baksi_decepticon_2021",
+  "anio": "2021",
+  "modelos": [
+   "HMM",
+   "Juegos"
+  ],
+  "datos": [
+   "--"
+  ],
+  "desb": "",
+  "metricas": {},
+  "abstract_ok": true
+ },
+ {
+  "nombre": "C. D. Xuan",
+  "key": "c_d_xuan_detecting_2021",
+  "anio": "2021",
+  "modelos": [
+   "Deep L.",
+   "ML clás."
+  ],
+  "datos": [
+   "--"
+  ],
+  "desb": "",
+  "metricas": {},
+  "abstract_ok": true
+ },
+ {
+  "nombre": "Guillen et al.",
+  "key": "guillen_propagation_2021",
+  "anio": "2021",
+  "modelos": [
+   "Markov",
+   "Bayes",
+   "Deep L.",
+   "ML clás."
+  ],
+  "datos": [
+   "--"
+  ],
+  "desb": "",
+  "metricas": {},
+  "abstract_ok": true
+ },
+ {
+  "nombre": "Hoffmann",
+  "key": "hoffmann_markov_2021",
+  "anio": "2021",
+  "modelos": [
+   "Markov"
+  ],
+  "datos": [
+   "--"
+  ],
+  "desb": "",
+  "metricas": {},
+  "abstract_ok": true
+ },
+ {
+  "nombre": "Kim et al.",
+  "key": "kim_intrusion_2021",
+  "anio": "2021",
+  "modelos": [
+   "Deep L.",
+   "ML clás."
+  ],
+  "datos": [
+   "DARPA",
+   "NSL-KDD",
+   "UNSW",
+   "KDD99"
+  ],
+  "desb": "",
+  "metricas": {},
+  "abstract_ok": true
+ },
+ {
+  "nombre": "Min et al.",
+  "key": "min_network_2021",
+  "anio": "2021",
+  "modelos": [
+   "Deep L.",
+   "ML clás."
+  ],
+  "datos": [
+   "DARPA",
+   "CICIDS",
+   "NSL-KDD",
+   "UNSW",
+   "KDD99"
+  ],
+  "desb": "x",
+  "metricas": {},
+  "abstract_ok": true
+ },
+ {
+  "nombre": "T. Shawly et al.",
+  "key": "t_shawly_architectures_2021",
+  "anio": "2021",
+  "modelos": [
+   "HMM",
+   "Markov",
+   "Grafos",
+   "Deep L."
+  ],
+  "datos": [
+   "DARPA"
+  ],
+  "desb": "",
+  "metricas": {},
+  "abstract_ok": true
+ },
+ {
+  "nombre": "Holgado et al.",
+  "key": "holgado_real-time_2020",
+  "anio": "2020",
+  "modelos": [
+   "HMM",
+   "Markov",
+   "Bayes",
+   "Grafos"
+  ],
+  "datos": [
+   "DARPA"
+  ],
+  "desb": "",
+  "metricas": {},
+  "abstract_ok": true
+ },
+ {
+  "nombre": "L. Wang et al.",
+  "key": "l_wang_method_2020",
+  "anio": "2020",
+  "modelos": [
+   "Bayes",
+   "ML clás."
+  ],
+  "datos": [
+   "--"
+  ],
+  "desb": "",
+  "metricas": {},
+  "abstract_ok": true
+ },
+ {
+  "nombre": "M. Khosravi y B. T. Ladani",
+  "key": "m_khosravi_alerts_2020",
+  "anio": "2020",
+  "modelos": [
+   "HMM",
+   "Markov",
+   "Grafos"
+  ],
+  "datos": [
+   "DARPA"
+  ],
+  "desb": "",
+  "metricas": {
+   "Accuracy": "x"
+  },
+  "abstract_ok": true
+ },
+ {
+  "nombre": "A. Chowdhary et al.",
+  "key": "a_chowdhary_adaptive_2019",
+  "anio": "2019",
+  "modelos": [
+   "Markov",
+   "Grafos",
+   "Juegos"
+  ],
+  "datos": [
+   "--"
+  ],
+  "desb": "",
+  "metricas": {},
+  "abstract_ok": true
+ },
+ {
+  "nombre": "Brogi y Di Bernardino",
+  "key": "brogi_hidden_2019",
+  "anio": "2019",
+  "modelos": [
+   "HMM",
+   "Markov",
+   "ML clás.",
+   "Juegos"
+  ],
+  "datos": [
+   "--"
+  ],
+  "desb": "",
+  "metricas": {},
+  "abstract_ok": true
+ },
+ {
+  "nombre": "Du et al.",
+  "key": "du_attack_2019",
+  "anio": "2019",
+  "modelos": [
+   "HMM"
+  ],
+  "datos": [
+   "--"
+  ],
+  "desb": "",
+  "metricas": {},
+  "abstract_ok": true
+ },
+ {
+  "nombre": "G. Ioannou et al.",
+  "key": "g_ioannou_markov_2019",
+  "anio": "2019",
+  "modelos": [
+   "HMM",
+   "Markov",
+   "Bayes",
+   "Grafos",
+   "Juegos"
+  ],
+  "datos": [
+   "--"
+  ],
+  "desb": "",
+  "metricas": {},
+  "abstract_ok": true
+ },
+ {
+  "nombre": "Ghafir et al.",
+  "key": "ghafir2019hmm",
+  "anio": "2019",
+  "modelos": [
+   "HMM",
+   "Markov",
+   "Deep L.",
+   "ML clás.",
+   "Juegos"
+  ],
+  "datos": [
+   "--"
+  ],
+  "desb": "",
+  "metricas": {},
+  "abstract_ok": false
+ },
+ {
+  "nombre": "Wang et al.",
+  "key": "wang_optimal_2019",
+  "anio": "2019",
+  "modelos": [
+   "Markov",
+   "Deep L.",
+   "Juegos"
+  ],
+  "datos": [
+   "--"
+  ],
+  "desb": "",
+  "metricas": {},
+  "abstract_ok": true
+ },
+ {
+  "nombre": "Zegeye et al.",
+  "key": "zegeye_multi-layer_2019",
+  "anio": "2019",
+  "modelos": [
+   "HMM",
+   "Markov",
+   "Deep L.",
+   "ML clás."
+  ],
+  "datos": [
+   "CICIDS",
+   "NSL-KDD"
+  ],
+  "desb": "",
+  "metricas": {},
+  "abstract_ok": true
+ },
+ {
+  "nombre": "D. Gonzales et al.",
+  "key": "d_gonzales_cloud-trustsecurity_2017",
+  "anio": "2017",
+  "modelos": [
+   "Bayes",
+   "Grafos"
+  ],
+  "datos": [
+   "--"
+  ],
+  "desb": "",
+  "metricas": {},
+  "abstract_ok": true
+ },
+ {
+  "nombre": "Niu et al.",
+  "key": "niu_modeling_2017",
+  "anio": "2017",
+  "modelos": [
+   "Grafos"
+  ],
+  "datos": [
+   "--"
+  ],
+  "desb": "",
+  "metricas": {},
+  "abstract_ok": true
+ },
+ {
+  "nombre": "Rass et al.",
+  "key": "rass_defending_2017",
+  "anio": "2017",
+  "modelos": [
+   "Markov",
+   "Grafos",
+   "ML clás.",
+   "Juegos"
+  ],
+  "datos": [
+   "--"
+  ],
+  "desb": "",
+  "metricas": {},
+  "abstract_ok": true
+ }
+]

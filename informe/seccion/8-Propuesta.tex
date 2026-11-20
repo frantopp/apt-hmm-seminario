@@ -13,13 +13,59 @@ Las decisiones arquitectónicas adoptadas responden directamente a las cuatro br
 \hline
 \textbf{RQ} & \textbf{Brecha identificada en la literatura} & \textbf{Decisión de diseño} \\ \hline
 \textbf{RQ1} & Los modelos probabilísticos aplicados a APT operan mayoritariamente sobre alertas o grafos previamente correlacionados, generando dependencia de una infraestructura previa. & El modelo se diseña para operar directamente sobre registros de tráfico de red, suprimiendo la dependencia de subsistemas externos de correlación. \\ \hline
-\textbf{RQ2} & Los estudios con HMM definen variables observables a partir de alertas de terceros; su modelación sobre tráfico estructurado por etapas está poco explorada. & Las variables observables se derivan de características estadísticas del flujo de red, y los estados ocultos se anclan a las fases de ataque etiquetadas en los conjuntos de datos (Sección~\ref{sec:correspondencia}). \\ \hline
-\textbf{RQ3} & Ausencia de un benchmark consolidado y baja representatividad temporal en los conjuntos de datos comúnmente evaluados. & Se adopta una estrategia dual con DAPT2020 (comparabilidad histórica) y Unraveled (seis semanas de emulación organizacional realista). \\ \hline
-\textbf{RQ4} & La mayoría de los estudios que reportan métricas utiliza \textit{Accuracy} global (35 de 77 estudios, frente a 14 que reportan $F_1$-score), lo que enmascara el desempeño sobre la clase minoritaria. & Evaluación con métricas desagregadas por etapa y métricas de detección temprana; tratamiento del desbalance que preserva la estructura temporal; comparación con modelos de referencia bajo las mismas condiciones. \\ \hline
+\textbf{RQ2} & Los estudios con HMM definen variables observables a partir de alertas de terceros, y su modelación sobre tráfico estructurado por etapas está poco explorada. & Las variables observables se derivan de características estadísticas del flujo de red, y los estados ocultos se anclan a las fases de ataque etiquetadas en los conjuntos de datos (Sección~\ref{sec:correspondencia}). \\ \hline
+\textbf{RQ3} & Ausencia de un benchmark consolidado y baja representatividad temporal en los conjuntos de datos comúnmente evaluados. & Se adopta una estrategia dual con DAPT2020 (comparabilidad con la literatura) y Unraveled (seis semanas de emulación organizacional), seleccionados mediante criterios explícitos derivados de los requerimientos del modelo (Secciones~\ref{sec:criterios_datasets} y~\ref{sec:datasets}). \\ \hline
+\textbf{RQ4} & La mayoría de los estudios que reportan métricas utiliza \textit{Accuracy} global (35 de 77 estudios, frente a 14 que reportan $F_1$-score), lo que enmascara el desempeño sobre la clase minoritaria. & Evaluación con métricas desagregadas por etapa y métricas de detección temprana, tratamiento del desbalance que preserva la estructura temporal y comparación con modelos de referencia bajo las mismas condiciones. \\ \hline
 \end{tabular}
 \caption{Trazabilidad entre brechas de la revisión sistemática y decisiones de diseño.}
 \label{tab:trazabilidad_brechas}
 \end{table}
+\FloatBarrier
+
+\section{Conjuntos de datos de evaluación}
+\label{sec:datasets}
+La evaluación se realizará sobre DAPT2020 \parencite{myneni2020dapt2020} y Unraveled \parencite{myneni2023unraveled}, que cumplen los seis criterios de selección definidos en el Estado del Arte (Sección~\ref{sec:criterios_datasets}): reproducen campañas APT multietapa, etiquetan cada flujo de red con la etapa del ataque, insertan la campaña en tráfico benigno con marcas de tiempo, emulan una red organizacional y han sido empleados en estudios del corpus. La Tabla~\ref{tab:datasets_eval} resume sus características.
+
+\begin{table}[h!]
+\centering
+\small
+\renewcommand{\arraystretch}{1.25}
+\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{3cm}|>{\raggedright\arraybackslash}X|>{\raggedright\arraybackslash}X|}
+\hline
+\textbf{Característica} & \textbf{DAPT2020} & \textbf{Unraveled} \\ \hline
+Entorno & Red de producción emulada en la nube, con servicios web y de sistema vulnerables en un segmento público y otro privado & Red corporativa de 15 empleados en tres departamentos, separada de la red de producción por un cortafuegos \\ \hline
+Vector de entrada & Vulnerabilidades de aplicaciones y sistemas & Vulnerabilidades humanas (\textit{phishing}) \\ \hline
+Duración & Cinco días (15 al 19 de julio de 2019), con capturas de algunas horas por día: uno de actividad normal y uno por cada etapa del ataque & Seis semanas (26 de mayo al 4 de julio de 2021) de actividad de empleados generada automáticamente \\ \hline
+Atacantes & Un equipo rojo interno & Tres grupos de distinta sofisticación (aficionado, intermedio y APT). Los flujos etiquetados corresponden al aficionado y al grupo APT \\ \hline
+Etapas etiquetadas & Reconocimiento, establecimiento del \textit{foothold}, movimiento lateral y exfiltración & Reconocimiento, establecimiento del \textit{foothold}, movimiento lateral, exfiltración y encubrimiento \\ \hline
+Formato & Flujos de red extraídos con CICFlowMeter (76 atributos) y dos etiquetas (actividad y etapa), en archivos diarios por segmento de red & Flujos de red extraídos con NFStream, con 85 atributos y cuatro etiquetas (actividad, etapa, respuesta del defensor y grupo atacante) \\ \hline
+Flujos & 86.691 & 6.863.988 \\ \hline
+Proporción benigna & 73,49~\% & 98,58~\% \\ \hline
+Flujos de exfiltración & 15 & 7.522 \\ \hline
+Papel en la evaluación & Comparabilidad con la literatura y verificación de la correspondencia entre estados y etapas en un escenario acotado & Estabilidad del modelo y detección temprana en trazas longitudinales con desbalance severo \\ \hline
+\end{tabularx}
+\caption[Características de los conjuntos de datos de evaluación.]{Características de los conjuntos de datos de evaluación. Los recuentos de DAPT2020 corresponden a la versión pública de sus flujos, mientras que \textcite{mamun_limitations_2024} reportan 321.266 flujos y un 88,35~\% de tráfico benigno para la versión que analizan. Los de Unraveled coinciden con los de dichos autores. Fuente: Elaboración propia a partir de \textcite{myneni2020dapt2020}, \textcite{myneni2023unraveled}, \textcite{mamun_limitations_2024} y recuento propio sobre los archivos de flujos.}
+\label{tab:datasets_eval}
+\end{table}
+\FloatBarrier
+
+\subsection{Complementariedad}
+Ambos conjuntos fueron construidos por el mismo grupo de investigación y comparten la taxonomía de etapas, lo que permite aplicar una única correspondencia entre etiquetas y estados del modelo. Sin embargo, reproducen escenarios distintos: en DAPT2020 el atacante compromete aplicaciones y servicios de una red de producción, mientras que en Unraveled ingresa a la red corporativa explotando vulnerabilidades humanas, con puntos de entrada, orígenes y vectores de ataque diferentes \parencite{myneni2023unraveled}. Su uso conjunto permite evaluar si las observables y la estructura de transiciones aprendidas se sostienen frente a vectores de ataque distintos. DAPT2020, más breve y con una proporción de tráfico malicioso mayor, ofrece un escenario controlado para verificar que cada estado capture su etapa. Unraveled, con seis semanas de actividad, una proporción de tráfico benigno cercana al 98~\% y ataques simultáneos de distinta sofisticación, somete al modelo a condiciones más cercanas a la operación real: exige distinguir una campaña APT de ataques menos elaborados y mantener una tasa de falsas alarmas baja durante semanas, que es donde las métricas de detección temprana resultan más informativas. Ambos conjuntos se han empleado de forma conjunta en estudios recientes del corpus \parencite{mamun_limitations_2024,rivas_analysis_2025,k_advanced_2026}, lo que permite situar los resultados frente a esos trabajos.
+
+\subsection{Correspondencia de etiquetas}
+Las cuatro etapas principales de ambos conjuntos (reconocimiento, establecimiento del \textit{foothold}, movimiento lateral y exfiltración) y el tráfico benigno se asignan directamente a los cinco estados del modelo. Las etiquetas minoritarias requieren una decisión explícita: el encubrimiento de Unraveled, posterior a la exfiltración, se asignará al estado de exfiltración, y si se emplea una versión de DAPT2020 que incluya la etiqueta de \textit{pivoting}, presente en el recuento de \textcite{mamun_limitations_2024}, esta se asignará al movimiento lateral, por tratarse de desplazamiento dentro de la red interna. El efecto de la asignación del encubrimiento se contrastará con su exclusión, y la tabla de correspondencia completa se documentará junto con el preprocesamiento.
+
+La campaña APT de Unraveled no sigue un orden estrictamente lineal: tras el establecimiento del \textit{foothold}, la exfiltración de datos precede al movimiento lateral, y este es seguido por un nuevo reconocimiento interno \parencite{myneni2023unraveled}. Esta secuencia respalda la decisión de no restringir la matriz de transición a un orden lineal (Sección~\ref{sec:correspondencia}).
+
+\subsection{Limitaciones de los conjuntos}
+\begin{itemize}
+    \item \textbf{Entornos emulados.} Ambos conjuntos provienen de entornos controlados, que pueden no reproducir la capacidad de adaptación ni la sofisticación de un actor APT real \parencite{mamun_limitations_2024}. Los resultados permitirán validar el diseño del modelo, pero no garantizan su desempeño en una red de producción.
+    \item \textbf{Etapas separadas por día en DAPT2020.} Como cada etapa se ejecuta en un día distinto, un modelo podría asociar las etapas al periodo de captura más que al comportamiento del tráfico. Por ello, la detección temprana se evaluará principalmente sobre Unraveled y los resultados de DAPT2020 se interpretarán como comparativos.
+    \item \textbf{Etapas con muy pocos registros.} En la versión pública de DAPT2020 la exfiltración comprende solo 15 flujos, insuficientes para estimar con confiabilidad la fila de emisión de ese estado. Por ello, la estimación de dicho estado se apoyará en el suavizado de Laplace y su evaluación se basará principalmente en Unraveled, que registra 7.522 flujos de exfiltración.
+    \item \textbf{Origen del reconocimiento en Unraveled.} De los 34.794 flujos etiquetados como reconocimiento, 34.109 corresponden al atacante aficionado y solo 685 al grupo APT. Para que el estado de reconocimiento no represente únicamente un escaneo poco sofisticado, se usará la etiqueta de grupo atacante para analizar por separado el desempeño frente a cada grupo.
+    \item \textbf{Cobertura de la captura en Unraveled.} El tráfico se captura en las interfaces del \textit{gateway}, por lo que las comunicaciones dentro de una misma subred no quedan registradas \parencite{myneni2023unraveled}. Parte del movimiento lateral podría estar subrepresentada, lo que se considerará al analizar el desempeño en esa etapa.
+    \item \textbf{Origen común.} Al provenir del mismo grupo, ambos conjuntos pueden compartir sesgos metodológicos de construcción y etiquetado. La evaluación sobre un conjunto de otro origen, como SCVIC-APT-2021, queda planteada como trabajo futuro.
+\end{itemize}
 
 \section{Componentes de la propuesta}
 
@@ -83,7 +129,7 @@ En todos los casos, el remuestreo se aplicará únicamente sobre la partición d
 Para cada etapa de ataque se reportarán la precisión, la exhaustividad y el $F_1$-score, junto con su promedio macro y la matriz de confusión entre etapas. Se descarta la exactitud global como métrica principal, por las razones expuestas en el Estado del Arte.
 
 \subsection{Detección temprana}
-Dado que el objetivo general del proyecto es la identificación temprana de la progresión de una APT, no basta con medir si una ventana se clasifica correctamente: es necesario medir \textit{cuándo} se detecta el ataque. Estas métricas se calculan con la inferencia en línea, es decir, utilizando en cada instante solo la evidencia disponible hasta ese momento.
+Dado que el objetivo general del proyecto es la identificación temprana de la progresión de una APT, además de medir si una ventana se clasifica correctamente, es necesario medir \textit{cuándo} se detecta el ataque. Estas métricas se calculan con la inferencia en línea, es decir, utilizando en cada instante solo la evidencia disponible hasta ese momento.
 
 Sea $\mathcal{C}$ el conjunto de secuencias atacadas, es decir, las secuencias de host que contienen al menos una ventana maliciosa. Para cada $c \in \mathcal{C}$, sea $t_0^c$ el inicio de la primera ventana maliciosa, $t_{\text{fin}}^c$ el final de la última y $t_{\text{exf}}^c$ el inicio de la etapa de exfiltración. El modelo emite una alerta en el instante $t$ cuando
 \begin{equation}
@@ -108,7 +154,7 @@ La comparación con resultados publicados no es suficiente para validar la propu
 \begin{itemize}
     \item \textbf{Mismos datos y misma partición.} Los datos se particionarán en entrenamiento, validación y prueba agrupando por secuencia, de modo que ninguna secuencia quede dividida entre particiones, y respetando el orden cronológico cuando la estructura del conjunto lo permita. Se evita la partición aleatoria por ventana, ya que ventanas contiguas son casi idénticas y su separación entre entrenamiento y prueba sobreestimaría el desempeño.
     \item \textbf{Mismas ventanas, atributos y etiquetas.} Los modelos de referencia utilizarán las mismas ventanas $\Delta t$, los mismos atributos y la misma correspondencia de cinco etapas. Se evaluarán con los atributos continuos, su representación natural, y con los mismos símbolos discretos del HMM, para aislar el efecto de la discretización.
-    \item \textbf{Variante con contexto temporal.} Se incluirá una variante de cada modelo de referencia que incorpora los atributos de las $k$ ventanas previas. Así, una eventual ventaja del HMM podrá atribuirse al modelado de la progresión entre etapas y no solo a disponer de información del pasado.
+    \item \textbf{Variante con contexto temporal.} Se incluirá una variante de cada modelo de referencia que incorpora los atributos de las $k$ ventanas previas. Como esta variante también dispone de información del pasado, una eventual ventaja del HMM sobre ella podrá atribuirse al modelado de la progresión entre etapas.
     \item \textbf{Mismas métricas.} Se reportarán las métricas por etapa y las de detección temprana. Para los modelos de referencia, la alerta se emite cuando la probabilidad estimada de una clase de ataque supera el umbral $\tau$, calibrado con el mismo criterio de falsas alarmas.
     \item \textbf{Mismo procedimiento de ajuste.} Los hiperparámetros de todos los modelos se ajustarán únicamente con la partición de validación.
 \end{itemize}
@@ -123,14 +169,15 @@ La Tabla~\ref{tab:experimentos} resume las configuraciones que se evaluarán. Ca
 \begin{tabularx}{\textwidth}{|c|p{3.4cm}|X|X|}
 \hline
 \textbf{ID} & \textbf{Modelo} & \textbf{Estimación} & \textbf{Tratamiento del desbalance} \\ \hline
-H1 & HMM & Supervisada (conteo de frecuencias) & Original con suavizado; umbral calibrado; remuestreo por secuencia \\ \hline
+H1 & HMM & Supervisada (conteo de frecuencias) & Original con suavizado, umbral calibrado y remuestreo por secuencia \\ \hline
 H2 & HMM & Supervisada + Baum-Welch restringido & Igual que H1 \\ \hline
-H0 & HMM (control) & Baum-Welch no supervisado, inicialización aleatoria & Original; se mide la correspondencia entre estados y etapas \\ \hline
-B1 & Random Forest & Supervisada, con y sin contexto temporal & Original; ponderación de clases; SMOTE en entrenamiento \\ \hline
+H0 & HMM (control) & Baum-Welch no supervisado, inicialización aleatoria & Original, midiendo la correspondencia entre estados y etapas \\ \hline
+B1 & Random Forest & Supervisada, con y sin contexto temporal & Original, ponderación de clases y SMOTE en entrenamiento \\ \hline
 B2 & XGBoost & Supervisada, con y sin contexto temporal & Igual que B1 \\ \hline
 \end{tabularx}
 \caption{Configuraciones del diseño experimental.}
 \label{tab:experimentos}
 \end{table}
+\FloatBarrier
 
 El diseño permite contrastar dos hipótesis de trabajo. La primera es que, a igual tasa de falsas alarmas, el HMM detecta las campañas antes y con mayor frecuencia previo a la exfiltración que los modelos de referencia, por modelar la progresión entre etapas. La segunda es que los modelos de referencia pueden alcanzar un $F_1$-score por ventana comparable o superior. Si ambas se confirman, el aporte del HMM radicaría en la detección temprana y la interpretabilidad de la progresión, más que en la clasificación aislada de ventanas. Los resultados se analizarán por conjunto de datos, por etapa y por condición de desbalance.

@@ -30,7 +30,7 @@ La distribución temporal, presentada en la Figura~\ref{fig:temporal}, evidencia
 \label{fig:temporal}
 \end{figure}
 
-La Figura~\ref{fig:modelos} presenta la distribución de los estudios según la familia de modelos que mencionan en su texto completo, conforme a la Tabla~\ref{tab:hallazgos}. Los enfoques basados en aprendizaje profundo constituyen el grupo más numeroso, con 60 estudios, seguidos por las técnicas clásicas de aprendizaje automático con 48 y los modelos de Markov con 32, de los cuales 19 corresponden a Modelos Ocultos de Markov. Los modelos basados en grafos, redes bayesianas y teoría de juegos presentan una participación menor pero significativa. Cabe señalar que un mismo estudio puede emplear o discutir más de una familia de modelos, por lo que las categorías no son mutuamente excluyentes.
+La Figura~\ref{fig:modelos} presenta la distribución de los estudios según la familia de modelos que mencionan en su texto completo, conforme a la Tabla~\ref{tab:hallazgos}. Los enfoques basados en aprendizaje profundo constituyen el grupo más numeroso, con 60 estudios, seguidos por las técnicas clásicas de aprendizaje automático con 48 y los modelos de Markov con 32, de los cuales 19 corresponden a Modelos Ocultos de Markov. Los modelos basados en grafos, redes bayesianas y teoría de juegos presentan una participación menor pero significativa. Un mismo estudio puede emplear o discutir más de una familia de modelos, por lo que las categorías no son mutuamente excluyentes.
 
 \begin{figure}[h!]
 \centering
@@ -55,116 +55,13 @@ La Figura~\ref{fig:modelos} presenta la distribución de los estudios según la 
 
 \section{Hallazgos por categoría de análisis}
 
-Esta sección presenta el análisis organizado según las categorías definidas en la metodología. La Tabla~\ref{tab:hallazgos} identifica, para cada estudio del corpus, las familias de modelos empleadas, los conjuntos de datos utilizados y el tratamiento explícito del desbalance de clases.
+Esta sección presenta el análisis organizado según las categorías definidas en la metodología. La Tabla~\ref{tab:hallazgos} identifica, para cada estudio del corpus, las familias de modelos empleadas, los conjuntos de datos utilizados, las métricas reportadas en el resumen y el tratamiento explícito del desbalance de clases.
 
-La revisión de los textos completos permite precisar la caracterización del corpus. Treinta y dos estudios mencionan modelos de Markov en alguna de sus variantes, de los cuales diecinueve refieren específicamente Modelos Ocultos de Markov. Nueve estudios trabajan con DAPT2020 y nueve con Unraveled, cifras superiores a las que sugería el análisis de resúmenes, lo que indica que una proporción relevante de los trabajos no declara el conjunto de datos en dicha sección. Treinta y seis estudios abordan de manera explícita el desbalance de clases, cerca de la mitad del corpus. Cabe precisar que estas cifras corresponden a la presencia de los términos en el texto completo, por lo que incluyen tanto el uso efectivo como las referencias a trabajos previos.
+La revisión de los textos completos permite precisar la caracterización del corpus. Treinta y dos estudios mencionan modelos de Markov en alguna de sus variantes, de los cuales diecinueve refieren específicamente Modelos Ocultos de Markov. Nueve estudios trabajan con DAPT2020 y nueve con Unraveled, cifras superiores a las que sugería el análisis de resúmenes, lo que indica que una proporción relevante de los trabajos no declara el conjunto de datos en dicha sección. Treinta y seis estudios abordan de manera explícita el desbalance de clases, cerca de la mitad del corpus. Estas cifras corresponden a la presencia de los términos en el texto completo, por lo que incluyen tanto el uso efectivo como las referencias a trabajos previos.
 
-\begin{footnotesize}
-\setlength{\tabcolsep}{4pt}
-\renewcommand{\arraystretch}{1.15}
-\begin{xltabular}{\linewidth}{|p{3.3cm}|c|X|p{3.6cm}|c|}
-
-\caption{Hallazgos por categoría de análisis en los estudios del corpus}
-\label{tab:hallazgos} \\
-\hline
-\textbf{Estudio} & \textbf{Año} & \textbf{Modelos / Técnicas} & \textbf{Conjuntos de datos} & \textbf{Desb.} \\
-\hline
-\endfirsthead
-
-\caption[]{Hallazgos por categoría de análisis en los estudios del corpus (Continuación)} \\
-\hline
-\textbf{Estudio} & \textbf{Año} & \textbf{Modelos / Técnicas} & \textbf{Conjuntos de datos} & \textbf{Desb.} \\
-\hline
-\endhead
-
-\hline
-\multicolumn{5}{|r|}{\textit{Continúa en la siguiente página\dots}} \\ \hline
-\endfoot
-
-\hline
-\endlastfoot
-
-
-Açıkgözoğlu \parencite{acikgozoglu_explainable_2026}& 2026 & Deep L., ML clás., Juegos & ToN-IoT & x \\
-Alsubait \parencite{alsubait_large_2026} & 2026 & Markov, Grafos, Deep L., LLM & CICIDS, NSL-KDD & x \\
-El Alami et al. \parencite{el_alami_real-time_2026} & 2026 & Deep L., ML clás., LLM & CICIDS, UNSW, KDD99 & x \\
-Ferazza et al. \parencite{ferazza_logs_2026} & 2026 & Deep L., LLM & -- & x \\
-Giacobbe et al. \parencite{giacobbe_enforcing_2026} & 2026 & Markov & -- &  \\
-Hölbl y Rotovnik \parencite{holbl_machine_2026} & 2026 & Bayes, Grafos, Deep L., ML clás. & DAPT2020, Unraveled, DARPA, CICAPT, CICIDS, NSL-KDD, UNSW & x \\
-Hussain y Petrova \parencite{hussain_threat_2026} & 2026 & Bayes, Deep L., ML clás., LLM & -- & x \\
-Jiao et al. \parencite{jiao_bg-flipin_2026} & 2026 & Markov, Bayes, Juegos & -- &  \\
-K et al. \parencite{k_advanced_2026} & 2026 & Bayes, Grafos, Deep L., ML clás. & DAPT2020, Unraveled, CICAPT, NSL-KDD, UNSW, ToN-IoT, KDD99 & x \\
-Kumar et al. \parencite{kumar_hlpmmgrsphtru_2026} & 2026 & HMM, Deep L., ML clás. & CICIDS & x \\
-Lahari et al. \parencite{lahari_intelligent_2026} & 2026 & Deep L., ML clás. & -- & x \\
-M. U. Basharat et al. \parencite{m_u_basharat_advanced_2026} & 2026 & Deep L., ML clás. & KDD99 & x \\
-P. Firdani et al. \parencite{p_firdani_multi-layer_2026} & 2026 & Grafos, Deep L., LLM & DARPA, CICAPT & x \\
-Puccetti et al. \parencite{puccetti_capture_2026} & 2026 & Grafos, Deep L., ML clás. & DAPT2020, Unraveled, DARPA, OpTC, CICAPT, CICIDS, NSL-KDD, ToN-IoT, KDD99 & x \\
-R. Alfageer et al. \parencite{r_alfageer_multi-stage_2026} & 2026 & Deep L., ML clás., LLM & CICIDS, NSL-KDD, UNSW, ToN-IoT & x \\
-R. Huang \parencite{r_huang_efficient_2026} & 2026 & Deep L., ML clás. & -- & x \\
-Salah et al. \parencite{salah_dual-model_2026} & 2026 & Grafos, Deep L., ML clás., LLM & CICAPT, CICIDS, UNSW, ToN-IoT & x \\
-Shahzad et al. \parencite{shahzad_autonomous_2026} & 2026 & Markov, Deep L., ML clás. & CICIDS, NSL-KDD, UNSW, ToN-IoT &  \\
-Sripada et al. \parencite{sripada_hybridml_2026} & 2026 & Bayes, Deep L., ML clás., Juegos & CICIDS, NSL-KDD, UNSW, ToN-IoT, KDD99 & x \\
-Yilmaz et al. \parencite{yilmaz_non-local_2026} & 2026 & Bayes, Deep L., ML clás. & CICIDS, UNSW, ToN-IoT & x \\
-You et al. \parencite{you_comparative_2026} & 2026 & Deep L., ML clás. & CICIDS, NSL-KDD, UNSW & x \\
-Zhao et al. \parencite{zhao_alert-driven_2026} & 2026 & Bayes, Deep L., Juegos & -- &  \\
-Bani Melhem et al. \parencite{bani_melhem_lens_2025} & 2025 & Deep L., ML clás., LLM & CICAPT & x \\
-Benabderrahmane et al. \parencite{benabderrahmane_ranking-enhanced_2025} & 2025 & Grafos, Deep L., ML clás. & DARPA, CICIDS, NSL-KDD, UNSW, KDD99 & x \\
-Cai et al. \parencite{cai_detecting_2025} & 2025 & Bayes, Grafos, Deep L., ML clás. & Unraveled & x \\
-Chen y Yan \parencite{chen_research_2025} & 2025 & Deep L., ML clás. & -- & x \\
-Chourasiya et al. \parencite{chourasiya_advanced_2025} & 2025 & Bayes, Deep L., ML clás., LLM & CICIDS, UNSW &  \\
-Ibrahim et al. \parencite{ibrahim_optimized_2025} & 2025 & Deep L., ML clás. & DAPT2020, Unraveled, CICIDS, NSL-KDD, UNSW &  \\
-L. Zhang \parencite{l_zhang_implementing_2025} & 2025 & Deep L., ML clás. & DARPA & x \\
-Mittal et al. \parencite{mittal_proactive_2025} & 2025 & HMM, Markov, Grafos, Deep L., ML clás., Juegos & -- & x \\
-Nicho et al. \parencite{nicho_enhanced_2025} & 2025 & HMM, Bayes, Deep L., ML clás. & -- & x \\
-Rivas et al. \parencite{rivas_analysis_2025} & 2025 & Bayes, Deep L., ML clás., Juegos & DAPT2020, Unraveled & x \\
-S. Lee et al. \parencite{s_lee_aptstop_2025} & 2025 & HMM, Bayes, Grafos, Deep L., ML clás., LLM, Juegos & DARPA &  \\
-Byrapuneni y Saidireddy \parencite{byrapuneni_efficient_2024} & 2024 & Bayes, Deep L., ML clás. & DARPA, NSL-KDD, KDD99 & x \\
-Cheng et al. \parencite{cheng_kairos_2024} & 2024 & Grafos, Deep L. & DARPA, OpTC &  \\
-Erfan Mazaheri y Shameli-Sendi \parencite{erfan_mazaheri_aptracker_2024} & 2024 & Bayes, Deep L., ML clás. & -- & x \\
-J. Jiao et al. \parencite{j_jiao_fpgaa_2024} & 2024 & Grafos, Deep L. & DARPA &  \\
-Lo et al. \parencite{lo_digital_2024} & 2024 & Deep L. & -- &  \\
-Ma et al. \parencite{ma_anomaly_2024} & 2024 & HMM, Markov, Bayes, Deep L., ML clás. & DARPA, CICIDS &  \\
-Mamun et al. \parencite{mamun_limitations_2024} & 2024 & Bayes, Deep L., ML clás. & DAPT2020, Unraveled, DARPA, CICIDS, NSL-KDD, UNSW, KDD99 & x \\
-Soliman et al.\parencite{soliman_rank_2024}  & 2024 & Grafos, Deep L. & DARPA, KDD99 &  \\
-Zhang et al. \parencite{zhang_secaas-based_2024} & 2024 & Markov, Grafos, Deep L., Juegos & -- &  \\
-Chen et al. \parencite{chen_machine_2023} & 2023 & Deep L., ML clás. & CICIDS, NSL-KDD, UNSW, ToN-IoT, KDD99 & x \\
-Javed et al. \parencite{javed_apt_2023} & 2023 & HMM, Bayes, Deep L., ML clás., LLM, Juegos & DAPT2020, CICIDS, NSL-KDD & x \\
-Kazeminajafabadi y Imani \parencite{kazeminajafabadi_optimal_2023} & 2023 & HMM, Markov, Bayes, Grafos, Deep L. & -- &  \\
-Kim et al. \parencite{kim_ban_2023} & 2023 & HMM, Markov, Bayes, Grafos, Deep L., Juegos & DAPT2020, Unraveled, DARPA &  \\
-Kumari y Lee \parencite{kumari_prospective_2023} & 2023 & Markov, Deep L., ML clás. & DAPT2020, Unraveled & x \\
-Smiliotopoulos et al. \parencite{smiliotopoulos_detection_2023} & 2023 & Bayes, Deep L., ML clás. & -- & x \\
-Wan et al. \parencite{wan_resisting_2023} & 2023 & ML clás., Juegos & -- &  \\
-Y. Javed et al. \parencite{y_javed_prism_2023} & 2023 & HMM, Markov, Grafos, Deep L. & -- &  \\
-Zhang et al. \parencite{zhang_application_2023} & 2023 & Markov, Grafos & -- &  \\
-Alsanad y Altuwaijri \parencite{alsanad_advanced_2022} & 2022 & Deep L., ML clás. & CICIDS & x \\
-Anjum et al. \parencite{anjum2021anubis} & 2022 & Bayes, Grafos, Deep L., ML clás. & DARPA, OpTC & x \\
-Choumanof et al. \parencite{choumanof_introducing_2022} & 2022 & Deep L. & DARPA, NSL-KDD, UNSW, ToN-IoT, KDD99 &  \\
-Liu et al. \parencite{liu_new_2022} & 2022 & Grafos, Deep L., ML clás. & -- &  \\
-Yao et al. \parencite{yao_intrusion_2022} & 2022 & Markov, Bayes, Deep L., Juegos & -- &  \\
-Al Amin et al. \parencite{al_amin_hidden_2021} & 2021 & HMM, Markov, Bayes, Grafos, Juegos & DARPA &  \\
-Baksi y Upadhyaya \parencite{baksi_decepticon_2021} & 2021 & HMM, Juegos & DARPA &  \\
-C. D. Xuan \parencite{c_d_xuan_detecting_2021} & 2021 & Deep L., ML clás. & -- &  \\
-Guillen et al. \parencite{guillen_propagation_2021} & 2021 & Markov, Bayes, Deep L., ML clás. & -- &  \\
-Hoffmann \parencite{hoffmann_markov_2021} & 2021 & Markov & -- &  \\
-Kim et al. \parencite{kim_intrusion_2021} & 2021 & Deep L., ML clás. & DARPA, NSL-KDD, UNSW, KDD99 &  \\
-Min et al. \parencite{min_network_2021} & 2021 & Deep L., ML clás. & DARPA, CICIDS, NSL-KDD, UNSW, KDD99 & x \\
-T. Shawly et al. \parencite{t_shawly_architectures_2021} & 2021 & HMM, Markov, Grafos, Deep L. & DARPA &  \\
-Holgado et al. \parencite{holgado_real-time_2020} & 2020 & HMM, Markov, Bayes, Grafos & DARPA &  \\
-L. Wang et al. \parencite{l_wang_method_2020} & 2020 & Bayes, ML clás. & -- &  \\
-M. Khosravi y B. T. Ladani \parencite{m_khosravi_alerts_2020} & 2020 & HMM, Markov, Grafos & DARPA &  \\
-A. Chowdhary et al. \parencite{a_chowdhary_adaptive_2019} & 2019 & Markov, Grafos, Juegos & -- &  \\
-Brogi y Di Bernardino \parencite{brogi_hidden_2019} & 2019 & HMM, Markov, ML clás., Juegos & -- &  \\
-Du et al. \parencite{du_attack_2019} & 2019 & HMM & -- &  \\
-G. Ioannou et al. \parencite{g_ioannou_markov_2019} & 2019 & HMM, Markov, Bayes, Grafos, Juegos & -- &  \\
-Ghafir et al. \parencite{ghafir2019hmm} & 2019 & HMM, Markov, Deep L., ML clás., Juegos & -- &  \\
-Wang et al. \parencite{wang_optimal_2019} & 2019 & Markov, Deep L., Juegos & -- &  \\
-Zegeye et al. \parencite{zegeye_multi-layer_2019} & 2019 & HMM, Markov, Deep L., ML clás. & CICIDS, NSL-KDD &  \\
-D. Gonzales et al. \parencite{d_gonzales_cloud-trustsecurity_2017} & 2017 & Bayes, Grafos & -- &  \\
-Niu et al. \parencite{niu_modeling_2017} & 2017 & Grafos & -- &  \\
-Rass et al. \parencite{rass_defending_2017} & 2017 & Markov, Grafos, ML clás., Juegos & -- &  \\
-
-\end{xltabular}
-\end{footnotesize}
+\clearpage
+\input{seccion/tablas/hallazgos}
+\FloatBarrier
 
 \section{Modelos probabilísticos aplicados a la detección de APT (RQ1)}
 
@@ -172,7 +69,7 @@ La evidencia recopilada muestra que los enfoques probabilísticos mantienen una 
 
 La primera corresponde a los modelos basados en redes bayesianas, empleados principalmente para representar dependencias entre eventos de seguridad y estimar la probabilidad de compromiso de distintos recursos de la red. Dentro de esta línea, \textcite{kazeminajafabadi_optimal_2023} modelan la red mediante grafos de ataque bayesianos para optimizar el monitoreo y la detección, mientras que \textcite{kim_ban_2023} integran el marco MITRE ATT\&CK en una red bayesiana para la predicción de campañas APT. Por su parte, \textcite{guillen_propagation_2021} emplean redes bayesianas dinámicas para modelar la propagación del malware utilizado en este tipo de campañas.
 
-La segunda línea agrupa los enfoques basados en teoría de juegos, que modelan la interacción entre atacante y defensor como un proceso estratégico bajo incertidumbre \parencite{rass_defending_2017}. Trabajos posteriores extienden esta aproximación mediante hipergiegos para resistir múltiples campañas simultáneas \parencite{wan_resisting_2023} y mediante marcos bayesianos aplicados a modelos de amenaza interna \parencite{jiao_bg-flipin_2026}. Estas propuestas resultan de interés para el diseño de estrategias de defensa, aunque su orientación es prescriptiva más que detectiva: buscan determinar la respuesta óptima ante un adversario, antes que inferir el estado en que este se encuentra.
+La segunda línea agrupa los enfoques basados en teoría de juegos, que modelan la interacción entre atacante y defensor como un proceso estratégico bajo incertidumbre \parencite{rass_defending_2017}. Trabajos posteriores extienden esta aproximación mediante hiperjuegos para resistir múltiples campañas simultáneas \parencite{wan_resisting_2023} y mediante marcos bayesianos aplicados a modelos de amenaza interna \parencite{jiao_bg-flipin_2026}. Estas propuestas sirven para diseñar estrategias de defensa, ya que determinan la respuesta óptima ante un adversario, pero no infieren la etapa en que este se encuentra.
 
 Una línea intermedia la constituyen los modelos de estado parcialmente observable, entre los que destacan el modelo multifase de creencia transferible de \textcite{g_ioannou_markov_2019} y la propuesta de \textcite{zhang_secaas-based_2024} para entornos industriales, que comparten con los HMM la premisa de que el estado del atacante no es directamente observable.
 
@@ -180,9 +77,11 @@ La tercera línea, y la más directamente vinculada a este trabajo, corresponde 
 
 Una observación transversal a las tres líneas es que los modelos probabilísticos tienden a aplicarse sobre representaciones previamente procesadas del comportamiento del atacante (alertas correlacionadas, grafos de ataque o indicadores de compromiso) antes que directamente sobre el tráfico de red. Esta dependencia de una etapa previa de procesamiento introduce un punto de falla adicional y condiciona el desempeño del modelo a la calidad de dicha correlación.
 
-\section{Modelos Ocultos de Markov aplicados a APT (RQ2)}
 
-De los 32 estudios que mencionan modelos de Markov, diecinueve aplican específicamente Modelos Ocultos de Markov a la detección o predicción de campañas APT, lo que confirma la pertinencia del enfoque adoptado en este trabajo y proporciona una base comparativa para su evaluación.
+\section{Modelos Ocultos de Markov aplicados a APT (RQ2)}
+\label{sec:rq2}
+
+De los 32 estudios que mencionan modelos de Markov, diecinueve se refieren específicamente a Modelos Ocultos de Markov. La lectura del texto completo muestra que trece de ellos emplean un HMM, o una variante, como parte central del método, mientras que los seis restantes lo citan como antecedente o trabajo relacionado \parencite{g_ioannou_markov_2019,m_khosravi_alerts_2020,javed_apt_2023,kim_ban_2023,nicho_enhanced_2025,s_lee_aptstop_2025}. Los trece estudios que aplican el modelo, resumidos en la Tabla~\ref{tab:hmm}, confirman la pertinencia del enfoque adoptado en este trabajo y proporcionan una base comparativa para su evaluación.
 
 El precedente metodológico más directo corresponde al trabajo de \textcite{ghafir2019hmm}, que emplea un HMM para determinar la secuencia más probable de etapas de una APT a partir de alertas correlacionadas, incorporando un algoritmo de predicción del siguiente paso del atacante. En una línea similar, \textcite{holgado_real-time_2020} proponen un sistema de predicción de ataques multi-etapa en tiempo real basado en HMM, evaluado sobre alertas provenientes de sistemas de detección de intrusiones, mientras que \textcite{brogi_hidden_2019} modelan la evolución de una campaña APT como un proceso de Markov oculto sobre observaciones de red. \textcite{du_attack_2019} abordan específicamente la predicción de la ruta de ataque mediante HMM.
 
@@ -190,9 +89,45 @@ Otras propuestas exploran variantes arquitectónicas del modelo. \textcite{zegey
 
 El análisis de estos trabajos permite identificar un patrón común en la definición del modelo: los estados ocultos se corresponden con las etapas de la cadena de ataque, mientras que las variables observables se derivan de alertas o indicadores previamente generados por otros sistemas. Esta decisión de diseño, si bien reduce la dimensionalidad del espacio de observaciones, hace que el modelo dependa de una infraestructura de detección previa y limita su aplicabilidad en escenarios donde dicha infraestructura no está disponible o produce alertas incompletas.
 
+Cuatro estudios se apartan en parte de este patrón. \textcite{zegeye_multi-layer_2019} derivan las observables de atributos de tráfico reducidos mediante análisis de componentes principales y cuantización vectorial, pero sobre un conjunto de intrusiones de uso general, sin etiquetas de etapa de APT. \textcite{ma_anomaly_2024} emplean el HMM para modelar el comportamiento normal del sistema y detectar desviaciones, no la progresión del atacante. \textcite{kazeminajafabadi_optimal_2023} representan un grafo de ataque bayesiano como un HMM de estados binarios por nodo, y \textcite{kumar_hlpmmgrsphtru_2026} proponen una variante con transiciones flexibles para sistemas IoT. Ninguno de los trece estudios evalúa un HMM con observables derivadas de flujos de red sobre un conjunto público con etapas de APT etiquetadas.
+
+\begin{footnotesize}
+\setlength{\tabcolsep}{4pt}
+\renewcommand{\arraystretch}{1.2}
+\begin{xltabular}{\linewidth}{|>{\raggedright\arraybackslash}p{2.6cm}|*{4}{>{\raggedright\arraybackslash}X|}}
+\caption[Estudios del corpus que aplican HMM a la detección de ataques multietapa.]{Estudios del corpus que aplican HMM a la detección de ataques multietapa. Fuente: Elaboración propia.}
+\label{tab:hmm} \\
+\hline
+\textbf{Estudio} & \textbf{Estados ocultos} & \textbf{Observables} & \textbf{Datos de evaluación} & \textbf{Inferencia y salida} \\ \hline
+\endfirsthead
+\hline
+\textbf{Estudio} & \textbf{Estados ocultos} & \textbf{Observables} & \textbf{Datos de evaluación} & \textbf{Inferencia y salida} \\ \hline
+\endhead
+\hline
+\multicolumn{5}{|r|}{\textit{Continúa en la siguiente página\dots}} \\ \hline
+\endfoot
+\hline
+\endlastfoot
+\textcite{ghafir2019hmm} & Etapas de la campaña APT & Alertas vinculadas por un marco de correlación & Datos sintéticos de escenarios APT & Viterbi para la secuencia de etapas y predicción del siguiente paso \\ \hline
+\textcite{brogi_hidden_2019} & Etapas de la campaña & Alertas IDS & Cadenas simuladas, contrastadas con la valoración de expertos & Viterbi modificado con transiciones de $k$ pasos y puntaje de verosimilitud \\ \hline
+\textcite{du_attack_2019} & Etapas de un modelo general de APT & Información de alertas & Entorno que simula el ataque Aurora & Predicción de la ruta de ataque \\ \hline
+\textcite{zegeye_multi-layer_2019} & Estados por capa de un HMM multicapa & Atributos de tráfico reducidos y cuantizados & CICIDS2017 & Detección de ataques multietapa \\ \hline
+\textcite{holgado_real-time_2020} & Fases de un tipo de ataque (un HMM por tipo) & Alertas IDS agrupadas por CVE y severidad & Escenario virtual de DDoS por amplificación NTP & Viterbi y \textit{forward-backward} para la predicción en tiempo real \\ \hline
+\textcite{t_shawly_architectures_2021} & Etapas de cada ataque (un HMM por ataque) & Alertas IDS preprocesadas & DARPA 2000 con alertas entrelazadas generadas & Detección de ataques multietapa entrelazados \\ \hline
+\textcite{baksi_decepticon_2021} & Fases del ataque de un grupo APT & Indicadores de compromiso & Marco teórico, sin evaluación experimental & Selección del mecanismo de engaño \\ \hline
+\textcite{al_amin_hidden_2021} & Etapas del movimiento lateral & Alertas IDS correlacionadas y trazas de red & Alertas sintéticas basadas en DARPA LLDDoS 1.0 & Ruta de ataque más probable y ubicación de señuelos \\ \hline
+\textcite{y_javed_prism_2023} & Etapas del ataque multietapa & Alertas IDS & ISCX-2012 y CICIDS2017 & Predicción de la progresión en una arquitectura jerárquica \\ \hline
+\textcite{kazeminajafabadi_optimal_2023} & Compromiso binario de cada nodo de un grafo de ataque & Monitoreo parcial e imperfecto de nodos & Redes simuladas & Estimador de mínimo error cuadrático medio y política de monitoreo \\ \hline
+\textcite{ma_anomaly_2024} & Estados del comportamiento normal & Alertas IDS vectorizadas con Doc2Vec & Tres conjuntos públicos, entre ellos DARPA 2000 y CICIDS2017 & Detección por umbral sobre la probabilidad de generación \\ \hline
+\textcite{mittal_proactive_2025} & Actividades o etapas de la APT & Actividad de red y de usuario & Conjunto sintético de 10 subconjuntos de 10.000 registros & Detección de actividad APT \\ \hline
+\textcite{kumar_hlpmmgrsphtru_2026} & Variante con transiciones flexibles (HLPMM) & Correlaciones temporales entre capas de un sistema IoT & Conjuntos de \textit{ransomware}, \textit{malware} y CIC-DDoS2019 & Detección explicable de ataques multietapa \\
+\end{xltabular}
+\end{footnotesize}
+\FloatBarrier
+
 \section{Conjuntos de datos utilizados (RQ3)}
 
-La Figura~\ref{fig:datasets} presenta los conjuntos de datos mencionados en el texto completo de los estudios del corpus. El hallazgo más relevante de esta dimensión es la ausencia de un conjunto de referencia consolidado: la categoría más frecuente, con 33 estudios, corresponde a trabajos que no declaran un conjunto público (conjuntos propios, generados sintéticamente o propuestas sin evaluación sobre datos abiertos), y ningún conjunto público alcanza un tercio del corpus. Entre los públicos predominan DARPA/OpTC y conjuntos de intrusiones de uso general (CICIDS, NSL-KDD, UNSW-NB15, KDD99), mientras que los conjuntos etiquetados por etapas de APT, DAPT2020 y Unraveled, aparecen en nueve estudios cada uno, lo que dificulta la comparación directa entre propuestas.
+La Figura~\ref{fig:datasets} presenta los conjuntos de datos mencionados en el texto completo de los estudios del corpus. El hallazgo más relevante de esta dimensión es la ausencia de un conjunto de referencia consolidado: la categoría más frecuente, con 33 estudios, corresponde a trabajos que no declaran un conjunto público (conjuntos propios, generados sintéticamente o propuestas sin evaluación sobre datos abiertos), y ningún conjunto público alcanza un tercio del corpus. Entre los públicos predominan los conjuntos de intrusiones de uso general (CICIDS, NSL-KDD, UNSW-NB15, KDD99) y DARPA/OpTC, mientras que los conjuntos etiquetados por etapas de APT, DAPT2020 y Unraveled, aparecen en nueve estudios cada uno, lo que dificulta la comparación directa entre propuestas.
 
 \begin{figure}[h!]
 \centering
@@ -201,14 +136,14 @@ La Figura~\ref{fig:datasets} presenta los conjuntos de datos mencionados en el t
     width=11cm, height=6.5cm,
     xbar, bar width=12pt,
     xmin=0, xmax=40,
-    symbolic y coords={CICAPT-IIoT,Unraveled,DAPT2020,ToN-IoT,KDD99,UNSW-NB15,NSL-KDD,CICIDS,{DARPA / OpTC},{Sin conjunto público}},
+    symbolic y coords={CICAPT-IIoT,Unraveled,DAPT2020,ToN-IoT,KDD99,UNSW-NB15,NSL-KDD,{DARPA / OpTC},CICIDS,{Sin conjunto público}},
     ytick=data,
     xlabel={Número de estudios},
     nodes near coords, nodes near coords style={font=\footnotesize},
     grid=major, grid style={dashed,gray!30},
     tick label style={font=\small}, label style={font=\small},
 ]
-\addplot[fill=orange!60,draw=orange!80!black] coordinates {(6,CICAPT-IIoT)(9,Unraveled)(9,DAPT2020)(10,ToN-IoT)(13,KDD99)(17,UNSW-NB15)(18,NSL-KDD)(21,CICIDS)(22,{DARPA / OpTC})(33,{Sin conjunto público})};
+\addplot[fill=orange!60,draw=orange!80!black] coordinates {(6,CICAPT-IIoT)(9,Unraveled)(9,DAPT2020)(10,ToN-IoT)(13,KDD99)(17,UNSW-NB15)(18,NSL-KDD)(21,{DARPA / OpTC})(22,CICIDS)(33,{Sin conjunto público})};
 \end{axis}
 \end{tikzpicture}
 \caption{Conjuntos de datos mencionados en los estudios del corpus. Fuente: Elaboración propia.}
@@ -216,15 +151,83 @@ La Figura~\ref{fig:datasets} presenta los conjuntos de datos mencionados en el t
 \end{figure}
 \FloatBarrier
 
+La Tabla~\ref{tab:datasets_comparacion} compara las características de los conjuntos públicos identificados en el corpus. Los conjuntos de intrusiones de uso general (KDD99, NSL-KDD, UNSW-NB15 y CICIDS2017) fueron diseñados para la detección de intrusiones en general y no para reproducir campañas APT \parencite{benabderrahmane_ranking-enhanced_2025}: etiquetan cada registro con una categoría de ataque, no con la etapa de una campaña. Los conjuntos específicos de APT, en cambio, reproducen el ciclo de vida del ataque, aunque difieren en el tipo de datos que registran y en la extensión temporal de la captura.
+
+\begin{table}[h!]
+\centering
+\footnotesize
+\renewcommand{\arraystretch}{1.25}
+\setlength{\tabcolsep}{3.5pt}
+\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{3cm}|>{\centering\arraybackslash}p{1.2cm}|*{3}{>{\raggedright\arraybackslash\hspace{0pt}}X|}>{\centering\arraybackslash}p{1.4cm}|}
+\hline
+\textbf{Conjunto} & \textbf{Año} & \textbf{Datos} & \textbf{Duración} & \textbf{Ciclo APT} & \textbf{Estudios} \\ \hline
+KDD99 & 1999 & Red & 7 semanas & No & 13 \\ \hline
+NSL-KDD & 2009 & Red & Derivado de KDD99 & No & 18 \\ \hline
+UNSW-NB15 & 2015 & Red & n. r. & No & 17 \\ \hline
+CICIDS2017 & 2017 & Red & 5 días & No & 22 \\ \hline
+ToN-IoT & 2020 & Red y registros & n. r. & No & 10 \\ \hline
+DARPA TC / OpTC & 2018, 2019 & Auditoría de host (TC), red y registros (OpTC) & 2 semanas (OpTC) & Sí & 21 \\ \hline
+DAPT2020 & 2020 & Red y registros & 5 días & Sí & 9 \\ \hline
+SCVIC-APT-2021 & 2021 & Red & n. r. & Sí & 5 \\ \hline
+PWNJUTSU & 2022 & Red y registros de host & n. r. & Parcial & 1 \\ \hline
+Unraveled & 2023 & Red y registros de host & 6 semanas & Sí & 9 \\ \hline
+CICAPT-IIoT & 2024 & Red y registros & 7 días & Sí & 6 \\ \hline
+cAPTure & 2026 & Red (paquetes) & 4,5 días & Sí & 1 \\ \hline
+\end{tabularx}
+\caption[Comparación de los conjuntos de datos públicos identificados en el corpus.]{Comparación de los conjuntos de datos públicos identificados en el corpus. n. r.: no reportado en las fuentes revisadas. La columna Estudios indica el número de estudios del corpus que mencionan el conjunto. Fuente: Elaboración propia a partir de \textcite{mamun_limitations_2024}, \textcite{puccetti_capture_2026}, \textcite{cheng_kairos_2024} y la documentación de DAPT2020 y Unraveled.}
+\label{tab:datasets_comparacion}
+\end{table}
+\FloatBarrier
+
 Entre los conjuntos con etiquetado por etapas de ataque, DAPT2020 \parencite{myneni2020dapt2020} y Unraveled \parencite{myneni2023unraveled} son los que presentan mayor correspondencia con los requerimientos de un modelo secuencial, dado que su estructura identifica explícitamente la fase de la campaña a la que corresponde cada registro. Ambos conjuntos han sido empleados conjuntamente en trabajos recientes de detección de APT \parencite{rivas_analysis_2025}. Los conjuntos de intrusiones de uso general, como NSL-KDD, CICIDS o UNSW-NB15, carecen de este etiquetado y presentan una separación entre tráfico legítimo y malicioso que no refleja la sofisticación de un adversario APT.
 
-La literatura reciente documenta de forma explícita estas limitaciones. \textcite{mamun_limitations_2024} analizan sistemáticamente los conjuntos de datos disponibles para investigación en APT y concluyen que tienden a cubrir periodos breves, a subrepresentar las etapas intermedias de la campaña y a presentar distribuciones de clase que no reproducen las condiciones de operación reales. Esta constatación ha motivado la aparición de nuevos conjuntos orientados a corregir dichas carencias, entre ellos el benchmark propuesto por \textcite{liu_new_2022}, el conjunto CYSAS-S3 \parencite{choumanof_introducing_2022}, el conjunto de malware con atribución a grupos APT de \textcite{erfan_mazaheri_aptracker_2024} y, más recientemente, el conjunto cAPTure \parencite{puccetti_capture_2026}, orientado específicamente a evaluar la rapidez de detección. La persistencia de esta línea de trabajo confirma que la disponibilidad de datos representativos constituye un problema abierto en el área, y fundamenta la decisión de emplear dos conjuntos complementarios en el presente trabajo.
+La literatura reciente documenta de forma explícita estas limitaciones. \textcite{mamun_limitations_2024} analizan sistemáticamente los conjuntos de datos disponibles para investigación en APT y concluyen que tienden a cubrir periodos breves, a subrepresentar las etapas intermedias de la campaña y a presentar distribuciones de clase que no reproducen las condiciones de operación reales. Esta constatación ha motivado la aparición de nuevos conjuntos orientados a corregir dichas carencias, entre ellos el benchmark propuesto por \textcite{liu_new_2022}, el conjunto CYSAS-S3 \parencite{choumanof_introducing_2022}, el conjunto de malware con atribución a grupos APT de \textcite{erfan_mazaheri_aptracker_2024} y, más recientemente, el conjunto cAPTure \parencite{puccetti_capture_2026}, orientado específicamente a evaluar la rapidez de detección. La persistencia de esta línea de trabajo confirma que la disponibilidad de datos representativos constituye un problema abierto en el área, y obliga a justificar la elección de los conjuntos de evaluación con criterios explícitos.
+
+\subsection{Criterios de selección de los conjuntos de datos}
+\label{sec:criterios_datasets}
+La elección de los conjuntos de evaluación se deriva de los requerimientos del modelo propuesto, y la frecuencia de uso en la literatura es solo uno de los criterios. Un HMM con estimación supervisada requiere secuencias en que cada observación esté asociada a la etapa de la campaña que la generó. Las variables observables se definen sobre el flujo de red, y las métricas de detección temprana exigen campañas completas insertas en actividad benigna con marcas de tiempo. A partir de estos requerimientos se definieron seis criterios de selección:
+
+\begin{itemize}
+    \item \textbf{CD-1, ciclo de vida APT:} el conjunto reproduce una campaña multietapa y no ataques aislados.
+    \item \textbf{CD-2, etiquetas de etapa:} cada registro identifica la etapa de la campaña a la que pertenece, condición necesaria para anclar los estados ocultos a las fases del ataque.
+    \item \textbf{CD-3, tráfico de red a nivel de flujo:} los registros permiten calcular las características estadísticas de flujo de las que se derivan las variables observables.
+    \item \textbf{CD-4, actividad benigna y continuidad temporal:} el ataque está inserto en tráfico benigno con marcas de tiempo, lo que permite construir secuencias por host, estimar la tasa de falsas alarmas y medir el tiempo hasta la detección.
+    \item \textbf{CD-5, entorno organizacional:} la red emula una organización, de modo que las etapas etiquetadas corresponden a los estados del modelo (reconocimiento, establecimiento del \textit{foothold}, movimiento lateral y exfiltración).
+    \item \textbf{CD-6, uso en la literatura:} el conjunto ha sido empleado en los estudios del corpus, lo que permite situar los resultados frente a trabajos previos.
+\end{itemize}
+
+La Tabla~\ref{tab:criterios_datasets} aplica estos criterios a los conjuntos públicos identificados en el corpus.
+
+\begin{table}[h!]
+\centering
+\footnotesize
+\renewcommand{\arraystretch}{1.25}
+\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{2.3cm}|*{4}{>{\raggedright\arraybackslash}X|}>{\raggedright\arraybackslash}p{2.4cm}|c|}
+\hline
+\textbf{Conjunto} & \textbf{CD-1 Ciclo APT} & \textbf{CD-2 Etiquetas de etapa} & \textbf{CD-3 Flujos de red} & \textbf{CD-4 Benigno y tiempo} & \textbf{CD-5 Entorno} & \textbf{CD-6} \\ \hline
+DAPT2020 & Sí & Sí & Sí & Sí (5 días) & Organizacional & 9 \\ \hline
+Unraveled & Sí & Sí & Sí & Sí (6 semanas) & Organizacional & 9 \\ \hline
+SCVIC-APT-2021 & Sí & Sí & Sí & Sí & Organizacional (dos dominios) & 5 \\ \hline
+CICAPT-IIoT & Sí & Sí (MITRE ATT\&CK) & Sí & Sí (7 días) & Industrial (IIoT) & 6 \\ \hline
+cAPTure & Sí & Sí & Parcial (paquetes) & Sí (4,5 días) & Industrial (CPS) & 1 \\ \hline
+PWNJUTSU & Parcial (competencia CTF) & Parcial (fases en JSON) & Sí (PCAP) & No (sin benigno etiquetado) & Infraestructura vulnerable & 1 \\ \hline
+DARPA TC / OpTC & Sí & No (reporte de la campaña) & Parcial (énfasis en host) & Sí & Organizacional & 21 \\ \hline
+CICIDS, NSL-KDD, UNSW-NB15, KDD99 & No & No & Sí & Sí & Red de laboratorio & 13--22 \\ \hline
+\end{tabularx}
+\caption[Conjuntos de datos del corpus evaluados según los criterios de selección.]{Conjuntos de datos del corpus evaluados según los criterios de selección. CD-6 indica el número de estudios del corpus que mencionan el conjunto en su texto completo. Fuente: Elaboración propia a partir de \textcite{mamun_limitations_2024}, \textcite{puccetti_capture_2026} y los estudios del corpus.}
+\label{tab:criterios_datasets}
+\end{table}
+\FloatBarrier
+
+Los conjuntos de intrusiones de uso general no satisfacen CD-1 ni CD-2, por lo que no permiten entrenar ni evaluar un modelo de progresión por etapas. DARPA TC/OpTC, el conjunto específico de APT más mencionado, se emplea en el corpus principalmente para construir grafos de proveniencia a partir de registros de auditoría de host \parencite{anjum2021anubis,cheng_kairos_2024}, y su verdad de terreno se entrega como una descripción de la campaña y no como una etiqueta de etapa por registro de tráfico. PWNJUTSU carece de tráfico benigno etiquetado y describe las fases del ataque en un formato no tabular \parencite{mamun_limitations_2024}. CICAPT-IIoT y cAPTure cumplen los criterios de etiquetado, pero emulan redes industriales cuyos protocolos y trayectorias de ataque difieren de los de una red organizacional. cAPTure, además, entrega trazas a nivel de paquete y su publicación es de 2026 \parencite{puccetti_capture_2026}.
+
+DAPT2020 y Unraveled cumplen los seis criterios y, junto con SCVIC-APT-2021 \parencite{liu_new_2022}, son los únicos conjuntos del corpus que satisfacen los cinco criterios técnicos. Se prefieren sobre este último por su mayor presencia en la literatura revisada, que favorece la comparabilidad, y porque, al provenir del mismo grupo de investigación, comparten una taxonomía de etapas que permite aplicar una única correspondencia entre etiquetas y estados, a la vez que reproducen escenarios de ataque distintos. SCVIC-APT-2021 se mantiene como candidato para evaluar la generalización del modelo a conjuntos de otro origen. Las características de los conjuntos seleccionados y su papel en la evaluación se detallan en la Sección~\ref{sec:datasets}.
 
 \section{Estrategias frente al desbalance de clases (RQ4)}
 
 Treinta y seis estudios del corpus abordan explícitamente el problema del desbalance de clases en la detección de amenazas, cerca de la mitad del total. Las estrategias identificadas se concentran en técnicas de remuestreo, entre las que predomina el sobremuestreo sintético de la clase minoritaria \parencite{chawla2002smote}, junto con aproximaciones híbridas que combinan sobremuestreo y submuestreo. Estas técnicas operan sobre instancias tratadas como independientes entre sí, supuesto cuyas implicancias para un modelo secuencial se discuten en el Capítulo~\ref{cap:propuesta}.
 
-No obstante, el hallazgo más significativo de esta dimensión no proviene de las estrategias empleadas, sino de las métricas utilizadas para evaluarlas. Como muestra la Figura~\ref{fig:metricas}, 35 estudios del corpus reportan \textit{accuracy}, mientras que solo 14 reportan F1-score, 8 precisión y 6 exhaustividad. Esta distribución resulta problemática: en escenarios con desbalance severo, donde la actividad maliciosa constituye una fracción mínima del tráfico total, la exactitud global puede alcanzar valores elevados aun cuando el modelo falle sistemáticamente en la clase minoritaria, que es precisamente la de interés.
+El hallazgo más significativo de esta dimensión está en las métricas utilizadas para evaluar dichas estrategias. Como muestra la Figura~\ref{fig:metricas}, 35 estudios del corpus reportan \textit{accuracy}, mientras que solo 14 reportan F1-score, 8 precisión y 6 exhaustividad. Esta distribución resulta problemática: en escenarios con desbalance severo, donde la actividad maliciosa constituye una fracción mínima del tráfico total, la exactitud global puede alcanzar valores elevados aun cuando el modelo falle sistemáticamente en la clase minoritaria, que es precisamente la de interés.
 
 \begin{figure}[h!]
 \centering
