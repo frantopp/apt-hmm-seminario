@@ -1,0 +1,11 @@
+# Sensibilidad de la ventana (D4, Fase 3): 1 minuto, evaluada en validación.
+# Con dt = 60, una hora sin captura son 60 ventanas.
+dataset = "unraveled"
+etiqueta = "sens_dt60"
+
+[ventanas]
+dt = 60
+max_hueco = 60
+
+[evaluacion]
+evaluar_en = "validacion"

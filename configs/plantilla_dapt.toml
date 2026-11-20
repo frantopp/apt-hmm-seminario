@@ -1,0 +1,80 @@
+# Parámetros de un experimento. Las líneas comentadas tienen el valor por defecto:
+# descoméntalas para cambiarlas. Uso: python -m apthmm ejecutar --config <archivo>
+dataset = "dapt"
+etiqueta = ""
+
+[datos]
+# carpeta de los CSV
+# ruta = "C:\\Proyectos\\apt-hmm-seminario\\data\\dapt2020\\csv"
+# prefijos de IP internas
+# internos = ["192.168.3."]
+# prefijos excluidos de los internos
+# externos = []
+# flujos mínimos para incluir un host
+# min_flujos = 100
+# partición (tipo = fechas o intradia)
+# particion = { tipo = "intradia", fracciones = [0.6, 0.2, 0.2] }
+
+[ventanas]
+# segundos por ventana
+# dt = 300
+# ventanas sin captura que cortan una secuencia
+# max_hueco = 12
+# asignar (a exfiltración) o excluir
+# encubrimiento = "asignar"
+# percentiles de discretización
+# cortes = [0.5, 0.95]
+
+[hmm]
+# suavizado de emisiones, se elige en validación
+# alfas_B = [0.01, 0.1, 1.0]
+# suavizado de transiciones permitidas
+# alfa_A = 1.0
+# suavizado de la distribución inicial
+# alfa_pi = 1.0
+# iteraciones máximas de Baum-Welch (H2)
+# em_max_iter = 50
+# caídas seguidas de la verosimilitud de validación que detienen EM
+# em_paciencia = 2
+# caída de recall que descarta el refinamiento
+# tolerancia_recall = 0.01
+# inicializaciones aleatorias del control H0
+# h0_reinicios = 10
+# iteraciones máximas por reinicio de H0
+# h0_max_iter = 100
+# semilla del primer reinicio de H0
+# h0_semilla = 0
+# pseudoconteo de emisiones en H0
+# h0_alfa_B = 0.1
+# ventanas benignas por cada ventana de ataque
+# remuestreo_razon = 2.0
+# tamaño de bloque benigno que se quita
+# remuestreo_bloque = 72
+
+[base]
+# ventanas previas probadas (variante con contexto)
+# ks = [1, 3, 6]
+# árboles del Random Forest
+# rf_arboles = 200
+# profundidades RF (0 = sin límite)
+# rf_profundidades = [0, 20]
+# árboles de XGBoost
+# xgb_arboles = 300
+# profundidades XGBoost
+# xgb_profundidades = [4, 8]
+# tasa de aprendizaje de XGBoost
+# xgb_tasa = 0.1
+# fracción de la clase mayoritaria que alcanza SMOTE
+# smote_fraccion = 0.1
+# núcleos para RF y XGBoost (-1 = todos)
+# n_jobs = -1
+
+[evaluacion]
+# tasa objetivo de falsas alarmas para calibrar tau
+# fpr = 0.01
+# segundos sin ataque que separan episodios
+# hueco_episodio = 21600.0
+# partición evaluada: prueba o validacion (sensibilidades, Fase 3)
+# evaluar_en = "prueba"
+# semilla de remuestreo y línea base
+# semilla = 2027

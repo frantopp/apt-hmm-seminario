@@ -1,0 +1,68 @@
+{
+  // Ejecutar y depurar el motor HMM desde la vista "Ejecutar y depurar" (Ctrl+Shift+D).
+  // Las configuraciones con ${input:...} preguntan el conjunto de datos o el archivo TOML.
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Preparar datos",
+      "type": "debugpy", "request": "launch", "module": "apthmm",
+      "args": ["preparar", "--dataset", "${input:dataset}"],
+      "cwd": "${workspaceFolder}", "console": "integratedTerminal", "justMyCode": true
+    },
+    {
+      "name": "Experimentos (todos, retoma lo pendiente)",
+      "type": "debugpy", "request": "launch", "module": "apthmm",
+      "args": ["ejecutar", "--dataset", "${input:dataset}", "--continuar"],
+      "cwd": "${workspaceFolder}", "console": "integratedTerminal", "justMyCode": true
+    },
+    {
+      "name": "Experimentos HMM",
+      "type": "debugpy", "request": "launch", "module": "apthmm",
+      "args": ["ejecutar", "--dataset", "${input:dataset}", "--grupos", "H"],
+      "cwd": "${workspaceFolder}", "console": "integratedTerminal", "justMyCode": true
+    },
+    {
+      "name": "Experimentos línea base",
+      "type": "debugpy", "request": "launch", "module": "apthmm",
+      "args": ["ejecutar", "--dataset", "${input:dataset}", "--grupos", "B", "--continuar"],
+      "cwd": "${workspaceFolder}", "console": "integratedTerminal", "justMyCode": true
+    },
+    {
+      "name": "Experimento desde archivo TOML",
+      "type": "debugpy", "request": "launch", "module": "apthmm",
+      "args": ["ejecutar", "--config", "${input:archivo}", "--continuar"],
+      "cwd": "${workspaceFolder}", "console": "integratedTerminal", "justMyCode": true
+    },
+    {
+      "name": "Una configuración (depurar)",
+      "type": "debugpy", "request": "launch", "module": "apthmm",
+      "args": ["ejecutar", "--dataset", "${input:dataset}", "--solo", "${input:configuracion}", "--detener-en-error", "-v"],
+      "cwd": "${workspaceFolder}", "console": "integratedTerminal", "justMyCode": false
+    },
+    {
+      "name": "Gráfico TTD vs. FPR",
+      "type": "debugpy", "request": "launch", "module": "apthmm",
+      "args": ["graficar", "--dataset", "${input:dataset}"],
+      "cwd": "${workspaceFolder}", "console": "integratedTerminal"
+    },
+    {
+      "name": "Resumen de resultados",
+      "type": "debugpy", "request": "launch", "module": "apthmm",
+      "args": ["resumen", "--dataset", "${input:dataset}"],
+      "cwd": "${workspaceFolder}", "console": "integratedTerminal"
+    },
+    {
+      "name": "Parámetros efectivos",
+      "type": "debugpy", "request": "launch", "module": "apthmm",
+      "args": ["parametros", "--dataset", "${input:dataset}"],
+      "cwd": "${workspaceFolder}", "console": "integratedTerminal"
+    }
+  ],
+  "inputs": [
+    { "id": "dataset", "type": "pickString", "description": "Conjunto de datos", "options": ["unraveled", "dapt"] },
+    { "id": "archivo", "type": "pickString", "description": "Archivo de experimento",
+      "options": ["configs/sens_dt900.toml", "configs/sens_dt60.toml", "configs/sens_terciles.toml",
+                  "configs/sens_p95.toml", "configs/sens_sin_encubrimiento.toml"] },
+    { "id": "configuracion", "type": "promptString", "description": "Nombre o patrón (python -m apthmm listar)", "default": "H1-original" }
+  ]
+}

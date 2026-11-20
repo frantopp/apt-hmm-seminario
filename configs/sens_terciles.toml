@@ -1,0 +1,9 @@
+# Sensibilidad de la discretización (D7, Fase 3): terciles en vez de p50/p95.
+dataset = "unraveled"
+etiqueta = "sens_terciles"
+
+[ventanas]
+cortes = [0.333, 0.667]
+
+[evaluacion]
+evaluar_en = "validacion"

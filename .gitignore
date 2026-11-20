@@ -35,6 +35,11 @@ __pycache__/
 .venv/
 venv/
 .ipynb_checkpoints/
+*.egg-info/
+.pytest_cache/
+
+# Resultados de experimentos (se regeneran con python -m apthmm ejecutar)
+results/
 
 # Datasets (no se versionan: DAPT2020 / Unraveled son pesados)
 data/*

@@ -1,0 +1,9 @@
+# Encubrimiento excluido en vez de asignado a exfiltración (D6, Fase 3).
+dataset = "unraveled"
+etiqueta = "sens_sin_encubrimiento"
+
+[ventanas]
+encubrimiento = "excluir"
+
+[evaluacion]
+evaluar_en = "validacion"

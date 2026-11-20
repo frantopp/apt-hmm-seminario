@@ -1,0 +1,9 @@
+# Sensibilidad de la discretización (D7, Fase 3): dos niveles, corte en p95 (M = 17).
+dataset = "unraveled"
+etiqueta = "sens_p95"
+
+[ventanas]
+cortes = [0.95]
+
+[evaluacion]
+evaluar_en = "validacion"

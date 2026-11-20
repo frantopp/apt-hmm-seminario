@@ -1,0 +1,10 @@
+# Sensibilidad de la ventana (D4, Fase 3): 15 minutos, evaluada en validación.
+# python -m apthmm ejecutar --config configs/sens_dt900.toml --grupos H
+dataset = "unraveled"
+etiqueta = "sens_dt900"
+
+[ventanas]
+dt = 900
+
+[evaluacion]
+evaluar_en = "validacion"
